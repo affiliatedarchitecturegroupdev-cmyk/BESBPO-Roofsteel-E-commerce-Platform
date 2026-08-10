@@ -55,10 +55,10 @@ out — tasks 2.12–2.14).
 
 | Task | Description | LoC est | LoC act | Status |
 |------|-------------|---------|---------|--------|
-| 3.1 | Cart page (full, real state) | 250 | — | [ ] |
-| 3.2 | CartDrawer wiring (CartContext, real state) | 200 | — | [ ] |
-| 3.3 | Checkout page (one-page, collapsible steps) | 600 | — | [ ] |
-| 3.4 | Checkout success/cancelled pages | 150 | — | [ ] |
+| 3.1 | Cart page (full, real state) | 250 | 117 | [x] |
+| 3.2 | CartDrawer wiring (CartContext, real state) | 200 | 0 | [x] |
+| 3.3 | Checkout page (one-page, collapsible steps) | 600 | 233 | [x] |
+| 3.4 | Checkout success/cancelled pages | 150 | 64 | [x] |
 | 3.5 | PayFast real HTTP integration + ITN webhook | 300 | — | [ ] |
 | 3.6 | Lulapay real Partner API integration | 250 | — | [ ] |
 | 3.7 | PayJustNow real integration (Retail only) | 200 | — | [ ] |

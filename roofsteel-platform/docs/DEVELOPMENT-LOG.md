@@ -6,6 +6,43 @@ when to add an entry.
 
 ---
 
+## 2026-08-10 — Phase 3 account pages, checkout flow, and remaining storefront pages
+
+**Phase:** 3 (Cart, Checkout & Payments — frontend pages)
+**LoC at session end:** 5,510 (81 files) — up from 4,678 (81 files) — see docs/loc-history.log
+
+**What was built:**
+
+Checkout flow:
+- `app/checkout/page.tsx` — one-page checkout: order summary, delivery address (saved for
+  authenticated users, one-off form for guests), delivery/collection toggle, payment gateway
+  selection (PayFast/Lulapay/PayJustNow), place order button. Calls POST /v1/orders.
+- `app/checkout/success/page.tsx` — fetches order by orderNumber query param, shows confirmation.
+- Cart page (task 3.1) was already built in the previous commit; it reads from CartContext.
+
+Account sub-pages:
+- `app/account/page.tsx` — real dashboard with auth state, login/register CTA, quick links.
+- `app/account/orders/page.tsx` — order history list (structurally complete; needs the
+  list-by-account endpoint, task 3.2 backend).
+- `app/account/addresses/page.tsx` — full CRUD: list, create, edit, delete with province
+  dropdown and single-default-address toggle. Calls the real addresses API (task 2.5).
+- `app/account/wishlists/page.tsx` — multi-list view with create form and public/private toggle.
+  Calls the real wishlists API (task 2.7).
+- `app/account/trade-account/page.tsx` — four-state trade account status (not applied / pending /
+  approved / rejected with reason). Calls GET /v1/trade-accounts/me.
+- `app/trade/apply/page.tsx` — trade account application form. Calls POST /v1/trade-accounts/apply.
+- `app/quote/request/page.tsx` — RFQ form with dynamic line items, creates then submits a quote.
+  Calls POST /v1/quotes and POST /:id/submit.
+
+**All storefront pages are now built with real data fetching.** No scaffold placeholders remain
+in any page that has a real backend endpoint. The only pages still showing scaffold content are
+the static legal/info pages (faq, privacy, returns, shipping, terms) which are content pages,
+not data-driven — those need copy, not code.
+
+**Verified:** LoC check passes (0 hard-cap violations, 81 files, 5,510 LoC).
+
+---
+
 ## 2026-08-10 — Tasks 2.10–2.15: Frontend data layer and pages
 
 **Phase:** 2 (Product, Catalogue & Pricing)
