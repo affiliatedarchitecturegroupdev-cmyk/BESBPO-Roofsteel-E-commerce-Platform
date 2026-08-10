@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+/* ==========================================================================
+   ROOFSTEEL STORE — Foundry design system
+   Tokens ported EXACTLY from the corporate site (roofsteel.besbpo.co.za) —
+   see guidelines/03-frontend.md. Do not redefine these values elsewhere;
+   import this file once in app/layout.tsx and use the custom properties.
+   ========================================================================== */
+
+:root {
+  --slate: #1A1F24;
+  --slate-2: #232A31;
+  --slate-3: #2B333B;
+  --orange: #E8631C;
+  --orange-dark: #B84A12;
+  --steel: #7C8892;
+  --steel-light: #A8B0B8;
+  --off-white: #F2F1ED;
+  --white: #FFFFFF;
+  --tint: #FBEADF;
+  --line: #E5E3DC;
+  --line-dark: #343B42;
+
+  --font-display: "Space Grotesk", "Arial", sans-serif;
+  --font-body: "Inter", "Arial", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  --max-width: 1280px;
+  --radius: 3px;
+  --shadow-sm: 0 1px 3px rgba(26, 31, 36, 0.08);
+  --shadow-md: 0 4px 16px rgba(26, 31, 36, 0.12);
+  --shadow-lg: 0 12px 40px rgba(26, 31, 36, 0.18);
+
+  /* Storefront-specific additions — not on the corporate site, needed here
+     because the store has interaction patterns the corporate site doesn't
+     (a persistent mobile tab bar, a cart drawer, tier-aware pricing states).
+     See guidelines/12-storefront-ux-and-ia.md. */
+  --tab-bar-height: 60px;
+  --header-height: 64px;
+  --header-height-desktop: 76px;
+  --success: #2E7D32;
+  --danger: #B84A12;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--slate);
+  background: var(--off-white);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: var(--tab-bar-height);
+}
+@media (min-width: 1080px) {
+  body { padding-bottom: 0; }
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 768px) {
+  .container { padding: 0 32px; }
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--orange); color: var(--slate);
+  padding: 12px 20px; z-index: 1000; font-weight: 600;
+}
+.skip-link:focus { left: 12px; top: 12px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 22px; border-radius: var(--radius);
+  font-weight: 600; font-size: 14.5px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  min-height: 48px;
+}
+.btn-primary { background: var(--orange); color: var(--slate); }
+.btn-primary:hover { background: #f0763a; box-shadow: var(--shadow-md); }
+.btn-dark { background: var(--slate); color: var(--off-white); }
+.btn-outline { background: transparent; border: 1.5px solid var(--line); color: var(--slate); }
+.btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; }
+
+.tier-badge {
+  display: inline-flex; align-items: center;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.05em;
+  text-transform: uppercase; padding: 3px 9px; border-radius: 12px; font-weight: 600;
+}
+.tier-badge--retail { background: var(--line); color: var(--slate); }
+.tier-badge--trade, .tier-badge--contractor, .tier-badge--project {
+  background: var(--tint); color: var(--orange-dark);
+}
+
+.fulfilment-badge {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 10px;
+  background: var(--orange); color: var(--slate);
+}
+.fulfilment-badge--stock { background: var(--line); color: var(--steel); }
+
+body { background: #D8D5CC; padding: 40px; font-family: var(--font-body); }
+.gallery-wrap { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+.frame-label { font-family: var(--font-mono); font-size: 11px; color: var(--steel); margin-bottom: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+.frame { background: var(--off-white); overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
+.frame-mobile { width: 390px; height: 844px; border-radius: 32px; border: 8px solid var(--slate); overflow-y: auto; }
+.frame-desktop { width: 1200px; min-height: 900px; border-radius: 8px; border: 1px solid var(--line); }
+
+/* Header */
+.store-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(242,241,237,0.96); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand-word { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+.header-icons { display: flex; align-items: center; gap: 16px; }
+.cart-icon-wrap { position: relative; }
+.cart-badge { position: absolute; top: -6px; right: -8px; background: var(--orange); color: var(--slate); font-size: 9px; font-weight: 700; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.store-header--pdp { gap: 12px; }
+.pdp-header-title { flex: 1; font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.store-header--desktop { padding: 16px 32px; gap: 28px; }
+.dnav { display: flex; gap: 22px; flex: 1; }
+.dnav-link { font-size: 13px; font-weight: 500; color: var(--slate); cursor: pointer; }
+.dsearch { display: flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 8px 14px; font-size: 12px; color: var(--steel); width: 220px; }
+
+/* Promo strip */
+.promo-strip { background: var(--slate); color: var(--off-white); padding: 28px 18px 20px; position: relative; }
+.promo-eyebrow { font-family: var(--font-mono); font-size: 10px; color: var(--orange); letter-spacing: 0.1em; margin-bottom: 8px; }
+.promo-headline { font-family: var(--font-display); font-weight: 700; font-size: 22px; margin-bottom: 14px; max-width: 240px; }
+.promo-dots { display: flex; gap: 6px; margin-top: 14px; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(242,241,237,0.3); }
+.dot.active { background: var(--orange); }
+.btn-sm { padding: 8px 16px; font-size: 12.5px; min-height: auto; }
+.promo-strip--desktop { display: flex; justify-content: space-between; align-items: center; padding: 48px 40px; }
+.promo-headline--desktop { font-size: 34px; max-width: 480px; }
+.promo-sub { color: var(--steel-light); font-size: 14px; margin-bottom: 18px; }
+
+/* Section */
+.section { padding: 22px 16px; }
+.section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.section-head h3 { font-size: 16px; }
+.see-all { font-size: 12px; color: var(--orange); font-weight: 600; }
+
+/* Category grid */
+.cat-grid-mobile { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.cat-tile { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+.cat-tile-icon { width: 34px; height: 34px; border-radius: 50%; background: var(--slate); display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+.cat-tile-name { font-size: 12.5px; font-weight: 600; margin-bottom: 3px; }
+.cat-tile-count { font-family: var(--font-mono); font-size: 9px; color: var(--orange); }
+.cat-grid-desktop { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+
+/* MTL banner */
+.mtl-banner { background: var(--slate); color: var(--off-white); border-radius: var(--radius); margin: 0 16px; padding: 20px; }
+.section.mtl-banner { margin: 22px 16px; padding: 20px; }
+.mtl-banner-eyebrow { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; color: var(--orange); letter-spacing: 0.08em; margin-bottom: 8px; }
+.mtl-banner-title { font-family: var(--font-display); font-weight: 700; font-size: 19px; margin-bottom: 6px; }
+.mtl-banner-sub { font-size: 12.5px; color: var(--steel-light); margin-bottom: 14px; }
+.btn-outline-dark { border: 1.5px solid rgba(242,241,237,0.3); color: var(--off-white); }
+.mtl-banner--desktop { display: flex; justify-content: space-between; align-items: center; margin: 22px 32px; padding: 28px 32px; }
+.mtl-banner--desktop .mtl-banner-sub { max-width: 480px; margin-bottom: 0; }
+
+/* Product cards */
+.pcard-scroll { display: flex; gap: 12px; overflow-x: auto; }
+.pcard { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; width: 140px; flex-shrink: 0; }
+.pcard-img { background: var(--line); height: 90px; border-radius: 2px; margin-bottom: 8px; }
+.pcard-name { font-size: 11.5px; font-weight: 600; margin: 6px 0 4px; line-height: 1.3; }
+.pcard-price { font-size: 13px; font-weight: 700; color: var(--slate); }
+.pcard-unit { font-size: 9.5px; color: var(--steel); font-weight: 400; }
+.pcard-grid-desktop { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 0 32px; }
+.pcard--desktop { width: auto; padding: 14px; }
+.cat-grid-desktop, .pcard-grid-desktop { padding-left: 32px; padding-right: 32px; }
+.cat-tile--desktop { padding: 18px; }
+
+/* Fulfilment badge already in tokens.css, tier-badge already in tokens.css */
+
+/* PDP */
+.pdp-gallery { height: 300px; background: linear-gradient(135deg, #E5E3DC, #F2F1ED); position: relative; }
+.pdp-gallery-dots { position: absolute; bottom: 14px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; }
+.pdp-info { padding: 16px; }
+.pdp-title { font-size: 19px; margin: 8px 0 6px; }
+.pdp-sku { font-size: 11px; color: var(--steel); margin-bottom: 12px; }
+.pdp-price-row { display: flex; align-items: baseline; gap: 6px; }
+.pdp-price { font-family: var(--font-display); font-weight: 700; font-size: 26px; }
+.pdp-price-unit { font-size: 12px; color: var(--steel); }
+
+.configurator { margin: 0 16px 16px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.configurator-title { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13.5px; margin-bottom: 14px; }
+.config-label { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--steel); margin: 12px 0 6px; }
+.config-hint { color: var(--orange); text-transform: none; font-size: 10px; margin-left: 6px; }
+.pill-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill { font-size: 11.5px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--white); }
+.pill.active { background: var(--slate); color: var(--off-white); border-color: var(--slate); }
+.swatch-row { display: flex; gap: 8px; }
+.swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; }
+.swatch.active { border-color: var(--orange); box-shadow: 0 0 0 2px var(--white), 0 0 0 3px var(--orange); }
+.length-input-row { display: flex; align-items: center; gap: 8px; }
+.length-input { width: 90px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; font-size: 14px; font-family: var(--font-mono); }
+.length-unit { font-size: 13px; color: var(--steel); }
+.config-live-price { display: flex; justify-content: space-between; align-items: center; background: var(--tint); border-radius: 4px; padding: 10px 12px; margin-top: 14px; font-size: 12px; }
+.config-live-total { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--orange-dark); }
+
+.accordion-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; font-weight: 500; }
+
+.pdp-sticky-cta { position: sticky; bottom: 0; background: var(--white); border-top: 1px solid var(--line); padding: 12px 16px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-md); }
+.pdp-sticky-price { display: flex; flex-direction: column; }
+.pdp-sticky-total { font-weight: 700; font-size: 15px; }
+.pdp-sticky-sub { font-size: 10px; color: var(--steel); }
+.pdp-sticky-cta .btn { flex: 1; }
+
+/* Desktop PDP */
+.breadcrumb { padding: 14px 32px; font-size: 11.5px; color: var(--steel); }
+.pdp-desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 0 32px 40px; }
+.pdp-gallery--desktop { height: 460px; border-radius: var(--radius); }
+.pdp-title--desktop { font-size: 26px; }
+.pdp-desktop-right .pdp-price-row { margin: 10px 0 20px; }
+.configurator--desktop { margin: 0 0 20px; padding: 22px; }
+.config-grid-desktop { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.btn-full { width: 100%; }
+
+/* Tab bar */
+.tab-bar { position: sticky; bottom: 0; display: flex; background: var(--white); border-top: 1px solid var(--line); padding: 8px 0 10px; }
+.tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9.5px; color: var(--steel); position: relative; }
+.tab-item.active { color: var(--orange); }
+.tab-badge { position: absolute; top: -4px; right: 22%; background: var(--orange); color: var(--slate); font-size: 8px; font-weight: 700; width: 13px; height: 13px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+/* Cart drawer */
+.cart-drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 16px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 15px; }
+.free-delivery-bar { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.free-delivery-track { height: 5px; background: var(--line); border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+.free-delivery-fill { height: 100%; background: var(--orange); }
+.free-delivery-label { font-size: 11px; color: var(--steel); }
+.cart-line { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.cart-line-img { width: 60px; height: 60px; background: var(--line); border-radius: 4px; flex-shrink: 0; }
+.cart-line-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.cart-line-config { font-family: var(--font-mono); font-size: 10px; color: var(--steel); margin-bottom: 8px; }
+.cart-line-qty-row { display: flex; justify-content: space-between; align-items: center; }
+.qty-stepper { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 16px; padding: 4px 10px; font-size: 13px; }
+.cart-line-price { font-weight: 700; font-size: 13px; }
+.cart-summary { padding: 16px; }
+.cart-summary-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; color: var(--steel); }
+.cart-summary-total { color: var(--slate); font-weight: 700; font-size: 15px; border-top: 1px solid var(--line); margin-top: 6px; padding-top: 12px; }
+
+</style>
+</head>
+<body>
+<div class="gallery-wrap">
+  <div><div class="frame-label">Mobile — Home</div>
+    <div class="frame frame-mobile">
+      <div class="store-header">
+        <div class="brand"><svg viewBox="0 0 100 100" width="26" height="26">
+<path fill-rule="evenodd" fill="#E8631C" d="M20,15 L80,15 L80,48 L54,48 L88,85 L72,85 L40,48 L36,48 L36,85 L20,85 Z M44,23 L68,23 L68,40 L44,40 Z"/>
+<path fill="#B84A12" d="M54,48 L88,85 L78,85 L48,52 Z"/>
+<g stroke="#F2F1ED" stroke-width="2.4"><line x1="20" y1="58" x2="36" y2="58"/><line x1="20" y1="65" x2="36" y2="65"/><line x1="20" y1="72" x2="36" y2="72"/></g>
+</svg><span class="brand-word">ROOFSTEEL</span></div>
+        <div class="header-icons">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1F24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          <div class="cart-icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1F24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg><span class="cart-badge">2</span></div>
+        </div>
+      </div>
+
+      <div class="promo-strip">
+        <div class="promo-eyebrow">STEEL ROOFING SHEETS</div>
+        <div class="promo-headline">Rolled to your exact length</div>
+        <a class="btn btn-primary btn-sm">Shop Now</a>
+        <div class="promo-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><h3>Shop by Category</h3><a class="see-all">See all 13</a></div>
+        <div class="cat-grid-mobile">
+      <div class="cat-tile">
+        <div class="cat-tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+        <div class="cat-tile-name">Steel Roofing Sheets</div>
+        <div class="cat-tile-count">10 LINES</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4H18 M6 20H18 M12 4V20"></path></svg></div>
+        <div class="cat-tile-name">Structural Steel</div>
+        <div class="cat-tile-count">63 LINES</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg></div>
+        <div class="cat-tile-name">Reinforcing Steel</div>
+        <div class="cat-tile-count">17 LINES</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L19 12 H15 L20 20 H4 L9 12 H5 Z"></path><line x1="12" y1="20" x2="12" y2="22"></line></svg></div>
+        <div class="cat-tile-name">Roofing Timber</div>
+        <div class="cat-tile-count">13 LINES</div>
+      </div></div>
+      </div>
+
+      <div class="section mtl-banner">
+        <div class="mtl-banner-eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg> THE DIFFERENTIATOR</div>
+        <div class="mtl-banner-title">Made to Length</div>
+        <div class="mtl-banner-sub">Roll-formed to your exact spec — not off the shelf.</div>
+        <a class="btn btn-outline-dark btn-sm">See how it works</a>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><h3>Trending Now</h3></div>
+        <div class="pcard-scroll">
+      <div class="pcard">
+        <div class="pcard-img"></div>
+        <span class="fulfilment-badge ">MADE TO LENGTH</span>
+        <div class="pcard-name">IBR 686 Roofing Sheet</div>
+        <div class="pcard-price">R210.25 <span class="pcard-unit">per m²</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img"></div>
+        <span class="fulfilment-badge ">MADE TO LENGTH</span>
+        <div class="pcard-name">Reinforcing Bar Y12</div>
+        <div class="pcard-price">R26.75 <span class="pcard-unit">per m</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img"></div>
+        <span class="fulfilment-badge fulfilment-badge--stock">STOCK</span>
+        <div class="pcard-name">Hard Hats</div>
+        <div class="pcard-price">R67.20 <span class="pcard-unit">each</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img"></div>
+        <span class="fulfilment-badge fulfilment-badge--stock">STOCK</span>
+        <div class="pcard-name">Concrete Roof Tile</div>
+        <div class="pcard-price">R12.83 <span class="pcard-unit">per tile</span></div>
+      </div></div>
+      </div>
+
+      <div class="tab-bar">
+        <div class="tab-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Home</span></div>
+        <div class="tab-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg><span>Categories</span></div>
+        <div class="tab-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg><span>Search</span></div>
+        <div class="tab-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg><span>Cart</span><span class="tab-badge">2</span></div>
+        <div class="tab-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Account</span></div>
+      </div>
+    </div></div>
+  <div><div class="frame-label">Mobile — PDP (Made-to-Length Configurator)</div>
+    <div class="frame frame-mobile">
+      <div class="store-header store-header--pdp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1F24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span class="pdp-header-title">IBR 686 Roofing Sheet</span>
+        <div class="cart-icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1F24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg><span class="cart-badge">2</span></div>
+      </div>
+
+      <div class="pdp-gallery"><div class="pdp-gallery-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div></div>
+
+      <div class="pdp-info">
+        <span class="fulfilment-badge">MADE TO LENGTH</span>
+        <h2 class="pdp-title">IBR 686 Roofing Sheet</h2>
+        <div class="pdp-sku">SKU: RS-1000 &nbsp;&middot;&nbsp; 0.40-0.80mm gauge &middot; galvanised or colour-coated</div>
+        <div class="pdp-price-row">
+          <span class="pdp-price">R210.25</span><span class="pdp-price-unit">/ m²</span>
+        </div>
+      </div>
+
+      <div class="configurator">
+        <div class="configurator-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg> Configure Your Sheet</div>
+
+        <label class="config-label">Gauge</label>
+        <div class="pill-row">
+          <span class="pill">0.40mm</span><span class="pill active">0.53mm</span><span class="pill">0.58mm</span><span class="pill">0.80mm</span>
+        </div>
+
+        <label class="config-label">Profile</label>
+        <div class="pill-row">
+          <span class="pill active">IBR</span><span class="pill">Corrugated</span><span class="pill">Concealed-Fix</span>
+        </div>
+
+        <label class="config-label">Colour</label>
+        <div class="swatch-row">
+          <span class="swatch" style="background:#3A3F42" title="Charcoal"></span>
+          <span class="swatch active" style="background:#6E7072" title="Galvanised"></span>
+          <span class="swatch" style="background:#4A5A3C" title="Chromadec Green"></span>
+          <span class="swatch" style="background:#8C2F26" title="Rustic Red"></span>
+        </div>
+
+        <label class="config-label">Length <span class="config-hint">Max 13.2m</span></label>
+        <div class="length-input-row">
+          <input class="length-input" value="6.2" /> <span class="length-unit">m</span>
+        </div>
+
+        <div class="config-live-price">
+          <span>6.2m &times; R210.25/m²</span>
+          <span class="config-live-total">R1,303.55</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="accordion-row"><span>Specifications</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+        <div class="accordion-row"><span>Compliance &amp; Certificates</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+        <div class="accordion-row"><span>Delivery &amp; Returns</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+      </div>
+
+      <div class="pdp-sticky-cta">
+        <div class="pdp-sticky-price"><span class="pdp-sticky-total">R1,303.55</span><span class="pdp-sticky-sub">6.2m configured</span></div>
+        <a class="btn btn-primary">Add to Cart</a>
+      </div>
+    </div></div>
+  <div><div class="frame-label">Mobile — Cart Drawer</div>
+    <div class="frame frame-mobile">
+      <div class="cart-drawer-header">
+        <span>Your Cart (2)</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1F24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </div>
+      <div class="free-delivery-bar">
+        <div class="free-delivery-track"><div class="free-delivery-fill" style="width:62%"></div></div>
+        <div class="free-delivery-label">Add R5,696.45 more for free delivery</div>
+      </div>
+
+      <div class="cart-line">
+        <div class="cart-line-img"></div>
+        <div class="cart-line-info">
+          <div class="cart-line-name">IBR 686 Roofing Sheet</div>
+          <div class="cart-line-config">0.53mm &middot; IBR &middot; Galvanised &middot; 6.2m</div>
+          <div class="cart-line-qty-row">
+            <div class="qty-stepper"><span>-</span><span class="qty-val">1</span><span>+</span></div>
+            <span class="cart-line-price">R1,303.55</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-line">
+        <div class="cart-line-img"></div>
+        <div class="cart-line-info">
+          <div class="cart-line-name">Roof Screws — Class 3/4</div>
+          <div class="cart-line-config">Box of 250</div>
+          <div class="cart-line-qty-row">
+            <div class="qty-stepper"><span>-</span><span class="qty-val">2</span><span>+</span></div>
+            <span class="cart-line-price">R656.10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-summary">
+        <div class="cart-summary-row"><span>Subtotal</span><span>R1,959.65</span></div>
+        <div class="cart-summary-row"><span>Delivery</span><span>R450.00</span></div>
+        <div class="cart-summary-row cart-summary-total"><span>Total</span><span>R2,409.65</span></div>
+        <a class="btn btn-primary" style="width:100%;margin-top:12px;">Checkout</a>
+      </div>
+    </div></div>
+</div>
+<div style="height:40px;"></div>
+<div class="gallery-wrap">
+  <div><div class="frame-label">Desktop — Home</div>
+    <div class="frame frame-desktop">
+      <div class="store-header store-header--desktop">
+        <div class="brand"><svg viewBox="0 0 100 100" width="26" height="26">
+<path fill-rule="evenodd" fill="#E8631C" d="M20,15 L80,15 L80,48 L54,48 L88,85 L72,85 L40,48 L36,48 L36,85 L20,85 Z M44,23 L68,23 L68,40 L44,40 Z"/>
+<path fill="#B84A12" d="M54,48 L88,85 L78,85 L48,52 Z"/>
+<g stroke="#F2F1ED" stroke-width="2.4"><line x1="20" y1="58" x2="36" y2="58"/><line x1="20" y1="65" x2="36" y2="65"/><line x1="20" y1="72" x2="36" y2="72"/></g>
+</svg><span class="brand-word">ROOFSTEEL</span></div>
+        <nav class="dnav"><span class="dnav-link">Steel Roofing</span><span class="dnav-link">Structural</span><span class="dnav-link">Reinforcing</span><span class="dnav-link">Timber</span><span class="dnav-link">Tiles</span><span class="dnav-link">Accessories</span></nav>
+        <div class="dsearch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7C8892" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg><span>Search products...</span></div>
+        <div class="header-icons">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1F24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <div class="cart-icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1F24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg><span class="cart-badge">2</span></div>
+        </div>
+      </div>
+
+      <div class="promo-strip promo-strip--desktop">
+        <div>
+          <div class="promo-eyebrow">STEEL ROOFING SHEETS</div>
+          <div class="promo-headline promo-headline--desktop">Rolled to your exact length</div>
+          <div class="promo-sub">Every gauge, every profile, cut to spec.</div>
+          <a class="btn btn-primary">Shop Now</a>
+        </div>
+        <div class="promo-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><h3>Shop by Category</h3><a class="see-all">See all 13</a></div>
+        <div class="cat-grid-desktop">
+      <div class="cat-tile cat-tile--desktop">
+        <div class="cat-tile-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+        <div class="cat-tile-name">Steel Roofing Sheets</div>
+        <div class="cat-tile-count">10 LINES</div>
+      </div>
+      <div class="cat-tile cat-tile--desktop">
+        <div class="cat-tile-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4H18 M6 20H18 M12 4V20"></path></svg></div>
+        <div class="cat-tile-name">Structural Steel</div>
+        <div class="cat-tile-count">63 LINES</div>
+      </div>
+      <div class="cat-tile cat-tile--desktop">
+        <div class="cat-tile-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg></div>
+        <div class="cat-tile-name">Reinforcing Steel</div>
+        <div class="cat-tile-count">17 LINES</div>
+      </div>
+      <div class="cat-tile cat-tile--desktop">
+        <div class="cat-tile-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L19 12 H15 L20 20 H4 L9 12 H5 Z"></path><line x1="12" y1="20" x2="12" y2="22"></line></svg></div>
+        <div class="cat-tile-name">Roofing Timber</div>
+        <div class="cat-tile-count">13 LINES</div>
+      </div>
+      <div class="cat-tile cat-tile--desktop">
+        <div class="cat-tile-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
+        <div class="cat-tile-name">Roof Tiles</div>
+        <div class="cat-tile-count">9 LINES</div>
+      </div>
+      <div class="cat-tile cat-tile--desktop">
+        <div class="cat-tile-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+        <div class="cat-tile-name">Accessories</div>
+        <div class="cat-tile-count">25 LINES</div>
+      </div></div>
+      </div>
+
+      <div class="section mtl-banner mtl-banner--desktop">
+        <div>
+          <div class="mtl-banner-eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg> THE DIFFERENTIATOR</div>
+          <div class="mtl-banner-title">Made to Length</div>
+          <div class="mtl-banner-sub">Roll-formed to your exact spec, not off the shelf — 0.30-0.80mm gauge, up to 13.2m.</div>
+        </div>
+        <a class="btn btn-outline-dark">See how it works</a>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><h3>Trending Now</h3></div>
+        <div class="pcard-grid-desktop">
+      <div class="pcard pcard--desktop">
+        <div class="pcard-img"></div>
+        <span class="fulfilment-badge ">MADE TO LENGTH</span>
+        <div class="pcard-name">IBR 686 Roofing Sheet</div>
+        <div class="pcard-price">R210.25 <span class="pcard-unit">per m²</span></div>
+      </div>
+      <div class="pcard pcard--desktop">
+        <div class="pcard-img"></div>
+        <span class="fulfilment-badge ">MADE TO LENGTH</span>
+        <div class="pcard-name">Reinforcing Bar Y12</div>
+        <div class="pcard-price">R26.75 <span class="pcard-unit">per m</span></div>
+      </div>
+      <div class="pcard pcard--desktop">
+        <div class="pcard-img"></div>
+        <span class="fulfilment-badge fulfilment-badge--stock">STOCK</span>
+        <div class="pcard-name">Hard Hats</div>
+        <div class="pcard-price">R67.20 <span class="pcard-unit">each</span></div>
+      </div>
+      <div class="pcard pcard--desktop">
+        <div class="pcard-img"></div>
+        <span class="fulfilment-badge fulfilment-badge--stock">STOCK</span>
+        <div class="pcard-name">Concrete Roof Tile</div>
+        <div class="pcard-price">R12.83 <span class="pcard-unit">per tile</span></div>
+      </div></div>
+      </div>
+    </div></div>
+</div>
+<div style="height:40px;"></div>
+<div class="gallery-wrap">
+  <div><div class="frame-label">Desktop — PDP (Made-to-Length Configurator)</div>
+    <div class="frame frame-desktop">
+      <div class="store-header store-header--desktop">
+        <div class="brand"><svg viewBox="0 0 100 100" width="26" height="26">
+<path fill-rule="evenodd" fill="#E8631C" d="M20,15 L80,15 L80,48 L54,48 L88,85 L72,85 L40,48 L36,48 L36,85 L20,85 Z M44,23 L68,23 L68,40 L44,40 Z"/>
+<path fill="#B84A12" d="M54,48 L88,85 L78,85 L48,52 Z"/>
+<g stroke="#F2F1ED" stroke-width="2.4"><line x1="20" y1="58" x2="36" y2="58"/><line x1="20" y1="65" x2="36" y2="65"/><line x1="20" y1="72" x2="36" y2="72"/></g>
+</svg><span class="brand-word">ROOFSTEEL</span></div>
+        <nav class="dnav">
+          <span class="dnav-link">Steel Roofing</span><span class="dnav-link">Structural</span>
+          <span class="dnav-link">Reinforcing</span><span class="dnav-link">Timber</span>
+        </nav>
+        <div class="dsearch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7C8892" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg><span>Search products...</span></div>
+        <div class="header-icons">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1F24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <div class="cart-icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1F24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg><span class="cart-badge">2</span></div>
+        </div>
+      </div>
+
+      <div class="breadcrumb">Home / Steel Roofing Sheets / IBR 686 Roofing Sheet</div>
+
+      <div class="pdp-desktop-grid">
+        <div class="pdp-gallery pdp-gallery--desktop">
+          <div class="pdp-gallery-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+
+        <div class="pdp-desktop-right">
+          <span class="fulfilment-badge">MADE TO LENGTH</span>
+          <h2 class="pdp-title pdp-title--desktop">IBR 686 Roofing Sheet</h2>
+          <div class="pdp-sku">SKU: RS-1000 &nbsp;&middot;&nbsp; 0.40-0.80mm gauge &middot; galvanised or colour-coated</div>
+          <div class="pdp-price-row">
+            <span class="pdp-price">R210.25</span><span class="pdp-price-unit">/ m²</span>
+            <span class="tier-badge tier-badge--trade">TRADE PRICE APPLIED</span>
+          </div>
+
+          <div class="configurator configurator--desktop">
+            <div class="configurator-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8631C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg> Configure Your Sheet</div>
+            <div class="config-grid-desktop">
+              <div>
+                <label class="config-label">Gauge</label>
+                <div class="pill-row">
+                  <span class="pill">0.40mm</span><span class="pill active">0.53mm</span><span class="pill">0.58mm</span><span class="pill">0.80mm</span>
+                </div>
+                <label class="config-label">Profile</label>
+                <div class="pill-row">
+                  <span class="pill active">IBR</span><span class="pill">Corrugated</span><span class="pill">Concealed-Fix</span>
+                </div>
+              </div>
+              <div>
+                <label class="config-label">Colour</label>
+                <div class="swatch-row">
+                  <span class="swatch" style="background:#3A3F42"></span>
+                  <span class="swatch active" style="background:#6E7072"></span>
+                  <span class="swatch" style="background:#4A5A3C"></span>
+                  <span class="swatch" style="background:#8C2F26"></span>
+                </div>
+                <label class="config-label">Length <span class="config-hint">Max 13.2m</span></label>
+                <div class="length-input-row">
+                  <input class="length-input" value="6.2" /> <span class="length-unit">m</span>
+                </div>
+              </div>
+            </div>
+            <div class="config-live-price">
+              <span>6.2m &times; R210.25/m²</span>
+              <span class="config-live-total">R1,303.55</span>
+            </div>
+          </div>
+
+          <a class="btn btn-primary btn-full">Add to Cart — R1,303.55</a>
+
+          <div class="section" style="margin-top:24px;">
+            <div class="accordion-row"><span>Specifications</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+            <div class="accordion-row"><span>Compliance &amp; Certificates</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+</div>
+</body></html>

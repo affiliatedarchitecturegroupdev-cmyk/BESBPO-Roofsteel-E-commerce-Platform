@@ -1,0 +1,11 @@
+Proprietary License
+
+Copyright (c) 2026 Besbpo Group (Pty) Ltd. All rights reserved.
+
+This repository and its contents (source code, database schema, seed data, documentation, and
+associated assets) are the proprietary property of Besbpo Group (Pty) Ltd and its Roofsteel
+division. No part of this repository may be copied, modified, distributed, or used outside of
+Besbpo Group's authorised development and operational activities without express written
+permission.
+
+Repository ownership: Besbpo Group — see docs/DECISIONS.md ADR-005.

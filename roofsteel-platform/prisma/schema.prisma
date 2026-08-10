@@ -1,0 +1,510 @@
+// Roofsteel E-Commerce Platform — Database Schema
+// Models the real product catalogue (171 lines / 13 categories) and pricing engine
+// (15 category-markup keys) already built for Roofsteel — see
+// Roofsteel-Ecommerce-Platform-Specification.docx Section 4 for the full spec
+// this schema implements.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----------------------------------------------------------------------
+// ENUMS
+// ----------------------------------------------------------------------
+
+enum FulfilmentType {
+  STOCK
+  MADE_TO_LENGTH
+  CUT_TO_ORDER
+  FABRICATED_TO_ORDER
+}
+
+enum Segment {
+  INDUSTRIAL
+  COMMERCIAL
+  CIVIL
+  INSTITUTIONAL
+  RESIDENTIAL
+}
+
+enum AccountType {
+  RETAIL
+  TRADE
+  CONTRACTOR
+  PROJECT
+}
+
+enum TradeApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Province {
+  GAUTENG
+  KWAZULU_NATAL
+  WESTERN_CAPE
+  LIMPOPO
+  MPUMALANGA
+  EASTERN_CAPE
+  NORTH_WEST
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PROCESSING
+  PACKED
+  DISPATCHED
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentGateway {
+  PAYFAST
+  LULAPAY
+  PAYJUSTNOW
+}
+
+enum ComplianceDocType {
+  MILL_TEST_CERTIFICATE
+  NRCS_LETTER_OF_AUTHORITY
+  SABS_MARK_CERTIFICATE
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  EXPIRED
+  DECLINED
+}
+
+// ----------------------------------------------------------------------
+// CATALOGUE — mirrors Roofsteel-Product-Catalogue.xlsx (171 lines / 13 categories)
+// ----------------------------------------------------------------------
+
+model Category {
+  id            String        @id @default(cuid())
+  name          String        @unique
+  slug          String        @unique
+  // Matches the icon keys already used on the corporate site and capacity
+  // deck (apps/web/lib/icon-paths.ts is the same set) — not a new taxonomy.
+  icon          String
+  subcategories Subcategory[]
+  products      Product[]
+  createdAt     DateTime      @default(now())
+}
+
+model Subcategory {
+  id         String    @id @default(cuid())
+  name       String
+  categoryId String
+  category   Category  @relation(fields: [categoryId], references: [id])
+  products   Product[]
+
+  @@unique([categoryId, name])
+}
+
+// A PricingBand corresponds 1:1 to a row in the Category Markup Bands sheet
+// of Roofsteel-Pricing-Framework.xlsx. pricingKey matches that sheet's
+// "Pricing Key" column exactly (including the two special-case splits:
+// "Steel Roofing Sheets — Stock" / "— Made to Length", and
+// "Roofing Timber & Trusses — Stock" / "— Fabricated").
+model PricingBand {
+  id              String    @id @default(cuid())
+  pricingKey      String    @unique
+  retailMarkup    Decimal   @db.Decimal(5, 4) // e.g. 0.4500 = 45%
+  tradeDiscount   Decimal   @db.Decimal(5, 4)
+  volumeDiscount  Decimal   @db.Decimal(5, 4)
+  rationale       String?   @db.Text
+  products        Product[]
+  updatedAt       DateTime  @updatedAt
+}
+
+model Product {
+  id             String         @id @default(cuid())
+  sku            String         @unique
+  name           String
+  specs          String         @db.Text
+  // Long-form PDP content — separate from `specs`, which stays the short
+  // catalogue-taxonomy field. See guidelines/13-listings-cms-inventory-sales.md
+  // Section 1 — this was a real gap the catalogue import never populated.
+  description    String?        @db.Text
+  unit           String // "per m", "per m²", "per sheet", "each", etc.
+  fulfilmentType FulfilmentType
+
+  categoryId    String
+  category      Category     @relation(fields: [categoryId], references: [id])
+  subcategoryId String
+  subcategory   Subcategory  @relation(fields: [subcategoryId], references: [id])
+
+  pricingBandId String
+  pricingBand   PricingBand @relation(fields: [pricingBandId], references: [id])
+
+  // Approved for commercial use 2026-08-09 (ADR-007) — sourced from the
+  // Pricing Framework workbook, reviewed by Fortune as broadly accurate
+  // though running high in some categories. A cost-refinement pass against
+  // real supplier quotes is planned for Phase 4/5, not required before use.
+  landedCost    Decimal  @db.Decimal(10, 2)
+  // Default false is for any product added after the ADR-007 seed run
+  // (2026-08-09) — the initial 171 were seeded with this set to true.
+  // See docs/DECISIONS.md ADR-007.
+  costIsReal    Boolean  @default(false)
+
+  // Made-to-Length / Cut-to-Order / Fabricated-to-Order lines don't have a
+  // stock count (see guidelines/13-listings-cms-inventory-sales.md Section
+  // 3.2) — a lead-time estimate instead. Null for STOCK lines, which use
+  // StockLevel below instead.
+  leadTimeDays  Int?
+
+  // Per-unit weight, feeding real weight-based freight calculation
+  // (guidelines/15-delivery-courier-and-location.md). 80 of 171 products
+  // (Structural + Reinforcing Steel) carry REAL engineering mass-table
+  // data; the remaining 91 are reasoned illustrative estimates — see
+  // weightIsReal below, same honesty pattern as costIsReal (ADR-007).
+  weightKgPerUnit Decimal @db.Decimal(10, 3)
+  weightIsReal    Boolean @default(false)
+
+  segments      ProductSegment[]
+  images        ProductImage[]
+  complianceDocs ComplianceDocument[]
+  stockLevels   StockLevel[]
+  cartItems     CartItem[]
+  orderItems    OrderItem[]
+
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([fulfilmentType])
+}
+
+// See guidelines/13-listings-cms-inventory-sales.md Section 4 — a product
+// has many images; sortOrder drives gallery order
+// (guidelines/12-storefront-ux-and-ia.md's PDP gallery spec).
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  url       String
+  altText   String
+  sortOrder Int     @default(0)
+
+  @@index([productId])
+}
+
+model ProductSegment {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  segment   Segment
+
+  @@unique([productId, segment])
+}
+
+// Per-batch compliance documents (mill test certs, NRCS LoAs) — spec Section 4.5.
+model ComplianceDocument {
+  id         String            @id @default(cuid())
+  productId  String
+  product    Product           @relation(fields: [productId], references: [id])
+  type       ComplianceDocType
+  batchRef   String?
+  fileUrl    String
+  issuedAt   DateTime?
+  uploadedAt DateTime          @default(now())
+}
+
+// ----------------------------------------------------------------------
+// INVENTORY — guidelines/13-listings-cms-inventory-sales.md Section 3.
+// Only STOCK-fulfilment products use StockLevel; Made-to-Length/Cut-to-Order/
+// Fabricated-to-Order use Product.leadTimeDays instead — see that guideline's
+// Section 3 table for why a single "quantity available" field would have
+// been wrong for roughly half the catalogue.
+// ----------------------------------------------------------------------
+
+enum StockMovementType {
+  RECEIVED
+  SOLD
+  ADJUSTED
+  DAMAGED
+  TRANSFERRED_IN
+  TRANSFERRED_OUT
+}
+
+// KZN/Gauteng two-yard plan from the capacity deck — only one Location is
+// seeded at launch, but StockLevel is location-aware from the start so the
+// second yard doesn't require a data migration later.
+model Location {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  province    Province
+  stockLevels StockLevel[]
+  createdAt   DateTime     @default(now())
+}
+
+model StockLevel {
+  id         String     @id @default(cuid())
+  productId  String
+  product    Product    @relation(fields: [productId], references: [id])
+  locationId String
+  location   Location   @relation(fields: [locationId], references: [id])
+
+  qtyOnHand   Int @default(0)
+  // Allocated to a real placed order, never a cart — a cart reservation
+  // would let an abandoned cart lock up real stock indefinitely. See
+  // guidelines/13-listings-cms-inventory-sales.md Section 3.1.
+  qtyReserved Int @default(0)
+
+  movements StockMovement[]
+  updatedAt DateTime        @updatedAt
+
+  @@unique([productId, locationId])
+}
+
+// The audit trail — every qtyOnHand change is a row here, not just a field
+// that silently changes value. See guidelines/13-listings-cms-inventory-sales.md
+// Section 3.1 and the same "record why a number changed" discipline used
+// throughout docs/DECISIONS.md.
+model StockMovement {
+  id           String            @id @default(cuid())
+  stockLevelId String
+  stockLevel   StockLevel        @relation(fields: [stockLevelId], references: [id])
+  type         StockMovementType
+  quantity     Int // positive for in-movements, negative for out-movements
+  reference    String? // e.g. an Order.orderNumber for a SOLD movement
+  note         String?
+  createdAt    DateTime          @default(now())
+
+  @@index([stockLevelId])
+}
+
+// ----------------------------------------------------------------------
+// ACCOUNTS & TRADE APPLICATIONS — spec Section 4.3
+// ----------------------------------------------------------------------
+
+model Account {
+  id          String      @id @default(cuid())
+  email       String      @unique
+  passwordHash String
+  name        String
+  companyName String?
+  type        AccountType @default(RETAIL)
+  emailVerifiedAt DateTime?
+
+  addresses            Address[]
+  tradeApplication      TradeAccountApplication?
+  carts                 Cart[]
+  orders                Order[]
+  quotes                Quote[]
+  wishlists              Wishlist[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TradeAccountApplication {
+  id            String                  @id @default(cuid())
+  accountId     String                  @unique
+  account       Account                 @relation(fields: [accountId], references: [id])
+  status        TradeApplicationStatus  @default(PENDING)
+  companyName   String
+  registrationNo String?
+  rejectionReason String?
+  reviewedAt    DateTime?
+  createdAt     DateTime                @default(now())
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  accountId  String
+  account    Account  @relation(fields: [accountId], references: [id])
+  line1      String
+  line2      String?
+  city       String
+  province   Province
+  postalCode String
+  isDefault  Boolean  @default(false)
+}
+
+// ----------------------------------------------------------------------
+// CART, MADE-TO-LENGTH CONFIG, PRICING RESOLUTION — spec Sections 4.1 / 4.2
+// ----------------------------------------------------------------------
+
+model Cart {
+  id        String     @id @default(cuid())
+  accountId String?
+  account   Account?   @relation(fields: [accountId], references: [id])
+  guestId   String?    @unique // for unauthenticated carts
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+// mtl* fields are populated only when the product's fulfilmentType is
+// MADE_TO_LENGTH — the Made-to-Length Configurator's structured output
+// (spec Section 4.1), not free text. cutBendShapeCode applies to
+// FABRICATED_TO_ORDER reinforcing steel lines (spec Section 4.4).
+model CartItem {
+  id             String   @id @default(cuid())
+  cartId         String
+  cart           Cart     @relation(fields: [cartId], references: [id])
+  productId      String
+  product        Product  @relation(fields: [productId], references: [id])
+  quantity       Int      @default(1)
+
+  mtlGaugeMm     Decimal? @db.Decimal(4, 2) // 0.30–0.80
+  mtlProfile     String?
+  mtlColour      String?
+  mtlLengthMm    Int?     // validated against the 13,200mm max at the API layer
+
+  cutBendShapeCode String? // SANS 282 shape code
+
+  createdAt      DateTime @default(now())
+}
+
+// ----------------------------------------------------------------------
+// ORDERS — spec Sections 3.6, 4.6, 5
+// ----------------------------------------------------------------------
+
+model Order {
+  id              String         @id @default(cuid())
+  orderNumber     String         @unique
+  accountId       String?
+  account         Account?       @relation(fields: [accountId], references: [id])
+  guestEmail      String?
+
+  status          OrderStatus    @default(PENDING_PAYMENT)
+  priceTierApplied AccountType   // Retail/Trade/Contractor/Project tier used for this order's pricing
+
+  deliveryAddressId String?
+  province        Province
+  freightCost     Decimal        @db.Decimal(10, 2)
+
+  // The honest answer to "when is this actually ready" for an order that
+  // may mix Stock (ready now) with Made-to-Length/Cut-to-Order/
+  // Fabricated-to-Order (real lead time) lines — computed as the MAX lead
+  // time across the order's lines, not an average or the fastest line. See
+  // guidelines/14-checkout-and-fulfilment-timing.md.
+  estimatedReadyDays Int @default(0)
+
+  subtotal        Decimal        @db.Decimal(12, 2)
+  total           Decimal        @db.Decimal(12, 2)
+
+  paymentGateway  PaymentGateway?
+  paymentRef      String?
+
+  items           OrderItem[]
+  shipment        Shipment?
+
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([accountId])
+  @@index([status])
+}
+
+// Courier/freight tracking — schema-ready ahead of an actual courier
+// decision (guidelines/15-delivery-courier-and-location.md Section 3),
+// same pattern as Lulapay being schema/interface-ready before Partner
+// credentials existed. One Shipment per Order for v1 (single-shipment
+// checkout, per guidelines/14-checkout-and-fulfilment-timing.md Section 4
+// — multi-shipment splitting is real but deferred).
+model Shipment {
+  id             String    @id @default(cuid())
+  orderId        String    @unique
+  order          Order     @relation(fields: [orderId], references: [id])
+
+  carrier        String?   // "Besfleet" | "The Courier Guy" | etc. — not an enum yet,
+  // deliberately, since the real carrier decision (guidelines/15 Section 3)
+  // isn't made. An enum locked in now would need a migration to change;
+  // a string doesn't.
+  trackingNumber String?
+  totalWeightKg  Decimal   @db.Decimal(10, 2)
+
+  dispatchedAt   DateTime?
+  deliveredAt    DateTime?
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model OrderItem {
+  id             String   @id @default(cuid())
+  orderId        String
+  order          Order    @relation(fields: [orderId], references: [id])
+  productId      String
+  product        Product  @relation(fields: [productId], references: [id])
+  quantity       Int
+  unitPrice      Decimal  @db.Decimal(10, 2) // resolved at order time from the pricing engine
+
+  // Snapshotted at order time, same reasoning as unitPrice above: if a
+  // product's fulfilmentType were ever changed later, a past order must
+  // still remember what it actually was when purchased — this is what a
+  // returns policy check reads, never the live Product.fulfilmentType.
+  // See guidelines/14-checkout-and-fulfilment-timing.md — Made to Length /
+  // Cut to Order / Fabricated to Order lines are non-returnable by nature
+  // (Pricing Framework workbook, Additional Charges sheet — decided long
+  // before this schema existed, never actually wired into code until now).
+  fulfilmentType FulfilmentType
+
+  mtlGaugeMm     Decimal? @db.Decimal(4, 2)
+  mtlProfile     String?
+  mtlColour      String?
+  mtlLengthMm    Int?
+  cutBendShapeCode String?
+}
+
+// ----------------------------------------------------------------------
+// QUOTES / RFQ — Project/Tender tier, spec Section 4.3
+// ----------------------------------------------------------------------
+
+model Quote {
+  id         String      @id @default(cuid())
+  quoteNumber String     @unique
+  accountId  String
+  account    Account     @relation(fields: [accountId], references: [id])
+  status     QuoteStatus @default(DRAFT)
+  validUntil DateTime
+  items      QuoteItem[]
+  createdAt  DateTime    @default(now())
+}
+
+model QuoteItem {
+  id          String  @id @default(cuid())
+  quoteId     String
+  quote       Quote   @relation(fields: [quoteId], references: [id])
+  description String  @db.Text
+  quantity    Int
+  unitPrice   Decimal @db.Decimal(10, 2)
+}
+
+// ----------------------------------------------------------------------
+// WISHLIST — multi-list, project-based (spec Section 3.7)
+// ----------------------------------------------------------------------
+
+model Wishlist {
+  id        String         @id @default(cuid())
+  accountId String
+  account   Account        @relation(fields: [accountId], references: [id])
+  name      String // e.g. "Warehouse Roof Project", "Q3 Site Order"
+  isPublic  Boolean        @default(false)
+  shareSlug String?        @unique
+  items     WishlistItem[]
+  createdAt DateTime       @default(now())
+}
+
+model WishlistItem {
+  id         String   @id @default(cuid())
+  wishlistId String
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
+  productId  String
+  addedAt    DateTime @default(now())
+}

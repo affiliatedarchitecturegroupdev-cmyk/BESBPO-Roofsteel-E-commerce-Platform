@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Steel Roofing Sheets",
+    "icon": "layers"
+  },
+  {
+    "name": "Roofing Timber & Trusses",
+    "icon": "tree"
+  },
+  {
+    "name": "Roof Tiles",
+    "icon": "grid"
+  },
+  {
+    "name": "Roofing Accessories",
+    "icon": "tool"
+  },
+  {
+    "name": "Reinforcing Steel",
+    "icon": "hash"
+  },
+  {
+    "name": "Structural Steel",
+    "icon": "beam"
+  },
+  {
+    "name": "Cladding & Facades",
+    "icon": "facade"
+  },
+  {
+    "name": "Fencing & Palisade",
+    "icon": "fence"
+  },
+  {
+    "name": "Waterproofing",
+    "icon": "drop"
+  },
+  {
+    "name": "Steel Doors, Frames & Security",
+    "icon": "door"
+  },
+  {
+    "name": "Welding Consumables & General Fasteners",
+    "icon": "weld"
+  },
+  {
+    "name": "PPE & Site Safety Equipment",
+    "icon": "hardhat"
+  },
+  {
+    "name": "Cement, Aggregate & Building Materials",
+    "icon": "bag"
+  }
+]

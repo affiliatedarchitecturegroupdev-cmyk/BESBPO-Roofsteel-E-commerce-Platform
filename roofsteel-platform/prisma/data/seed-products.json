@@ -1,0 +1,3104 @@
+[
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "IBR Profile",
+    "name": "IBR 686 Roofing Sheet",
+    "specs": "0.40 / 0.50 / 0.53 / 0.58 / 0.80mm gauge; full standard colour range; galvanised or colour-coated",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 145,
+    "retailPrice": 210.25,
+    "tradePrice": 193.43,
+    "volumePrice": 185.02,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "Corrugated Profile",
+    "name": "Corrugated 762 Roofing Sheet",
+    "specs": "0.40 / 0.53 / 0.58mm gauge; galvanised or colour-coated",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 128,
+    "retailPrice": 185.6,
+    "tradePrice": 170.75,
+    "volumePrice": 163.33,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "Corrugated Profile",
+    "name": "Mini / Bullnose Corrugated Sheet",
+    "specs": "0.53mm gauge; decorative profile; colour-coated",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 132,
+    "retailPrice": 191.4,
+    "tradePrice": 176.09,
+    "volumePrice": 168.43,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "Concealed-Fix",
+    "name": "Concealed-Fix Standing Seam Sheet (Klip-Lok style)",
+    "specs": "0.53 / 0.58 / 0.80mm gauge; hidden-fastener system",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 185,
+    "retailPrice": 268.25,
+    "tradePrice": 246.79,
+    "volumePrice": 236.06,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "Colour-Coated",
+    "name": "Premium Colour-Coated Steel Sheet",
+    "specs": "AZ150 substrate; full colour chart; 0.47\u20130.58mm",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 168,
+    "retailPrice": 243.6,
+    "tradePrice": 224.11,
+    "volumePrice": 214.37,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "Galvanised",
+    "name": "Plain Galvanised Roof Sheet",
+    "specs": "Z275 coating; IBR or corrugated profile",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 110,
+    "retailPrice": 159.5,
+    "tradePrice": 146.74,
+    "volumePrice": 140.36,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "Aluminium",
+    "name": "Aluminium Roof Sheeting",
+    "specs": "IBR or corrugated profile; mill finish or coated",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 210,
+    "retailPrice": 304.5,
+    "tradePrice": 280.14,
+    "volumePrice": 267.96,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "Insulated Panels",
+    "name": "Insulated Roof Sandwich Panel",
+    "specs": "PIR / PUR / EPS core; 30\u2013100mm thickness; both-side steel skin",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 410,
+    "retailPrice": 594.5,
+    "tradePrice": 546.94,
+    "volumePrice": 523.16,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "Translucent",
+    "name": "Fibreglass / Polycarbonate Skylight Sheet",
+    "specs": "Profile-matched to IBR / corrugated; UV-stabilised",
+    "unit": "per sheet",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 295,
+    "retailPrice": 368.75,
+    "tradePrice": 339.25,
+    "volumePrice": 313.44,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Steel Roofing Sheets",
+    "subcategory": "Off-Cuts",
+    "name": "Second-Grade / Off-Cut Sheeting",
+    "specs": "Mixed gauge and length; discount stock",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "residential"
+    ],
+    "landedCost": 62,
+    "retailPrice": 77.5,
+    "tradePrice": 71.3,
+    "volumePrice": 65.88,
+    "weightKgPerUnit": 4.5
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Structural Timber",
+    "name": "SA Pine Structural Timber 38x38",
+    "specs": "H2/H3/H4 treated; 3.0\u20136.0m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 22,
+    "retailPrice": 28.6,
+    "tradePrice": 26.31,
+    "volumePrice": 24.31,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Structural Timber",
+    "name": "SA Pine Structural Timber 38x50",
+    "specs": "H2/H3/H4 treated; 3.0\u20136.0m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 29,
+    "retailPrice": 37.7,
+    "tradePrice": 34.68,
+    "volumePrice": 32.05,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Structural Timber",
+    "name": "SA Pine Structural Timber 50x50",
+    "specs": "H2/H3/H4 treated; 3.0\u20136.0m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 38,
+    "retailPrice": 49.4,
+    "tradePrice": 45.45,
+    "volumePrice": 41.99,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Structural Timber",
+    "name": "SA Pine Structural Timber 50x76",
+    "specs": "H2/H3/H4 treated; 3.0\u20136.0m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 52,
+    "retailPrice": 67.6,
+    "tradePrice": 62.19,
+    "volumePrice": 57.46,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Structural Timber",
+    "name": "SA Pine Structural Timber 50x114",
+    "specs": "H2/H3/H4 treated; 3.0\u20136.0m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 74,
+    "retailPrice": 96.2,
+    "tradePrice": 88.5,
+    "volumePrice": 81.77,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Structural Timber",
+    "name": "SA Pine Structural Timber 50x152",
+    "specs": "H2/H3/H4 treated; 3.6\u20136.0m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 98,
+    "retailPrice": 127.4,
+    "tradePrice": 117.21,
+    "volumePrice": 108.29,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Structural Timber",
+    "name": "SA Pine Structural Timber 76x228",
+    "specs": "H3/H4 treated; beam-grade; 3.6\u20136.0m",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 210,
+    "retailPrice": 273.0,
+    "tradePrice": 251.16,
+    "volumePrice": 232.05,
+    "weightKgPerUnit": 9.5
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Trusses",
+    "name": "Pre-Nailed Engineered Roof Truss",
+    "specs": "Custom span/pitch; SANS 10243 design; made to drawing",
+    "unit": "per truss",
+    "fulfilmentType": "Fabricated to Order",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 950,
+    "retailPrice": 1330.0,
+    "tradePrice": 1223.6,
+    "volumePrice": 1130.5,
+    "weightKgPerUnit": 45.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Purlins & Battens",
+    "name": "Timber Purlins",
+    "specs": "38x114 / 50x76 / 50x114; H3 treated",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 46,
+    "retailPrice": 59.8,
+    "tradePrice": 55.02,
+    "volumePrice": 50.83,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Purlins & Battens",
+    "name": "Timber Battens",
+    "specs": "38x38 / 38x50; tile-lath grade",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 18,
+    "retailPrice": 23.4,
+    "tradePrice": 21.53,
+    "volumePrice": 19.89,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Wall Plates",
+    "name": "Timber Wall Plate",
+    "specs": "50x76 / 50x114; H3 treated",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 52,
+    "retailPrice": 67.6,
+    "tradePrice": 62.19,
+    "volumePrice": 57.46,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Engineered Timber",
+    "name": "Laminated / Glulam Structural Beam",
+    "specs": "Custom sizing; engineer-specified spans",
+    "unit": "per m",
+    "fulfilmentType": "Fabricated to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 385,
+    "retailPrice": 539.0,
+    "tradePrice": 495.88,
+    "volumePrice": 458.15,
+    "weightKgPerUnit": 22.0
+  },
+  {
+    "category": "Roofing Timber & Trusses",
+    "subcategory": "Decking",
+    "name": "Plywood Roof Decking / Shuttering Ply",
+    "specs": "12 / 18mm; structural grade",
+    "unit": "per sheet",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 340,
+    "retailPrice": 442.0,
+    "tradePrice": 406.64,
+    "volumePrice": 375.7,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Roof Tiles",
+    "subcategory": "Concrete Tiles",
+    "name": "Concrete Roof Tile \u2014 Double Roman",
+    "specs": "Standard colour range; interlocking profile",
+    "unit": "per tile",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 9.5,
+    "retailPrice": 12.83,
+    "tradePrice": 11.8,
+    "volumePrice": 10.91,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Roof Tiles",
+    "subcategory": "Concrete Tiles",
+    "name": "Concrete Roof Tile \u2014 Shingle Profile",
+    "specs": "Standard colour range",
+    "unit": "per tile",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 9.8,
+    "retailPrice": 13.23,
+    "tradePrice": 12.17,
+    "volumePrice": 11.25,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Roof Tiles",
+    "subcategory": "Concrete Tiles",
+    "name": "Concrete Roof Tile \u2014 Flat Profile",
+    "specs": "Standard colour range; contemporary line",
+    "unit": "per tile",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 10.2,
+    "retailPrice": 13.77,
+    "tradePrice": 12.67,
+    "volumePrice": 11.7,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Roof Tiles",
+    "subcategory": "Clay Tiles",
+    "name": "Clay Roof Tile \u2014 Traditional Profile",
+    "specs": "Natural fired clay; regional colour range",
+    "unit": "per tile",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "residential"
+    ],
+    "landedCost": 14.2,
+    "retailPrice": 19.17,
+    "tradePrice": 17.64,
+    "volumePrice": 16.29,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Roof Tiles",
+    "subcategory": "Fibre-Cement",
+    "name": "Fibre-Cement Roof Tile / Slate",
+    "specs": "Lightweight; standard colour range",
+    "unit": "per tile",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 18.5,
+    "retailPrice": 24.98,
+    "tradePrice": 22.98,
+    "volumePrice": 21.23,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Roof Tiles",
+    "subcategory": "Ridge & Hip",
+    "name": "Ridge Tile",
+    "specs": "Matched profile and colour to main tile range",
+    "unit": "per tile",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 22,
+    "retailPrice": 29.7,
+    "tradePrice": 27.32,
+    "volumePrice": 25.24,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Roof Tiles",
+    "subcategory": "Ridge & Hip",
+    "name": "Hip Tile",
+    "specs": "Matched profile and colour to main tile range",
+    "unit": "per tile",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 24,
+    "retailPrice": 32.4,
+    "tradePrice": 29.81,
+    "volumePrice": 27.54,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Roof Tiles",
+    "subcategory": "Fixing System",
+    "name": "Tile Battens & Fixing Clips",
+    "specs": "Galvanised clips; treated timber battens",
+    "unit": "per pack",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 165,
+    "retailPrice": 222.75,
+    "tradePrice": 204.93,
+    "volumePrice": 189.34,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Roof Tiles",
+    "subcategory": "Verge",
+    "name": "Verge Tile / Cappings",
+    "specs": "Matched to main tile profile",
+    "unit": "per tile",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 26,
+    "retailPrice": 35.1,
+    "tradePrice": 32.29,
+    "volumePrice": 29.84,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Flashings",
+    "name": "Ridge Flashing",
+    "specs": "Profile-matched; colour-coated or galvanised",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 58,
+    "retailPrice": 87.0,
+    "tradePrice": 78.3,
+    "volumePrice": 73.95,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Flashings",
+    "name": "Apron / End Flashing",
+    "specs": "Profile-matched; colour-coated or galvanised",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 54,
+    "retailPrice": 81.0,
+    "tradePrice": 72.9,
+    "volumePrice": 68.85,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Flashings",
+    "name": "Valley Flashing",
+    "specs": "Wide-format; colour-coated or galvanised",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 92,
+    "retailPrice": 138.0,
+    "tradePrice": 124.2,
+    "volumePrice": 117.3,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Flashings",
+    "name": "Barge / Verge Flashing",
+    "specs": "Profile-matched; colour-coated or galvanised",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 60,
+    "retailPrice": 90.0,
+    "tradePrice": 81.0,
+    "volumePrice": 76.5,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Flashings",
+    "name": "Parapet Flashing / Coping",
+    "specs": "Custom bend; colour-coated or galvanised",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 110,
+    "retailPrice": 165.0,
+    "tradePrice": 148.5,
+    "volumePrice": 140.25,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Ridge Caps",
+    "name": "Ridge Capping \u2014 IBR Profile",
+    "specs": "Colour-matched; standard 2\u20133m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 62,
+    "retailPrice": 93.0,
+    "tradePrice": 83.7,
+    "volumePrice": 79.05,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Ridge Caps",
+    "name": "Ridge Capping \u2014 Corrugated Profile",
+    "specs": "Colour-matched; standard 2\u20133m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 58,
+    "retailPrice": 87.0,
+    "tradePrice": 78.3,
+    "volumePrice": 73.95,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Gutters",
+    "name": "Gutter \u2014 Quad Profile",
+    "specs": "Galvanised, colour-coated, or PVC",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 78,
+    "retailPrice": 117.0,
+    "tradePrice": 105.3,
+    "volumePrice": 99.45,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Gutters",
+    "name": "Gutter \u2014 Half-Round Profile",
+    "specs": "Galvanised, colour-coated, or PVC",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 88,
+    "retailPrice": 132.0,
+    "tradePrice": 118.8,
+    "volumePrice": 112.2,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Gutters",
+    "name": "Gutter \u2014 Box Profile",
+    "specs": "Galvanised or colour-coated; industrial spec",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 145,
+    "retailPrice": 217.5,
+    "tradePrice": 195.75,
+    "volumePrice": 184.88,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Downpipes",
+    "name": "Downpipe \u2014 Round",
+    "specs": "65 / 75 / 100mm diameter; various materials",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 62,
+    "retailPrice": 93.0,
+    "tradePrice": 83.7,
+    "volumePrice": 79.05,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Downpipes",
+    "name": "Downpipe \u2014 Square / Rectangular",
+    "specs": "Various sizes; various materials",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 68,
+    "retailPrice": 102.0,
+    "tradePrice": 91.8,
+    "volumePrice": 86.7,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Gutter Hardware",
+    "name": "Gutter Brackets, Outlets & End Caps",
+    "specs": "Matched to gutter profile and material",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 28,
+    "retailPrice": 42.0,
+    "tradePrice": 37.8,
+    "volumePrice": 35.7,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Fasteners",
+    "name": "Roof Screws \u2014 Class 3 / Class 4 Coated",
+    "specs": "Colour-matched caps; 65\u2013175mm lengths",
+    "unit": "per box",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 210,
+    "retailPrice": 315.0,
+    "tradePrice": 283.5,
+    "volumePrice": 267.75,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Fasteners",
+    "name": "Roofing Nails",
+    "specs": "Galvanised; umbrella-head",
+    "unit": "per kg",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 48,
+    "retailPrice": 72.0,
+    "tradePrice": 64.8,
+    "volumePrice": 61.2,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Sealants & Coatings",
+    "name": "Roof Sealant \u2014 Silicone / Bituminous",
+    "specs": "Cartridge or bulk; UV-stable",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 85,
+    "retailPrice": 127.5,
+    "tradePrice": 114.75,
+    "volumePrice": 108.38,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Sealants & Coatings",
+    "name": "Waterproof Roof Coating",
+    "specs": "Acrylic or bitumen-based; bulk containers",
+    "unit": "per 20L drum",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 610,
+    "retailPrice": 915.0,
+    "tradePrice": 823.5,
+    "volumePrice": 777.75,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Closures",
+    "name": "Foam Closure Strips",
+    "specs": "Profile-matched to IBR / corrugated",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 24,
+    "retailPrice": 36.0,
+    "tradePrice": 32.4,
+    "volumePrice": 30.6,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Skylights",
+    "name": "Skylight & Roof Window Units",
+    "specs": "Fixed or ventilated; profile-matched flashing kit included",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 1450,
+    "retailPrice": 2175.0,
+    "tradePrice": 1957.5,
+    "volumePrice": 1848.75,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Insulation",
+    "name": "Roof Insulation \u2014 Rigid Board",
+    "specs": "25 / 40 / 50 / 75mm; foil-faced",
+    "unit": "per sheet",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 145,
+    "retailPrice": 217.5,
+    "tradePrice": 195.75,
+    "volumePrice": 184.88,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Insulation",
+    "name": "Roof Insulation \u2014 Reflective Foil / Sisalation",
+    "specs": "Single- or double-sided reflective; various widths",
+    "unit": "per roll",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 340,
+    "retailPrice": 510.0,
+    "tradePrice": 459.0,
+    "volumePrice": 433.5,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Safety",
+    "name": "Anti-Fall Safety Mesh",
+    "specs": "Roof-void safety mesh; SANS-compliant",
+    "unit": "per roll",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 480,
+    "retailPrice": 720.0,
+    "tradePrice": 648.0,
+    "volumePrice": 612.0,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Ventilation",
+    "name": "Roof Ventilation \u2014 Whirlybird / Turbine Vent",
+    "specs": "Various diameters; galvanised or colour-coated",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 620,
+    "retailPrice": 930.0,
+    "tradePrice": 837.0,
+    "volumePrice": 790.5,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Ventilation",
+    "name": "Ridge & Gable Ventilation Strip",
+    "specs": "Profile-matched; insect-proof mesh",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 74,
+    "retailPrice": 111.0,
+    "tradePrice": 99.9,
+    "volumePrice": 94.35,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Roofing Accessories",
+    "subcategory": "Bird / Pest Control",
+    "name": "Bird-Proofing / Snow Guard Strips",
+    "specs": "Profile-matched; clip-fit",
+    "unit": "per m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 46,
+    "retailPrice": 69.0,
+    "tradePrice": 62.1,
+    "volumePrice": 58.65,
+    "weightKgPerUnit": 1.5
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Bar",
+    "name": "Reinforcing Bar Y8",
+    "specs": "SANS 920 deformed bar; 12m standard stock length; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 9.48,
+    "retailPrice": 10.62,
+    "tradePrice": 10.09,
+    "volumePrice": 9.56,
+    "weightKgPerUnit": 0.395
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Bar",
+    "name": "Reinforcing Bar Y10",
+    "specs": "SANS 920 deformed bar; 12m standard stock length; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 14.81,
+    "retailPrice": 16.59,
+    "tradePrice": 15.76,
+    "volumePrice": 14.93,
+    "weightKgPerUnit": 0.617
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Bar",
+    "name": "Reinforcing Bar Y12",
+    "specs": "SANS 920 deformed bar; 12m standard stock length; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 21.31,
+    "retailPrice": 23.87,
+    "tradePrice": 22.68,
+    "volumePrice": 21.48,
+    "weightKgPerUnit": 0.888
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Bar",
+    "name": "Reinforcing Bar Y16",
+    "specs": "SANS 920 deformed bar; 12m standard stock length; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 37.87,
+    "retailPrice": 42.41,
+    "tradePrice": 40.29,
+    "volumePrice": 38.17,
+    "weightKgPerUnit": 1.578
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Bar",
+    "name": "Reinforcing Bar Y20",
+    "specs": "SANS 920 deformed bar; 12m standard stock length; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 59.18,
+    "retailPrice": 66.28,
+    "tradePrice": 62.97,
+    "volumePrice": 59.65,
+    "weightKgPerUnit": 2.466
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Bar",
+    "name": "Reinforcing Bar Y25",
+    "specs": "SANS 920 deformed bar; 12m standard stock length; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 92.47,
+    "retailPrice": 103.57,
+    "tradePrice": 98.39,
+    "volumePrice": 93.21,
+    "weightKgPerUnit": 3.853
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Bar",
+    "name": "Reinforcing Bar Y32",
+    "specs": "SANS 920 deformed bar; 12m standard stock length; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 151.51,
+    "retailPrice": 169.69,
+    "tradePrice": 161.21,
+    "volumePrice": 152.72,
+    "weightKgPerUnit": 6.313
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Mesh",
+    "name": "Reinforcing Mesh Ref 100",
+    "specs": "SANS 1024 welded mesh; standard 6m x 2.4m sheet",
+    "unit": "per sheet (6x2.4m)",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 340,
+    "retailPrice": 380.8,
+    "tradePrice": 361.76,
+    "volumePrice": 342.72,
+    "weightKgPerUnit": 22
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Mesh",
+    "name": "Reinforcing Mesh Ref 193",
+    "specs": "SANS 1024 welded mesh; standard 6m x 2.4m sheet",
+    "unit": "per sheet (6x2.4m)",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 385,
+    "retailPrice": 431.2,
+    "tradePrice": 409.64,
+    "volumePrice": 388.08,
+    "weightKgPerUnit": 42
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Mesh",
+    "name": "Reinforcing Mesh Ref 245",
+    "specs": "SANS 1024 welded mesh; standard 6m x 2.4m sheet",
+    "unit": "per sheet (6x2.4m)",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 460,
+    "retailPrice": 515.2,
+    "tradePrice": 489.44,
+    "volumePrice": 463.68,
+    "weightKgPerUnit": 53
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Mesh",
+    "name": "Reinforcing Mesh Ref 395",
+    "specs": "SANS 1024 welded mesh; standard 6m x 2.4m sheet",
+    "unit": "per sheet (6x2.4m)",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 720,
+    "retailPrice": 806.4,
+    "tradePrice": 766.08,
+    "volumePrice": 725.76,
+    "weightKgPerUnit": 85
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Reinforcing Mesh",
+    "name": "Reinforcing Mesh Ref 500",
+    "specs": "SANS 1024 welded mesh; standard 6m x 2.4m sheet",
+    "unit": "per sheet (6x2.4m)",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 890,
+    "retailPrice": 996.8,
+    "tradePrice": 946.96,
+    "volumePrice": 897.12,
+    "weightKgPerUnit": 108
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Accessories",
+    "name": "Binding Wire",
+    "specs": "1.6mm annealed wire; coil",
+    "unit": "per coil",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 145,
+    "retailPrice": 162.4,
+    "tradePrice": 154.28,
+    "volumePrice": 146.16,
+    "weightKgPerUnit": 5.0
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Accessories",
+    "name": "Rebar Chairs & Spacers",
+    "specs": "Various heights; plastic or wire",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 3.8,
+    "retailPrice": 4.26,
+    "tradePrice": 4.05,
+    "volumePrice": 3.83,
+    "weightKgPerUnit": 0.05
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Accessories",
+    "name": "Rebar Couplers",
+    "specs": "Threaded mechanical splice; sized to bar diameter",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 68,
+    "retailPrice": 76.16,
+    "tradePrice": 72.35,
+    "volumePrice": 68.54,
+    "weightKgPerUnit": 0.3
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Accessories",
+    "name": "Starter Bars",
+    "specs": "Pre-cut and bent to specification",
+    "unit": "each",
+    "fulfilmentType": "Fabricated to Order",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 42,
+    "retailPrice": 47.04,
+    "tradePrice": 44.69,
+    "volumePrice": 42.34,
+    "weightKgPerUnit": 0.9
+  },
+  {
+    "category": "Reinforcing Steel",
+    "subcategory": "Accessories",
+    "name": "Stirrups & Links \u2014 Pre-Bent",
+    "specs": "Cut and bent to drawing; standard column/beam shapes",
+    "unit": "each",
+    "fulfilmentType": "Fabricated to Order",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 18,
+    "retailPrice": 20.16,
+    "tradePrice": 19.15,
+    "volumePrice": 18.14,
+    "weightKgPerUnit": 0.4
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "I-Beams / H-Beams",
+    "name": "Universal Beam 152x89mm",
+    "specs": "SANS 50025 structural steel; standard 12\u201313m mill lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 384.0,
+    "retailPrice": 441.6,
+    "tradePrice": 419.52,
+    "volumePrice": 388.61,
+    "weightKgPerUnit": 16.0
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "I-Beams / H-Beams",
+    "name": "Universal Beam 203x102mm",
+    "specs": "SANS 50025 structural steel; standard 12\u201313m mill lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 554.4,
+    "retailPrice": 637.56,
+    "tradePrice": 605.68,
+    "volumePrice": 561.05,
+    "weightKgPerUnit": 23.1
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "I-Beams / H-Beams",
+    "name": "Universal Beam 254x146mm",
+    "specs": "SANS 50025 structural steel; standard 12\u201313m mill lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 746.4,
+    "retailPrice": 858.36,
+    "tradePrice": 815.44,
+    "volumePrice": 755.36,
+    "weightKgPerUnit": 31.1
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "I-Beams / H-Beams",
+    "name": "Universal Beam 305x165mm",
+    "specs": "SANS 50025 structural steel; standard 12\u201313m mill lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 967.2,
+    "retailPrice": 1112.28,
+    "tradePrice": 1056.67,
+    "volumePrice": 978.81,
+    "weightKgPerUnit": 40.3
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "I-Beams / H-Beams",
+    "name": "Universal Beam 356x171mm",
+    "specs": "SANS 50025 structural steel; standard 12\u201313m mill lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 1080.0,
+    "retailPrice": 1242.0,
+    "tradePrice": 1179.9,
+    "volumePrice": 1092.96,
+    "weightKgPerUnit": 45.0
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "I-Beams / H-Beams",
+    "name": "Universal Beam 406x178mm",
+    "specs": "SANS 50025 structural steel; standard 12\u201313m mill lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 1298.4,
+    "retailPrice": 1493.16,
+    "tradePrice": 1418.5,
+    "volumePrice": 1313.98,
+    "weightKgPerUnit": 54.1
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "I-Beams / H-Beams",
+    "name": "Universal Beam 457x152mm",
+    "specs": "SANS 50025 structural steel; standard 12\u201313m mill lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 1255.2,
+    "retailPrice": 1443.48,
+    "tradePrice": 1371.31,
+    "volumePrice": 1270.26,
+    "weightKgPerUnit": 52.3
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Channels",
+    "name": "Parallel Flange Channel (PFC) 75x40mm",
+    "specs": "SANS 50025 structural steel; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 160.8,
+    "retailPrice": 184.92,
+    "tradePrice": 175.67,
+    "volumePrice": 162.73,
+    "weightKgPerUnit": 6.7
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Channels",
+    "name": "Parallel Flange Channel (PFC) 100x50mm",
+    "specs": "SANS 50025 structural steel; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 199.2,
+    "retailPrice": 229.08,
+    "tradePrice": 217.63,
+    "volumePrice": 201.59,
+    "weightKgPerUnit": 8.3
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Channels",
+    "name": "Parallel Flange Channel (PFC) 150x75mm",
+    "specs": "SANS 50025 structural steel; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 429.6,
+    "retailPrice": 494.04,
+    "tradePrice": 469.34,
+    "volumePrice": 434.76,
+    "weightKgPerUnit": 17.9
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Channels",
+    "name": "Parallel Flange Channel (PFC) 180x75mm",
+    "specs": "SANS 50025 structural steel; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 487.2,
+    "retailPrice": 560.28,
+    "tradePrice": 532.27,
+    "volumePrice": 493.05,
+    "weightKgPerUnit": 20.3
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Channels",
+    "name": "Parallel Flange Channel (PFC) 200x75mm",
+    "specs": "SANS 50025 structural steel; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 561.6,
+    "retailPrice": 645.84,
+    "tradePrice": 613.55,
+    "volumePrice": 568.34,
+    "weightKgPerUnit": 23.4
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Channels",
+    "name": "Parallel Flange Channel (PFC) 250x90mm",
+    "specs": "SANS 50025 structural steel; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 729.6,
+    "retailPrice": 839.04,
+    "tradePrice": 797.09,
+    "volumePrice": 738.36,
+    "weightKgPerUnit": 30.4
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Channels",
+    "name": "Parallel Flange Channel (PFC) 300x90mm",
+    "specs": "SANS 50025 structural steel; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 864.0,
+    "retailPrice": 993.6,
+    "tradePrice": 943.92,
+    "volumePrice": 874.37,
+    "weightKgPerUnit": 36.0
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 25x25x3mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 26.64,
+    "retailPrice": 30.64,
+    "tradePrice": 29.11,
+    "volumePrice": 26.96,
+    "weightKgPerUnit": 1.11
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 32x32x3mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 34.32,
+    "retailPrice": 39.47,
+    "tradePrice": 37.5,
+    "volumePrice": 34.73,
+    "weightKgPerUnit": 1.43
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 40x40x3mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 43.92,
+    "retailPrice": 50.51,
+    "tradePrice": 47.98,
+    "volumePrice": 44.45,
+    "weightKgPerUnit": 1.83
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 40x40x5mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 71.28,
+    "retailPrice": 81.97,
+    "tradePrice": 77.87,
+    "volumePrice": 72.13,
+    "weightKgPerUnit": 2.97
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 50x50x5mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 90.48,
+    "retailPrice": 104.05,
+    "tradePrice": 98.85,
+    "volumePrice": 91.56,
+    "weightKgPerUnit": 3.77
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 50x50x6mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 107.28,
+    "retailPrice": 123.37,
+    "tradePrice": 117.2,
+    "volumePrice": 108.57,
+    "weightKgPerUnit": 4.47
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 65x65x6mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 141.84,
+    "retailPrice": 163.12,
+    "tradePrice": 154.96,
+    "volumePrice": 143.55,
+    "weightKgPerUnit": 5.91
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 75x75x6mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 164.4,
+    "retailPrice": 189.06,
+    "tradePrice": 179.61,
+    "volumePrice": 166.37,
+    "weightKgPerUnit": 6.85
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 100x100x8mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 292.8,
+    "retailPrice": 336.72,
+    "tradePrice": 319.88,
+    "volumePrice": 296.31,
+    "weightKgPerUnit": 12.2
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Angle Iron",
+    "name": "Equal Angle 100x100x10mm",
+    "specs": "Mild steel; standard 6m lengths; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 360.0,
+    "retailPrice": 414.0,
+    "tradePrice": 393.3,
+    "volumePrice": 364.32,
+    "weightKgPerUnit": 15.0
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Square Hollow Section (SHS) 20x20mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 27.6,
+    "retailPrice": 31.74,
+    "tradePrice": 30.15,
+    "volumePrice": 27.93,
+    "weightKgPerUnit": 1.15
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Square Hollow Section (SHS) 25x25mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 35.52,
+    "retailPrice": 40.85,
+    "tradePrice": 38.81,
+    "volumePrice": 35.95,
+    "weightKgPerUnit": 1.48
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Square Hollow Section (SHS) 30x30mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 49.44,
+    "retailPrice": 56.86,
+    "tradePrice": 54.02,
+    "volumePrice": 50.04,
+    "weightKgPerUnit": 2.06
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Square Hollow Section (SHS) 40x40mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 67.92,
+    "retailPrice": 78.11,
+    "tradePrice": 74.2,
+    "volumePrice": 68.74,
+    "weightKgPerUnit": 2.83
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Square Hollow Section (SHS) 50x50mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 110.64,
+    "retailPrice": 127.24,
+    "tradePrice": 120.88,
+    "volumePrice": 111.97,
+    "weightKgPerUnit": 4.61
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Square Hollow Section (SHS) 60x60mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 134.4,
+    "retailPrice": 154.56,
+    "tradePrice": 146.83,
+    "volumePrice": 136.01,
+    "weightKgPerUnit": 5.6
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Square Hollow Section (SHS) 75x75mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 206.4,
+    "retailPrice": 237.36,
+    "tradePrice": 225.49,
+    "volumePrice": 208.88,
+    "weightKgPerUnit": 8.6
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Square Hollow Section (SHS) 80x80mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 221.28,
+    "retailPrice": 254.47,
+    "tradePrice": 241.75,
+    "volumePrice": 223.93,
+    "weightKgPerUnit": 9.22
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Square Hollow Section (SHS) 100x100mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 348.0,
+    "retailPrice": 400.2,
+    "tradePrice": 380.19,
+    "volumePrice": 352.18,
+    "weightKgPerUnit": 14.5
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Rectangular Hollow Section (RHS) 50x25mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 65.28,
+    "retailPrice": 75.07,
+    "tradePrice": 71.32,
+    "volumePrice": 66.06,
+    "weightKgPerUnit": 2.72
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Rectangular Hollow Section (RHS) 50x30mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 72.72,
+    "retailPrice": 83.63,
+    "tradePrice": 79.45,
+    "volumePrice": 73.59,
+    "weightKgPerUnit": 3.03
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Rectangular Hollow Section (RHS) 60x40mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 104.4,
+    "retailPrice": 120.06,
+    "tradePrice": 114.06,
+    "volumePrice": 105.65,
+    "weightKgPerUnit": 4.35
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Rectangular Hollow Section (RHS) 76x38mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 129.6,
+    "retailPrice": 149.04,
+    "tradePrice": 141.59,
+    "volumePrice": 131.16,
+    "weightKgPerUnit": 5.4
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Rectangular Hollow Section (RHS) 100x50mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 172.32,
+    "retailPrice": 198.17,
+    "tradePrice": 188.26,
+    "volumePrice": 174.39,
+    "weightKgPerUnit": 7.18
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Rectangular Hollow Section (RHS) 150x50mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 237.84,
+    "retailPrice": 273.52,
+    "tradePrice": 259.84,
+    "volumePrice": 240.7,
+    "weightKgPerUnit": 9.91
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Rectangular Hollow Section (RHS) 150x100mm",
+    "specs": "Various wall thickness 2.0\u20136.0mm; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 326.4,
+    "retailPrice": 375.36,
+    "tradePrice": 356.59,
+    "volumePrice": 330.32,
+    "weightKgPerUnit": 13.6
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Circular Hollow Section / Steel Tube 20NB",
+    "specs": "Medium or heavy wall class; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 34.56,
+    "retailPrice": 39.74,
+    "tradePrice": 37.75,
+    "volumePrice": 34.97,
+    "weightKgPerUnit": 1.44
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Circular Hollow Section / Steel Tube 25NB",
+    "specs": "Medium or heavy wall class; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 44.4,
+    "retailPrice": 51.06,
+    "tradePrice": 48.51,
+    "volumePrice": 44.93,
+    "weightKgPerUnit": 1.85
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Circular Hollow Section / Steel Tube 32NB",
+    "specs": "Medium or heavy wall class; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 61.2,
+    "retailPrice": 70.38,
+    "tradePrice": 66.86,
+    "volumePrice": 61.93,
+    "weightKgPerUnit": 2.55
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Circular Hollow Section / Steel Tube 40NB",
+    "specs": "Medium or heavy wall class; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 75.36,
+    "retailPrice": 86.66,
+    "tradePrice": 82.33,
+    "volumePrice": 76.26,
+    "weightKgPerUnit": 3.14
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Circular Hollow Section / Steel Tube 50NB",
+    "specs": "Medium or heavy wall class; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 100.8,
+    "retailPrice": 115.92,
+    "tradePrice": 110.12,
+    "volumePrice": 102.01,
+    "weightKgPerUnit": 4.2
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Circular Hollow Section / Steel Tube 65NB",
+    "specs": "Medium or heavy wall class; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 148.56,
+    "retailPrice": 170.84,
+    "tradePrice": 162.3,
+    "volumePrice": 150.34,
+    "weightKgPerUnit": 6.19
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Circular Hollow Section / Steel Tube 80NB",
+    "specs": "Medium or heavy wall class; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 185.04,
+    "retailPrice": 212.8,
+    "tradePrice": 202.16,
+    "volumePrice": 187.26,
+    "weightKgPerUnit": 7.71
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Hollow Section",
+    "name": "Circular Hollow Section / Steel Tube 100NB",
+    "specs": "Medium or heavy wall class; cut to length available",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 276.0,
+    "retailPrice": 317.4,
+    "tradePrice": 301.53,
+    "volumePrice": 279.31,
+    "weightKgPerUnit": 11.5
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 3mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 1682.49,
+    "retailPrice": 1934.86,
+    "tradePrice": 1838.12,
+    "volumePrice": 1702.68,
+    "weightKgPerUnit": 23.55
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 4mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 2243.32,
+    "retailPrice": 2579.82,
+    "tradePrice": 2450.83,
+    "volumePrice": 2270.24,
+    "weightKgPerUnit": 31.4
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 5mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 2804.15,
+    "retailPrice": 3224.77,
+    "tradePrice": 3063.53,
+    "volumePrice": 2837.8,
+    "weightKgPerUnit": 39.25
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 6mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 3364.97,
+    "retailPrice": 3869.72,
+    "tradePrice": 3676.23,
+    "volumePrice": 3405.35,
+    "weightKgPerUnit": 47.1
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 8mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 4486.63,
+    "retailPrice": 5159.62,
+    "tradePrice": 4901.64,
+    "volumePrice": 4540.47,
+    "weightKgPerUnit": 62.8
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 10mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 5608.29,
+    "retailPrice": 6449.53,
+    "tradePrice": 6127.05,
+    "volumePrice": 5675.59,
+    "weightKgPerUnit": 78.5
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 12mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 6729.95,
+    "retailPrice": 7739.44,
+    "tradePrice": 7352.47,
+    "volumePrice": 6810.71,
+    "weightKgPerUnit": 94.2
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 16mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 8973.27,
+    "retailPrice": 10319.26,
+    "tradePrice": 9803.3,
+    "volumePrice": 9080.95,
+    "weightKgPerUnit": 125.6
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 20mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 11216.58,
+    "retailPrice": 12899.07,
+    "tradePrice": 12254.12,
+    "volumePrice": 11351.18,
+    "weightKgPerUnit": 157.0
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Plate Steel",
+    "name": "Steel Plate 25mm",
+    "specs": "Mild steel; standard 2440x1220mm sheet; cut to size available",
+    "unit": "per sheet (2440x1220)",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 14020.73,
+    "retailPrice": 16123.84,
+    "tradePrice": 15317.65,
+    "volumePrice": 14188.98,
+    "weightKgPerUnit": 196.25
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Flat & Round Bar",
+    "name": "Flat Bar",
+    "specs": "20x3 to 100x10mm range; standard 6m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 42,
+    "retailPrice": 48.3,
+    "tradePrice": 45.88,
+    "volumePrice": 42.5,
+    "weightKgPerUnit": 3.5
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Flat & Round Bar",
+    "name": "Round Bar",
+    "specs": "6mm to 50mm diameter range; standard 6m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 46,
+    "retailPrice": 52.9,
+    "tradePrice": 50.25,
+    "volumePrice": 46.55,
+    "weightKgPerUnit": 2.2
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Flat & Round Bar",
+    "name": "Square Bar",
+    "specs": "10mm to 40mm range; standard 6m lengths",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 44,
+    "retailPrice": 50.6,
+    "tradePrice": 48.07,
+    "volumePrice": 44.53,
+    "weightKgPerUnit": 3.0
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Lintels",
+    "name": "Steel Lintel",
+    "specs": "Standard door/window opening widths; galvanised",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 185,
+    "retailPrice": 212.75,
+    "tradePrice": 202.11,
+    "volumePrice": 187.22,
+    "weightKgPerUnit": 8.0
+  },
+  {
+    "category": "Structural Steel",
+    "subcategory": "Purlins",
+    "name": "Z-Purlin / C-Purlin (Lipped Channel)",
+    "specs": "150\u2013250mm depth range; various gauge",
+    "unit": "per m",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 165,
+    "retailPrice": 189.75,
+    "tradePrice": 180.26,
+    "volumePrice": 166.98,
+    "weightKgPerUnit": 5.5
+  },
+  {
+    "category": "Cladding & Facades",
+    "subcategory": "Wall Cladding",
+    "name": "Wall Cladding Sheet \u2014 IBR / Corrugated Profile",
+    "specs": "Colour-coated; vertical or horizontal fix",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Made to Length",
+    "segments": [
+      "industrial",
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 135,
+    "retailPrice": 182.25,
+    "tradePrice": 167.67,
+    "volumePrice": 154.91,
+    "weightKgPerUnit": 5.0
+  },
+  {
+    "category": "Cladding & Facades",
+    "subcategory": "Composite Panels",
+    "name": "Composite Cladding Panel",
+    "specs": "Aluminium composite panel (ACP); wide colour range",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 320,
+    "retailPrice": 432.0,
+    "tradePrice": 397.44,
+    "volumePrice": 367.2,
+    "weightKgPerUnit": 5.0
+  },
+  {
+    "category": "Cladding & Facades",
+    "subcategory": "Perforated",
+    "name": "Perforated Metal Cladding",
+    "specs": "Decorative screening; various perforation patterns",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Cut to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 385,
+    "retailPrice": 519.75,
+    "tradePrice": 478.17,
+    "volumePrice": 441.79,
+    "weightKgPerUnit": 5.0
+  },
+  {
+    "category": "Cladding & Facades",
+    "subcategory": "Louvres",
+    "name": "Louvre Cladding System",
+    "specs": "Fixed or adjustable; solar-shading and ventilation",
+    "unit": "per m\u00b2",
+    "fulfilmentType": "Fabricated to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 620,
+    "retailPrice": 837.0,
+    "tradePrice": 770.04,
+    "volumePrice": 711.45,
+    "weightKgPerUnit": 5.0
+  },
+  {
+    "category": "Fencing & Palisade",
+    "subcategory": "Palisade",
+    "name": "Palisade Fencing Panel & Pales",
+    "specs": "1.8\u20132.4m standard heights; powder-coated or galvanised",
+    "unit": "per panel/m",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 285,
+    "retailPrice": 384.75,
+    "tradePrice": 353.97,
+    "volumePrice": 327.04,
+    "weightKgPerUnit": 8.0
+  },
+  {
+    "category": "Fencing & Palisade",
+    "subcategory": "Mesh Fencing",
+    "name": "Diamond Mesh / Chain-Link Fencing",
+    "specs": "Galvanised; various heights and apertures",
+    "unit": "per roll",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 620,
+    "retailPrice": 837.0,
+    "tradePrice": 770.04,
+    "volumePrice": 711.45,
+    "weightKgPerUnit": 8.0
+  },
+  {
+    "category": "Fencing & Palisade",
+    "subcategory": "Security Wire",
+    "name": "Razor Wire & Barbed Wire",
+    "specs": "Standard coil lengths",
+    "unit": "per roll",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 340,
+    "retailPrice": 459.0,
+    "tradePrice": 422.28,
+    "volumePrice": 390.15,
+    "weightKgPerUnit": 8.0
+  },
+  {
+    "category": "Fencing & Palisade",
+    "subcategory": "Posts",
+    "name": "Fencing Posts \u2014 Steel / Concrete",
+    "specs": "Various heights; standard or heavy-duty",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 145,
+    "retailPrice": 195.75,
+    "tradePrice": 180.09,
+    "volumePrice": 166.39,
+    "weightKgPerUnit": 8.0
+  },
+  {
+    "category": "Fencing & Palisade",
+    "subcategory": "Gates",
+    "name": "Steel Gates \u2014 Pedestrian, Sliding, Swing",
+    "specs": "Fabricated to opening size",
+    "unit": "per gate",
+    "fulfilmentType": "Fabricated to Order",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 2850,
+    "retailPrice": 3847.5,
+    "tradePrice": 3539.7,
+    "volumePrice": 3270.38,
+    "weightKgPerUnit": 8.0
+  },
+  {
+    "category": "Fencing & Palisade",
+    "subcategory": "Fixings",
+    "name": "Fencing Fixings & Brackets",
+    "specs": "Galvanised; matched to fencing system",
+    "unit": "per pack",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 95,
+    "retailPrice": 128.25,
+    "tradePrice": 117.99,
+    "volumePrice": 109.01,
+    "weightKgPerUnit": 8.0
+  },
+  {
+    "category": "Waterproofing",
+    "subcategory": "Membranes",
+    "name": "Torch-On Waterproofing Membrane",
+    "specs": "APP-modified bitumen; standard roll widths",
+    "unit": "per roll",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 480,
+    "retailPrice": 696.0,
+    "tradePrice": 626.4,
+    "volumePrice": 591.6,
+    "weightKgPerUnit": 12.0
+  },
+  {
+    "category": "Waterproofing",
+    "subcategory": "Liquid Systems",
+    "name": "Liquid Waterproofing Compound",
+    "specs": "Acrylic or polyurethane-based",
+    "unit": "per 20L drum",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 610,
+    "retailPrice": 884.5,
+    "tradePrice": 796.05,
+    "volumePrice": 751.82,
+    "weightKgPerUnit": 12.0
+  },
+  {
+    "category": "Waterproofing",
+    "subcategory": "Primers",
+    "name": "Waterproofing Primer",
+    "specs": "Bitumen or acrylic-based",
+    "unit": "per 20L drum",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 385,
+    "retailPrice": 558.25,
+    "tradePrice": 502.43,
+    "volumePrice": 474.51,
+    "weightKgPerUnit": 12.0
+  },
+  {
+    "category": "Waterproofing",
+    "subcategory": "DPC",
+    "name": "Damp-Proof Course (DPC) Membrane",
+    "specs": "Standard roll widths per SANS 10400",
+    "unit": "per roll",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 245,
+    "retailPrice": 355.25,
+    "tradePrice": 319.73,
+    "volumePrice": 301.96,
+    "weightKgPerUnit": 12.0
+  },
+  {
+    "category": "Waterproofing",
+    "subcategory": "Geotextiles",
+    "name": "Geotextile Membrane",
+    "specs": "Non-woven; civil and landscaping grade",
+    "unit": "per roll",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 390,
+    "retailPrice": 565.5,
+    "tradePrice": 508.95,
+    "volumePrice": 480.68,
+    "weightKgPerUnit": 12.0
+  },
+  {
+    "category": "Steel Doors, Frames & Security",
+    "subcategory": "Frames",
+    "name": "Steel Door Frame",
+    "specs": "Standard door opening sizes; welded or knock-down",
+    "unit": "per frame",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 780,
+    "retailPrice": 1092.0,
+    "tradePrice": 1004.64,
+    "volumePrice": 928.2,
+    "weightKgPerUnit": 25.0
+  },
+  {
+    "category": "Steel Doors, Frames & Security",
+    "subcategory": "Security Gates",
+    "name": "Security Gate / Burglar Bar Set",
+    "specs": "Standard or custom sizing",
+    "unit": "per set",
+    "fulfilmentType": "Fabricated to Order",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 1850,
+    "retailPrice": 2590.0,
+    "tradePrice": 2382.8,
+    "volumePrice": 2201.5,
+    "weightKgPerUnit": 25.0
+  },
+  {
+    "category": "Steel Doors, Frames & Security",
+    "subcategory": "Roller Shutters",
+    "name": "Roller Shutter Door",
+    "specs": "Manual or motorised; industrial and commercial sizing",
+    "unit": "per door",
+    "fulfilmentType": "Fabricated to Order",
+    "segments": [
+      "industrial",
+      "commercial"
+    ],
+    "landedCost": 4200,
+    "retailPrice": 5880.0,
+    "tradePrice": 5409.6,
+    "volumePrice": 4998.0,
+    "weightKgPerUnit": 85.0
+  },
+  {
+    "category": "Steel Doors, Frames & Security",
+    "subcategory": "Security Doors",
+    "name": "Steel Security Door",
+    "specs": "Standard residential and commercial sizes",
+    "unit": "per door",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "residential"
+    ],
+    "landedCost": 2650,
+    "retailPrice": 3710.0,
+    "tradePrice": 3413.2,
+    "volumePrice": 3153.5,
+    "weightKgPerUnit": 45.0
+  },
+  {
+    "category": "Welding Consumables & General Fasteners",
+    "subcategory": "Welding",
+    "name": "Welding Electrodes (Rods)",
+    "specs": "2.5 / 3.15 / 4.0mm; general-purpose grade",
+    "unit": "per box",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 95,
+    "retailPrice": 147.25,
+    "tradePrice": 132.53,
+    "volumePrice": 125.16,
+    "weightKgPerUnit": 2.0
+  },
+  {
+    "category": "Welding Consumables & General Fasteners",
+    "subcategory": "Welding",
+    "name": "MIG Welding Wire",
+    "specs": "0.8 / 0.9 / 1.2mm; various spool sizes",
+    "unit": "per spool",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil"
+    ],
+    "landedCost": 320,
+    "retailPrice": 496.0,
+    "tradePrice": 446.4,
+    "volumePrice": 421.6,
+    "weightKgPerUnit": 2.0
+  },
+  {
+    "category": "Welding Consumables & General Fasteners",
+    "subcategory": "Fasteners",
+    "name": "Structural Bolts, Nuts & Washers",
+    "specs": "M8\u2013M24; grade 8.8 and 4.6",
+    "unit": "per box",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 145,
+    "retailPrice": 224.75,
+    "tradePrice": 202.28,
+    "volumePrice": 191.04,
+    "weightKgPerUnit": 2.0
+  },
+  {
+    "category": "Welding Consumables & General Fasteners",
+    "subcategory": "Fasteners",
+    "name": "Chemical & Mechanical Anchors",
+    "specs": "Various diameters and embedment depths",
+    "unit": "per box",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 185,
+    "retailPrice": 286.75,
+    "tradePrice": 258.07,
+    "volumePrice": 243.74,
+    "weightKgPerUnit": 2.0
+  },
+  {
+    "category": "Welding Consumables & General Fasteners",
+    "subcategory": "Fasteners",
+    "name": "Self-Tapping Screws",
+    "specs": "Various gauges and lengths; coated options",
+    "unit": "per box",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 110,
+    "retailPrice": 170.5,
+    "tradePrice": 153.45,
+    "volumePrice": 144.92,
+    "weightKgPerUnit": 2.0
+  },
+  {
+    "category": "Welding Consumables & General Fasteners",
+    "subcategory": "Fasteners",
+    "name": "Rivets \u2014 Steel & Aluminium",
+    "specs": "Various diameters; blind rivet type",
+    "unit": "per box",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 95,
+    "retailPrice": 147.25,
+    "tradePrice": 132.53,
+    "volumePrice": 125.16,
+    "weightKgPerUnit": 2.0
+  },
+  {
+    "category": "PPE & Site Safety Equipment",
+    "subcategory": "Head Protection",
+    "name": "Hard Hats",
+    "specs": "SANS-compliant; various colours",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 42,
+    "retailPrice": 67.2,
+    "tradePrice": 60.48,
+    "volumePrice": 57.12,
+    "weightKgPerUnit": 0.8
+  },
+  {
+    "category": "PPE & Site Safety Equipment",
+    "subcategory": "Fall Protection",
+    "name": "Safety Harness & Fall-Arrest Kit",
+    "specs": "Full-body harness with lanyard; SANS-compliant",
+    "unit": "per kit",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 380,
+    "retailPrice": 608.0,
+    "tradePrice": 547.2,
+    "volumePrice": 516.8,
+    "weightKgPerUnit": 0.8
+  },
+  {
+    "category": "PPE & Site Safety Equipment",
+    "subcategory": "Footwear",
+    "name": "Safety Boots",
+    "specs": "Steel-toe; SANS-compliant; various sizes",
+    "unit": "per pair",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 210,
+    "retailPrice": 336.0,
+    "tradePrice": 302.4,
+    "volumePrice": 285.6,
+    "weightKgPerUnit": 0.8
+  },
+  {
+    "category": "PPE & Site Safety Equipment",
+    "subcategory": "Workwear",
+    "name": "Hi-Vis Vests & Workwear",
+    "specs": "Reflective; various sizes",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 65,
+    "retailPrice": 104.0,
+    "tradePrice": 93.6,
+    "volumePrice": 88.4,
+    "weightKgPerUnit": 0.8
+  },
+  {
+    "category": "PPE & Site Safety Equipment",
+    "subcategory": "Hand Protection",
+    "name": "Work Gloves \u2014 Cut-Resistant & General",
+    "specs": "Various grades and sizes",
+    "unit": "per pair",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 38,
+    "retailPrice": 60.8,
+    "tradePrice": 54.72,
+    "volumePrice": 51.68,
+    "weightKgPerUnit": 0.8
+  },
+  {
+    "category": "PPE & Site Safety Equipment",
+    "subcategory": "Signage",
+    "name": "Site Safety Signage",
+    "specs": "Standard warning and instruction signs; SANS pictograms",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 85,
+    "retailPrice": 136.0,
+    "tradePrice": 122.4,
+    "volumePrice": 115.6,
+    "weightKgPerUnit": 0.8
+  },
+  {
+    "category": "Cement, Aggregate & Building Materials",
+    "subcategory": "Cement",
+    "name": "General Purpose Cement",
+    "specs": "32.5N / 42.5N; 50kg bags or bulk",
+    "unit": "per bag",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 92,
+    "retailPrice": 103.04,
+    "tradePrice": 97.89,
+    "volumePrice": 92.74,
+    "weightKgPerUnit": 50.0
+  },
+  {
+    "category": "Cement, Aggregate & Building Materials",
+    "subcategory": "Aggregate",
+    "name": "Building Sand & Stone Aggregate",
+    "specs": "Various grades; fulfilled via Precast Direct partnership",
+    "unit": "per tonne",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "industrial",
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 620,
+    "retailPrice": 694.4,
+    "tradePrice": 659.68,
+    "volumePrice": 624.96,
+    "weightKgPerUnit": 1000.0
+  },
+  {
+    "category": "Cement, Aggregate & Building Materials",
+    "subcategory": "Masonry",
+    "name": "Building Blocks & Bricks",
+    "specs": "Standard concrete and clay units",
+    "unit": "each",
+    "fulfilmentType": "Stock",
+    "segments": [
+      "commercial",
+      "civil",
+      "residential"
+    ],
+    "landedCost": 4.8,
+    "retailPrice": 5.38,
+    "tradePrice": 5.11,
+    "volumePrice": 4.84,
+    "weightKgPerUnit": 40.0
+  }
+]

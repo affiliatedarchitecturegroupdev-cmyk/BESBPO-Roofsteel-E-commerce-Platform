@@ -1,0 +1,107 @@
+[
+  {
+    "pricingKey": "Steel Roofing Sheets \u2014 Stock",
+    "retailMarkup": 0.25,
+    "tradeDiscount": 0.08,
+    "volumeDiscount": 0.15,
+    "rationale": "Benchmarked against retail coated-sheet pricing (see Sheet 5); moderate margin, some price transparency."
+  },
+  {
+    "pricingKey": "Steel Roofing Sheets \u2014 Made to Length",
+    "retailMarkup": 0.45,
+    "tradeDiscount": 0.08,
+    "volumeDiscount": 0.12,
+    "rationale": "Roll-forming is Roofsteel's real differentiator \u2014 priced as a service premium, not just material, since competitors mostly sell fixed lengths only."
+  },
+  {
+    "pricingKey": "Roofing Timber & Trusses \u2014 Stock",
+    "retailMarkup": 0.3,
+    "tradeDiscount": 0.08,
+    "volumeDiscount": 0.15,
+    "rationale": "Timber pricing tracks SA pine market rate; moderate margin typical of building-materials timber yards."
+  },
+  {
+    "pricingKey": "Roofing Timber & Trusses \u2014 Fabricated",
+    "retailMarkup": 0.4,
+    "tradeDiscount": 0.08,
+    "volumeDiscount": 0.15,
+    "rationale": "Pre-nailed trusses and glulam beams are made-to-drawing \u2014 priced above raw timber for engineering and fabrication."
+  },
+  {
+    "pricingKey": "Roof Tiles",
+    "retailMarkup": 0.35,
+    "tradeDiscount": 0.08,
+    "volumeDiscount": 0.15,
+    "rationale": "Lower price transparency than commodity steel; comparable to concrete/clay tile retail margins."
+  },
+  {
+    "pricingKey": "Roofing Accessories",
+    "retailMarkup": 0.5,
+    "tradeDiscount": 0.1,
+    "volumeDiscount": 0.15,
+    "rationale": "Low price transparency, high attach-rate to sheet orders \u2014 classic hardware-margin category."
+  },
+  {
+    "pricingKey": "Reinforcing Steel",
+    "retailMarkup": 0.12,
+    "tradeDiscount": 0.05,
+    "volumeDiscount": 0.1,
+    "rationale": "Thin \u2014 highly price-transparent commodity; customers routinely cross-shop per-metre/per-tonne price (see Y12 benchmark, Sheet 5)."
+  },
+  {
+    "pricingKey": "Structural Steel",
+    "retailMarkup": 0.15,
+    "tradeDiscount": 0.05,
+    "volumeDiscount": 0.12,
+    "rationale": "Thin commodity margin; structural buyers quote-compare across merchants on mass/length pricing."
+  },
+  {
+    "pricingKey": "Cladding & Facades",
+    "retailMarkup": 0.35,
+    "tradeDiscount": 0.08,
+    "volumeDiscount": 0.15,
+    "rationale": "Comparable to roofing sheet \u2014 moderate margin, some made-to-order premium built in separately."
+  },
+  {
+    "pricingKey": "Fencing & Palisade",
+    "retailMarkup": 0.35,
+    "tradeDiscount": 0.08,
+    "volumeDiscount": 0.15,
+    "rationale": "Moderate margin, standard building-materials yard positioning."
+  },
+  {
+    "pricingKey": "Waterproofing",
+    "retailMarkup": 0.45,
+    "tradeDiscount": 0.1,
+    "volumeDiscount": 0.15,
+    "rationale": "Lower price transparency, specification-driven purchase \u2014 healthy margin typical of the category."
+  },
+  {
+    "pricingKey": "Steel Doors, Frames & Security",
+    "retailMarkup": 0.4,
+    "tradeDiscount": 0.08,
+    "volumeDiscount": 0.15,
+    "rationale": "Fabricated-to-order items carry a service margin similar to trusses."
+  },
+  {
+    "pricingKey": "Welding Consumables & General Fasteners",
+    "retailMarkup": 0.55,
+    "tradeDiscount": 0.1,
+    "volumeDiscount": 0.15,
+    "rationale": "Classic high-margin hardware category \u2014 small basket size, low price sensitivity."
+  },
+  {
+    "pricingKey": "PPE & Site Safety Equipment",
+    "retailMarkup": 0.6,
+    "tradeDiscount": 0.1,
+    "volumeDiscount": 0.15,
+    "rationale": "Highest-margin category \u2014 low price sensitivity, frequent small top-up purchase."
+  },
+  {
+    "pricingKey": "Cement, Aggregate & Building Materials",
+    "retailMarkup": 0.12,
+    "tradeDiscount": 0.05,
+    "volumeDiscount": 0.1,
+    "rationale": "Thin by design \u2014 a convenience/cross-sell line bridging to [[precast-direct]]; not a margin driver in its own right."
+  }
+]
