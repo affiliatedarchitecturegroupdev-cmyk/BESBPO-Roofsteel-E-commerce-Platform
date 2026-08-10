@@ -104,6 +104,24 @@ export class OrdersService {
     return order;
   }
 
+  // List orders for an authenticated account — paginated, most recent first. This is what
+  // the /account/orders page calls. Guest orders (no accountId) are excluded — a guest only
+  // sees their order if they have the orderNumber from their confirmation email.
+  async listByAccount(accountId: string, page = 1, pageSize = 20) {
+    const size = Math.min(pageSize, 100);
+    const [items, total] = await Promise.all([
+      this.prisma.order.findMany({
+        where: { accountId },
+        include: { _count: { select: { items: true } } },
+        skip: (page - 1) * size,
+        take: size,
+        orderBy: { createdAt: "desc" },
+      }),
+      this.prisma.order.count({ where: { accountId } }),
+    ]);
+    return { items, total, page, pageSize: size };
+  }
+
   private assertGatewayAllowedForTier(gateway: PaymentStrategy["gatewayName"], accountType: AccountType) {
     const allowed = GATEWAYS_BY_TIER[accountType];
     if (!allowed.includes(gateway)) {

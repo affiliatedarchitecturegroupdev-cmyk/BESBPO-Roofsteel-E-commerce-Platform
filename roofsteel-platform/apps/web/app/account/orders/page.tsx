@@ -14,10 +14,11 @@ export default function OrderHistoryPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // The ordersApi.listByAccount endpoint is task 3.2 scope — for now, show the page
-    // structure with an empty list. The API client method will be added when the endpoint
-    // exists, and this page will just work.
-    setLoading(false);
+    ordersApi
+      .list()
+      .then((data) => setOrders(data.items))
+      .catch((e) => setError(e instanceof Error ? e.message : "Failed to load orders"))
+      .finally(() => setLoading(false));
   }, []);
 
   return (

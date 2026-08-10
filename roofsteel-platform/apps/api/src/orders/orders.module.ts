@@ -29,6 +29,19 @@ export class OrdersController {
     return this.orders.createOrder(dto, accountType);
   }
 
+  // List orders for the authenticated account — paginated. This is a literal segment before
+  // the :orderNumber parameterised route below to avoid the route conflict (guidelines/01
+  // -api-design.md: "literal segments before parameterised ones").
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  list(@CurrentAccount() account: JwtPayload, @Query("page") page?: string, @Query("pageSize") pageSize?: string) {
+    return this.orders.listByAccount(
+      account.sub,
+      page ? parseInt(page, 10) : 1,
+      pageSize ? parseInt(pageSize, 10) : 20
+    );
+  }
+
   @Get(":orderNumber")
   findOne(@Param("orderNumber") orderNumber: string) {
     return this.orders.getByOrderNumber(orderNumber);

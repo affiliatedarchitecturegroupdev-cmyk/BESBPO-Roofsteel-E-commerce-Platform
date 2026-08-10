@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Icon } from "../Icon";
 import { useCart } from "../../lib/hooks";
+import { CartDrawer } from "../cart/CartDrawer";
 
 // Validated against design-mockup/mockup.html's mobile and desktop Home
 // screens (docs/DEVELOPMENT-LOG.md) — one component, responsive via CSS
@@ -14,9 +17,21 @@ import { useCart } from "../../lib/hooks";
 // (guidelines/12-storefront-ux-and-ia.md's "same brand, different job"):
 // no Launch Store CTA (we're already in the store), cart + account icons
 // take that visual priority instead. Cart count comes from the CartContext
-// (lib/hooks.ts) — real, not hardcoded.
+// (lib/hooks.ts) — real, not hardcoded. The cart icon opens the CartDrawer
+// overlay (task 3.2), which reads from the same CartContext — the drawer and
+// the /cart page always show the same state.
 export function StoreHeader() {
-  const { itemCount } = useCart();
+  const router = useRouter();
+  const { cart, itemCount, updateQuantity } = useCart();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  // Map the real cart items to the CartDrawer's expected CartLine shape.
+  const drawerLines = cart?.items.map((item) => ({
+    id: item.id,
+    productName: item.productName,
+    quantity: item.quantity,
+    lineTotal: item.lineTotal,
+  })) ?? [];
 
   return (
     <header className="store-header">
@@ -55,11 +70,26 @@ export function StoreHeader() {
         <Link href="/account" aria-label="Account">
           <Icon name="users" size={20} color="#1A1F24" />
         </Link>
-        <Link href="/cart" className="cart-icon-wrap" aria-label={`Cart, ${itemCount} items`}>
+        <button
+          className="cart-icon-wrap"
+          aria-label={`Cart, ${itemCount} items`}
+          onClick={() => setDrawerOpen(true)}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+        >
           <Icon name="bag" size={20} color="#1A1F24" />
           {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
-        </Link>
+        </button>
       </div>
+
+      <CartDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        lines={drawerLines}
+        subtotal={cart?.subtotal ?? 0}
+        freeDeliveryThreshold={15000}
+        onQuantityChange={(lineId, quantity) => updateQuantity(lineId, quantity)}
+        onCheckout={() => router.push("/checkout")}
+      />
     </header>
   );
 }

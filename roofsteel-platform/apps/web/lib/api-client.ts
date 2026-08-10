@@ -239,6 +239,13 @@ export interface OrderSummary {
 }
 
 export const ordersApi = {
+  list: (page?: number, pageSize?: number) => {
+    const params = new URLSearchParams();
+    if (page) params.set("page", String(page));
+    if (pageSize) params.set("pageSize", String(pageSize));
+    const query = params.toString() ? `?${params}` : "";
+    return apiFetch<PaginatedResponse<OrderSummary>>(`/orders${query}`);
+  },
   getByOrderNumber: (orderNumber: string) =>
     apiFetch<unknown>(`/orders/${orderNumber}`),
 };
