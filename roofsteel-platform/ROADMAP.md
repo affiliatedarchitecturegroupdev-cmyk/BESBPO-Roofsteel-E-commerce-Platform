@@ -64,12 +64,12 @@ out — tasks 2.12–2.14).
 | 3.7 | PayJustNow real integration (Retail only) | 200 | — | [ ] |
 | 3.8 | Payment webhook idempotency + order transitions | 200 | 45 | [x] |
 | 3.9 | Orders list-by-account endpoint | 100 | 35 | [x] |
-| 3.10 | Account dashboard page | 200 | — | [ ] |
-| 3.11 | Account/orders (list + detail + tracking) | 400 | — | [ ] |
-| 3.12 | Account/addresses page | 250 | — | [ ] |
-| 3.13 | Account/trade-account page (4 states) | 200 | — | [ ] |
-| 3.14 | Trade/apply page (built out) | 200 | — | [ ] |
-| 3.15 | Quote/request page | 250 | — | [ ] |
+| 3.10 | Account dashboard page | 200 | 148 | [x] |
+| 3.11 | Account/orders (list + detail + tracking) | 400 | 205 | [x] |
+| 3.12 | Account/addresses page | 250 | 163 | [x] |
+| 3.13 | Account/trade-account page (4 states) | 200 | 92 | [x] |
+| 3.14 | Trade/apply page (built out) | 200 | 130 | [x] |
+| 3.15 | Quote/request page | 250 | 120 | [x] |
 | | **Phase 3 subtotal** | **3,550** | — | |
 
 **Already done:** Cart module (add/update/remove/merge, server-side MtL validation), orders
