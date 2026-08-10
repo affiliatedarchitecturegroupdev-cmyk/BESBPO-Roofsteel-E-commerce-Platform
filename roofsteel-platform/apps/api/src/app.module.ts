@@ -7,15 +7,20 @@ import { AuthModule } from "./auth/auth.module";
 import { CartModule } from "./cart/cart.module";
 import { OrdersModule } from "./orders/orders.module";
 import { TradeAccountsModule } from "./trade-accounts/trade-accounts.module";
+import { AddressesModule } from "./addresses/addresses.module";
+import { QuotesModule } from "./quotes/quotes.module";
+import { WishlistsModule } from "./wishlists/wishlists.module";
+import { ComplianceModule } from "./compliance/compliance.module";
+import { ReviewsModule } from "./reviews/reviews.module";
 
-// All six modules below now have real logic, not empty scaffolds — see
-// docs/DEVELOPMENT-LOG.md for the session that finalised auth/cart/orders/trade-accounts.
-// What's still genuinely incomplete in each (real TODOs, not silent gaps) is marked with
-// TODO comments in the relevant service/controller file, most commonly: resolving the
-// authenticated account's real type instead of defaulting to RETAIL (blocked on a full
-// session/JWT strategy — see guidelines/08-security-and-compliance.md), and the real
-// third-party API calls in the three payment strategy classes (blocked on real gateway
-// credentials being issued, not on anything in this codebase).
+// All modules now have real logic, not empty scaffolds. The auth module provides JWT
+// session issuance (task 2.1), guards (task 2.2), and the @CurrentAccount decorator that
+// the products/cart/orders/trade-accounts controllers use for tier-correct pricing (task 2.3).
+// The addresses, quotes, wishlists, compliance, and reviews modules (tasks 2.5–2.9) provide
+// the CRUD endpoints the storefront and admin panel need. What's still genuinely incomplete
+// in each (real TODOs, not silent gaps) is marked with TODO comments in the relevant
+// service/controller file — most commonly the real third-party API calls in the payment
+// strategy classes and the admin auth guard (Phase 4).
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -26,6 +31,11 @@ import { TradeAccountsModule } from "./trade-accounts/trade-accounts.module";
     CartModule,
     OrdersModule,
     TradeAccountsModule,
+    AddressesModule,
+    QuotesModule,
+    WishlistsModule,
+    ComplianceModule,
+    ReviewsModule,
   ],
 })
 export class AppModule {}

@@ -33,11 +33,11 @@ Status legend: `[x]` done and merged, `[~]` in progress, `[ ]` not started
 | 2.2 | Auth guard + @CurrentAccount decorator | 150 | 46 | [x] |
 | 2.3 | Wire account-type into ProductsService/PricingService | 50 | 8 | [x] |
 | 2.4 | Real Postgres full-text search (tsvector/pg_trgm) | 200 | — | [ ] |
-| 2.5 | Address module (CRUD endpoints) | 250 | — | [ ] |
-| 2.6 | Quote/RFQ module (Project/Tender tier) | 300 | — | [ ] |
-| 2.7 | Wishlist module (multi-list, project-based) | 250 | — | [ ] |
-| 2.8 | ComplianceDocument module (upload + list) | 200 | — | [ ] |
-| 2.9 | Review model + module (text/star, schema change) | 300 | — | [ ] |
+| 2.5 | Address module (CRUD endpoints) | 250 | 135 | [x] |
+| 2.6 | Quote/RFQ module (Project/Tender tier) | 300 | 160 | [x] |
+| 2.7 | Wishlist module (multi-list, project-based) | 250 | 135 | [x] |
+| 2.8 | ComplianceDocument module (upload + list) | 200 | 95 | [x] |
+| 2.9 | Review model + module (text/star, schema change) | 300 | 145 | [x] |
 | 2.10 | API client data layer (frontend) | 300 | — | [ ] |
 | 2.11 | Home page (real fetch, trending, new arrivals) | 200 | — | [ ] |
 | 2.12 | Category/[slug] PLP (filters, sort, grid, pagination) | 350 | — | [ ] |

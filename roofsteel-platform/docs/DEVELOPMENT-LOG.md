@@ -6,6 +6,55 @@ when to add an entry.
 
 ---
 
+## 2026-08-10 — Tasks 2.5–2.9: Address, Quote, Wishlist, Compliance, Review modules
+
+**Phase:** 2 (Product, Catalogue & Pricing)
+**LoC at session end:** 3,616 (79 files) — up from 2,749 (64 files) — see docs/loc-history.log
+**Schema:** 22 → 23 models (Review added; WishlistItem gained the missing product relation)
+
+**What was built:**
+
+Task 2.5 — Address module (est. 250, actual 135 LoC):
+- Full CRUD: GET /v1/addresses, POST, PUT /:id, DELETE /:id. All scoped to the authenticated
+  account via @CurrentAccount. Single-default-address constraint enforced in a transaction
+  (updating isDefault on a new address unsets the previous default). Deleting a default address
+  promotes another one rather than leaving the account with no default.
+
+Task 2.6 — Quote/RFQ module (est. 300, actual 160 LoC):
+- The Project/Tender tier RFQ engine: POST /v1/quotes (create draft), POST /:id/submit
+  (DRAFT→SENT), GET /v1/quotes (list own), GET /:id. Admin endpoints: GET /all, PUT /:id/items/
+  :itemId/price (price a line), PUT /:id/status (accept/decline/expire). Valid status
+  transitions enforced. Quote items start unpriced (unitPrice 0) until an admin responds —
+  never presents 0 as a real price.
+
+Task 2.7 — Wishlist module (est. 250, actual 135 LoC):
+- Multi-list, project-based: GET /v1/wishlists, POST, GET /:id, GET /shared/:slug (public,
+  no auth), POST /:id/items, DELETE /:id/items/:itemId, PUT /:id/visibility, DELETE /:id.
+  shareSlug generated via crypto.randomBytes for public sharing without exposing the account ID.
+
+Task 2.8 — ComplianceDocument module (est. 200, actual 95 LoC):
+- GET /v1/compliance/products/:sku (public — compliance docs are product/batch data, not
+  personal data per POPIA), POST /products/:productId (admin upload), DELETE /:id. The
+  fileUrl comes from the storage layer (ADR-013, still open); this service handles the DB
+  record, the admin upload UI (task 4.8) will wire in the actual file storage.
+
+Task 2.9 — Review model + module (est. 300, actual 145 LoC):
+- Added Review model to schema.prisma: accountId, productId, rating (1-5), body (text),
+  @@unique([accountId, productId]) — one review per product per account at the DB level.
+- Also fixed WishlistItem to include the missing `product Product @relation` (it had
+  productId without the relation field — a real schema inconsistency, not a style choice).
+- Module: GET /v1/reviews/products/:sku (public, paginated, with average rating), POST
+  /products/:sku (authenticated, upsert — updates existing review rather than rejecting),
+  DELETE /:id. No photo upload at launch (spec Section 8 open question).
+
+**All five modules registered in app.module.ts.** The API now has 13 modules with real logic.
+
+**Verified:** LoC check passes (0 hard-cap violations, 79 files, 3,616 LoC). 23 models in
+schema.prisma. All new modules follow the established patterns: thin controllers, logic in
+services, DTOs with class-validator, PrismaService injected, @CurrentAccount for auth context.
+
+---
+
 ## 2026-08-10 — Tasks 2.1–2.3: JWT auth, guards, and account-type resolution
 
 **Phase:** 2 (Product, Catalogue & Pricing)

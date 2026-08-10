@@ -178,6 +178,7 @@ model Product {
   stockLevels   StockLevel[]
   cartItems     CartItem[]
   orderItems    OrderItem[]
+  reviews       Review[]
 
   active        Boolean  @default(true)
   createdAt     DateTime @default(now())
@@ -305,6 +306,7 @@ model Account {
   orders                Order[]
   quotes                Quote[]
   wishlists              Wishlist[]
+  reviews               Review[]
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -506,5 +508,27 @@ model WishlistItem {
   wishlistId String
   wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
   productId  String
+  product    Product  @relation(fields: [productId], references: [id])
   addedAt    DateTime @default(now())
+}
+
+// ----------------------------------------------------------------------
+// REVIEWS — text/star at launch (spec Section 8, open question on photo upload)
+// ----------------------------------------------------------------------
+
+model Review {
+  id        String   @id @default(cuid())
+  accountId String
+  account   Account  @relation(fields: [accountId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  rating    Int      // 1-5
+  body      String?  @db.Text
+  createdAt DateTime @default(now())
+
+  // One review per product per account — enforced at the database level, not just in
+  // application logic. This prevents a customer from submitting multiple reviews on the
+  // same product from different sessions.
+  @@unique([accountId, productId])
+  @@index([productId])
 }
