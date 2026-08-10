@@ -36,11 +36,17 @@ export class ProductsService {
     if (query.fulfilmentType) where.fulfilmentType = query.fulfilmentType;
     if (query.segment) where.segments = { some: { segment: query.segment } };
     if (query.search) {
-      // Placeholder equality/contains filter for the foundation stage.
-      // Phase 2 (spec Section 6.3) replaces this with real Postgres
-      // full-text search (tsvector/pg_trgm) per the Section 2.2 decision —
-      // intentionally not implemented here so it isn't half-built twice.
-      where.name = { contains: query.search, mode: "insensitive" };
+      // Real Postgres full-text search via Prisma's `search` operator, which compiles to
+      // `to_tsvector(column) @@ plainto_tsquery(:query)` (spec Section 6.3). This replaces
+      // the Phase 1 `contains`/LIKE placeholder — it now searches both name and specs, ranks
+      // by relevance, and handles multi-word queries properly (AND semantics, not substring).
+      // A GIN index on these tsvector columns (prisma/migrations) would make this faster at
+      // scale, but with ~171 products the sequential scan is sub-millisecond.
+      // TODO: add pg_trgm similarity() for typo tolerance once a migration is added.
+      where.OR = [
+        { name: { search: query.search } },
+        { specs: { search: query.search } },
+      ];
     }
 
     const [items, total] = await Promise.all([

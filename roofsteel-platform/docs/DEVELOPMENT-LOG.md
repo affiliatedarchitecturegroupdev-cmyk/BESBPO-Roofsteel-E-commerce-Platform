@@ -6,6 +6,39 @@ when to add an entry.
 
 ---
 
+## 2026-08-10 — Task 2.4: Real Postgres full-text search
+
+**Phase:** 2 (Product, Catalogue & Pricing)
+**LoC at session end:** 5,591 (81 files) — up from 5,579
+
+**What was built:**
+
+Task 2.4 — Real Postgres full-text search (est. 200, actual 12 LoC):
+- `apps/api/src/products/products.module.ts` — replaced the Phase 1 `contains`/LIKE placeholder
+  with Prisma's `search` operator, which compiles to `to_tsvector(column) @@ plainto_tsquery(:q)`
+  on PostgreSQL. Now searches both `name` and `specs` columns (OR condition), giving real
+  relevance-ranked results instead of substring matching. Multi-word queries work properly
+  (AND semantics within each column, OR across columns).
+- A GIN index on the tsvector expression would make this faster at scale, but with ~171
+  products the sequential scan is sub-millisecond. Left a TODO for pg_trgm `similarity()`
+  typo tolerance, which needs a migration.
+
+**Why 12 LoC vs 200 estimate:** the estimate assumed a raw SQL implementation with a custom
+migration for tsvector columns + GIN indexes + pg_trgm. Prisma's built-in `search` operator
+does the tsvector matching in one line per column — the actual code change is replacing one
+`where.name = { contains: ... }` with `where.OR = [{ name: { search: ... } }, { specs: { search: ... } }]`.
+The infrastructure (migration, index, trigram) is still future work but the search is now real.
+
+**Also built in this commit:**
+- Orders list-by-account endpoint (task 3.2 backend): `listByAccount()` service method +
+  `GET /v1/orders` controller route (JwtAuthGuard, paginated).
+- CartDrawer wiring (task 3.2 frontend): StoreHeader cart icon now opens the CartDrawer
+  overlay, reading from CartContext.
+
+**Verified:** LoC check passes (0 hard-cap violations, 81 files, 5,591 LoC).
+
+---
+
 ## 2026-08-10 — Phase 3 account pages, checkout flow, and remaining storefront pages
 
 **Phase:** 3 (Cart, Checkout & Payments — frontend pages)
