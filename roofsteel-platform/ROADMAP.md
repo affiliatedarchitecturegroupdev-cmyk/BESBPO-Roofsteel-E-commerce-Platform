@@ -108,7 +108,7 @@ ProductImage, Product.description.
 
 | Task | Description | LoC est | LoC act | Status |
 |------|-------------|---------|---------|--------|
-| 5.1 | Legal/info pages (Terms, Privacy, Returns, Shipping, FAQ) | 400 | — | [ ] |
+| 5.1 | Legal/info pages (Terms, Privacy, Returns, Shipping, FAQ) | 400 | 221 | [x] |
 | 5.2 | Accessibility pass (WCAG 2.1 AA) | 150 | — | [ ] |
 | 5.3 | AI service quote-assist endpoint | 200 | — | [ ] |
 | 5.4 | AI service search-relevance endpoint | 150 | — | [ ] |

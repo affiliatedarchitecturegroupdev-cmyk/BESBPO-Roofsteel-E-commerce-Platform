@@ -291,3 +291,54 @@ h1, h2, h3, h4 {
    — see docs/DEVELOPMENT-LOG.md for the UX validation session. Any visual
    change here should be checked against that mockup first, not improvised
    inline in a component. */
+
+/* Legal/info pages — clean, readable long-form content. Not styled like the storefront;
+   these are transactional reference pages (guidelines/12-storefront-ux-and-ia.md). */
+.page-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; min-height: 100vh; display: flex; flex-direction: column; }
+.legal-header { padding: 20px 0; }
+.legal-header .brand { font-weight: 800; font-size: 22px; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+.legal-main { flex: 1; }
+.legal-footer { padding: 24px 0 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--steel); }
+.legal-content { max-width: 680px; }
+.legal-content h1 { font-size: 28px; margin-bottom: 8px; }
+.legal-content h2 { font-size: 18px; margin: 28px 0 12px; }
+.legal-content h3 { font-size: 15px; margin: 20px 0 8px; }
+.legal-content p { font-size: 14px; line-height: 1.7; margin-bottom: 12px; color: var(--slate); }
+.legal-content ul, .legal-content ol { font-size: 14px; line-height: 1.7; color: var(--slate); margin-bottom: 12px; padding-left: 20px; }
+.legal-content li { margin-bottom: 4px; }
+.legal-content a { color: var(--orange); }
+.legal-content em { color: var(--steel); font-size: 13px; }
+.data-table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 13px; }
+.data-table th { text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--slate); }
+.data-table td { padding: 8px 12px; border-bottom: 1px solid var(--line); }
+.faq-list { margin-top: 24px; }
+.faq-item { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.faq-item summary { font-weight: 600; font-size: 15px; cursor: pointer; padding: 4px 0; }
+.faq-item summary:hover { color: var(--orange); }
+.faq-answer { padding: 12px 0 4px; }
+.faq-answer p { font-size: 14px; line-height: 1.7; color: var(--slate); margin-bottom: 8px; }
+
+/* Store footer with legal links — appears on all storefront pages (root layout). */
+.store-footer { border-top: 1px solid var(--line); padding: 24px 20px 32px; text-align: center; margin-top: 40px; }
+.store-footer-links { display: flex; flex-wrap: wrap; gap: 16px 20px; justify-content: center; margin-bottom: 12px; }
+.store-footer-links a { font-size: 13px; color: var(--steel); text-decoration: none; }
+.store-footer-links a:hover { color: var(--orange); }
+.store-footer-copy { font-size: 12px; color: var(--steel); }
+
+/* Legal/info pages — long-form content, styled for readability not storefront. */
+.legal-content h1 { font-size: 28px; margin-bottom: 8px; }
+.legal-content h2 { font-size: 18px; margin: 28px 0 12px; }
+.legal-content h3 { font-size: 15px; margin: 20px 0 8px; }
+.legal-content p { font-size: 14px; line-height: 1.7; margin-bottom: 12px; color: var(--slate); }
+.legal-content ul, .legal-content ol { font-size: 14px; line-height: 1.7; color: var(--slate); margin-bottom: 12px; padding-left: 20px; }
+.legal-content li { margin-bottom: 4px; }
+.legal-content a { color: var(--orange); }
+.data-table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 13px; }
+.data-table th { text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--slate); }
+.data-table td { padding: 8px 12px; border-bottom: 1px solid var(--line); }
+.faq-list { margin-top: 24px; }
+.faq-item { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.faq-item summary { font-weight: 600; font-size: 15px; cursor: pointer; padding: 4px 0; }
+.faq-item summary:hover { color: var(--orange); }
+.faq-answer { padding: 12px 0 4px; }
+.faq-answer p { font-size: 14px; line-height: 1.7; color: var(--slate); margin-bottom: 8px; }
