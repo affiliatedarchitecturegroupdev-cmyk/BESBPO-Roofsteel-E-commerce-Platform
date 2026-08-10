@@ -3,6 +3,7 @@
 import { CategoryGrid } from "../components/category/CategoryGrid";
 import { ProductCard } from "../components/product/ProductCard";
 import { Icon } from "../components/Icon";
+import { JsonLd, storeJsonLd } from "../components/JsonLd";
 import { useCategories, useProducts } from "../lib/hooks";
 import type { CategorySummary, ProductSummary } from "@roofsteel/shared-types";
 
@@ -21,6 +22,7 @@ export default function HomePage() {
 
   return (
     <>
+      <JsonLd data={storeJsonLd()} />
       <section className="promo-strip promo-strip--desktop">
         <div>
           <div className="promo-eyebrow">STEEL ROOFING SHEETS</div>

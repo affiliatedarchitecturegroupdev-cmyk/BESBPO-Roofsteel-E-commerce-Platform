@@ -8,13 +8,22 @@ import { MobileTabBar } from "../components/layout/MobileTabBar";
 import { CartProvider } from "../lib/hooks";
 
 export const metadata = {
-  title: "Roofsteel Store — Steel, Roofing & Structural Materials",
+  metadataBase: new URL("https://store.roofsteel.co.za"),
+  title: {
+    default: "Roofsteel Store — Steel, Roofing & Structural Materials",
+    template: "%s | Roofsteel Store",
+  },
   description:
     "Shop the full Roofsteel catalogue — steel roofing, structural steel, reinforcing steel, timber, and more.",
   manifest: "/site.webmanifest",
   icons: {
     icon: "/favicon.ico",
     apple: "/icon-192.png",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Roofsteel Store",
+    locale: "en_ZA",
   },
 };
 
