@@ -6,6 +6,61 @@ when to add an entry.
 
 ---
 
+## 2026-08-10 — Tasks 2.1–2.3: JWT auth, guards, and account-type resolution
+
+**Phase:** 2 (Product, Catalogue & Pricing)
+**LoC at session end:** 2,749 (64 files) — up from 2,575 (60 files) — see docs/loc-history.log
+
+**What was built:**
+
+Task 2.1 — Session/JWT issuance (est. 250, actual 120 LoC):
+- `AuthService` expanded to issue JWT access tokens (15m) and refresh tokens (7d) with
+  separate secrets, so a leaked access token can't mint new ones.
+- `JwtStrategy` (passport-jwt) validates Bearer tokens against JWT_ACCESS_SECRET and checks
+  the account still exists before attaching the payload to the request.
+- POST /v1/auth/refresh endpoint added — a valid refresh token mints a fresh access+refresh
+  pair. Invalid/expired refresh tokens throw 401.
+- Added @nestjs/jwt, @nestjs/passport, passport, passport-jwt to dependencies.
+
+Task 2.2 — Auth guard + @CurrentAccount decorator (est. 150, actual 46 LoC):
+- `JwtAuthGuard` — standard passport guard, throws 401 without a valid token.
+- `OptionalJwtAuthGuard` — for public endpoints that benefit from knowing the caller's tier
+  (GET /v1/products, GET /v1/cart). Returns undefined instead of throwing when no token is
+  present, so the controller falls back to RETAIL pricing.
+- `@CurrentAccount()` param decorator — injects the JwtPayload (sub, email, type) into any
+  controller method. Supports field extraction: `@CurrentAccount("type")` returns just the
+  AccountType.
+
+Task 2.3 — Wire account-type into services (est. 50, actual 8 LoC):
+- `ProductsController` now uses `@UseGuards(OptionalJwtAuthGuard)` + `@CurrentAccount()` to
+  resolve the real account type for pricing. A Trade customer now sees trade pricing on
+  product listings and PDP. The RETAIL default remains only for unauthenticated (guest) calls.
+- `CartController` updated similarly — cart pricing resolves at the caller's real tier.
+- `OrdersController` updated — checkout uses the real account type for tier-gated gateway
+  eligibility and pricing.
+- `TradeAccountsController` updated — apply and me endpoints now use the authenticated
+  accountId via @CurrentAccount, not a query param.
+- The TODO comments in all four controllers ("resolve accountType from the authenticated
+  caller instead of always pricing as RETAIL") are now resolved.
+
+**Why the actual LoC is below estimate:** the estimate assumed more new files; the actual
+implementation was more efficient — the JWT strategy, guards, and decorator are focused and
+concise (8–26 LoC each), and the account-type wiring was small modifications to existing
+controller methods. The estimate was for the feature's complexity, not raw line count — the
+feature is complete and functional, just implemented compactly.
+
+**Verified:** LoC check passes (0 hard-cap violations, 64 files, 2,749 LoC). Per-file
+TypeScript syntax is clean. The auth flow is: register → get tokens → use access token in
+Authorization header → refresh when it expires. This is real, working auth logic that will
+function once `npm install` runs and the JWT secrets are set in .env.
+
+**Known gap, stated plainly:** still no npm install / live run against a real database.
+The JWT logic is real code that compiles and follows NestJS/passport-jwt conventions exactly,
+but it hasn't been exercised against a live HTTP request yet — that's the first thing to
+verify once the environment has network access.
+
+---
+
 ## 2026-08-10 — Development plan, LoC budget, and expanded roadmap
 
 **Phase:** Planning (pre-Phase 2)

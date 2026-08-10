@@ -1,7 +1,10 @@
 import { Module, Controller, Post, Body, HttpCode } from "@nestjs/common";
+import { JwtModule } from "@nestjs/jwt";
+import { PassportModule } from "@nestjs/passport";
 import { PrismaService } from "../common/prisma.service";
 import { AuthService } from "./auth.service";
-import { RegisterDto, LoginDto } from "./dto/auth.dto";
+import { JwtStrategy } from "./jwt.strategy";
+import { RegisterDto, LoginDto, RefreshDto } from "./dto/auth.dto";
 
 @Controller("auth")
 export class AuthController {
@@ -16,15 +19,25 @@ export class AuthController {
   @HttpCode(200)
   login(@Body() dto: LoginDto) {
     return this.auth.login(dto);
-    // TODO(Phase 2, guidelines/08-security-and-compliance.md): issue a real session
-    // token/cookie here rather than returning the account payload alone — this is the
-    // register/login business logic, not yet a complete session strategy.
+  }
+
+  @Post("refresh")
+  @HttpCode(200)
+  refresh(@Body() dto: RefreshDto) {
+    return this.auth.refresh(dto.refreshToken);
   }
 }
 
 @Module({
+  imports: [
+    PassportModule,
+    JwtModule.register({
+      secret: process.env.JWT_ACCESS_SECRET ?? "dev-access-secret",
+      signOptions: { expiresIn: process.env.JWT_ACCESS_EXPIRES_IN ?? "15m" },
+    }),
+  ],
   controllers: [AuthController],
-  providers: [AuthService, PrismaService],
-  exports: [AuthService],
+  providers: [AuthService, JwtStrategy, PrismaService],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

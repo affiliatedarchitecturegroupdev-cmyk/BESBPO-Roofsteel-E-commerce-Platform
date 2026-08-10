@@ -1,14 +1,14 @@
 import { Injectable, ConflictException, UnauthorizedException } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcryptjs";
 import { PrismaService } from "../common/prisma.service";
 import { RegisterDto, LoginDto } from "./dto/auth.dto";
-import { AccountType } from "@prisma/client";
+import { AccountType, Account } from "@prisma/client";
 
-// Guideline: guidelines/08-security-and-compliance.md — passwords hashed, never reversible,
-// never logged. Session/JWT issuance is intentionally minimal here (a signed opaque token
-// stub) — a full session strategy (refresh tokens, revocation) is Phase 2 scope per
-// ROADMAP.md; this gives real register/login/password-verification logic to build on rather
-// than leaving the whole module empty.
+// Guidelines/08-security-and-compliance.md: passwords hashed (bcrypt, never reversible),
+// session tokens never logged, refresh tokens are separate from access tokens. Access tokens
+// are short-lived (15m default); refresh tokens are long-lived (7d default) and carry a
+// different secret so a leaked access token can't be used to mint new ones.
 const SALT_ROUNDS = 12;
 
 export interface AuthResult {
@@ -16,11 +16,22 @@ export interface AuthResult {
   email: string;
   name: string;
   type: AccountType;
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface JwtPayload {
+  sub: string;
+  email: string;
+  type: AccountType;
 }
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwtService: JwtService
+  ) {}
 
   async register(dto: RegisterDto): Promise<AuthResult> {
     const existing = await this.prisma.account.findUnique({ where: { email: dto.email } });
@@ -36,8 +47,7 @@ export class AuthService {
         passwordHash,
         name: dto.name,
         companyName: dto.companyName,
-        type: AccountType.RETAIL, // every account starts Retail — Trade requires a separate
-        // application/approval flow (see trade-accounts module), never granted at registration
+        type: AccountType.RETAIL,
       },
     });
 
@@ -60,12 +70,52 @@ export class AuthService {
     return this.toAuthResult(account);
   }
 
-  private toAuthResult(account: {
-    id: string;
-    email: string;
-    name: string;
-    type: AccountType;
-  }): AuthResult {
-    return { accountId: account.id, email: account.email, name: account.name, type: account.type };
+  async refresh(refreshToken: string): Promise<AuthResult> {
+    let payload: JwtPayload;
+    try {
+      payload = this.jwtService.verify(refreshToken, {
+        secret: process.env.JWT_REFRESH_SECRET,
+      });
+    } catch {
+      throw new UnauthorizedException("Invalid or expired refresh token");
+    }
+
+    const account = await this.prisma.account.findUnique({ where: { id: payload.sub } });
+    if (!account) {
+      throw new UnauthorizedException("Account no longer exists");
+    }
+
+    return this.toAuthResult(account);
+  }
+
+  async validateAccount(accountId: string): Promise<Account | null> {
+    return this.prisma.account.findUnique({ where: { id: accountId } });
+  }
+
+  private toAuthResult(account: Account): AuthResult {
+    const payload: JwtPayload = {
+      sub: account.id,
+      email: account.email,
+      type: account.type,
+    };
+
+    const accessToken = this.jwtService.sign(payload, {
+      secret: process.env.JWT_ACCESS_SECRET,
+      expiresIn: process.env.JWT_ACCESS_EXPIRES_IN ?? "15m",
+    });
+
+    const refreshToken = this.jwtService.sign(payload, {
+      secret: process.env.JWT_REFRESH_SECRET,
+      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN ?? "7d",
+    });
+
+    return {
+      accountId: account.id,
+      email: account.email,
+      name: account.name,
+      type: account.type,
+      accessToken,
+      refreshToken,
+    };
   }
 }

@@ -1,4 +1,4 @@
-import { Module, Controller, Get, Post, Param, Body } from "@nestjs/common";
+import { Module, Controller, Get, Post, Param, Body, UseGuards } from "@nestjs/common";
 import { PrismaService } from "../common/prisma.service";
 import { PricingService } from "../pricing/pricing.service";
 import { CartService } from "../cart/cart.service";
@@ -7,16 +7,26 @@ import { CreateOrderDto } from "./dto/orders.dto";
 import { PayFastStrategy } from "./payments/payfast.strategy";
 import { LulapayStrategy } from "./payments/lulapay.strategy";
 import { PayJustNowStrategy } from "./payments/payjustnow.strategy";
+import { OptionalJwtAuthGuard } from "../auth/optional-jwt-auth.guard";
+import { CurrentAccount } from "../auth/current-account.decorator";
+import type { JwtPayload } from "../auth/auth.service";
+import { AccountType } from "@prisma/client";
 
 @Controller("orders")
 export class OrdersController {
   constructor(private readonly orders: OrdersService) {}
 
-  // TODO(Phase 2, auth): accountType resolved from the authenticated session, not defaulted
-  // to RETAIL — same TODO as products.module.ts and cart.module.ts.
+  // Optional auth: a guest can checkout with guestEmail; an authenticated user's account type
+  // determines their pricing tier and available payment gateways. The real accountType is
+  // threaded through here (guidelines/01-api-design.md, "Auth context in services").
   @Post()
-  create(@Body() dto: CreateOrderDto) {
-    return this.orders.createOrder(dto);
+  @UseGuards(OptionalJwtAuthGuard)
+  create(@Body() dto: CreateOrderDto, @CurrentAccount() account?: JwtPayload) {
+    const accountType = account?.type ?? AccountType.RETAIL;
+    if (account && !dto.accountId) {
+      dto.accountId = account.sub;
+    }
+    return this.orders.createOrder(dto, accountType);
   }
 
   @Get(":orderNumber")

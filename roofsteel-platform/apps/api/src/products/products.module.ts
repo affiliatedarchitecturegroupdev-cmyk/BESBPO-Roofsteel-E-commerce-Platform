@@ -1,7 +1,10 @@
-import { Module, Controller, Get, Param, Query, Injectable, NotFoundException } from "@nestjs/common";
+import { Module, Controller, Get, Param, Query, Injectable, NotFoundException, UseGuards } from "@nestjs/common";
 import { PrismaService } from "../common/prisma.service";
 import { PricingService } from "../pricing/pricing.service";
 import { FulfilmentType, Segment, AccountType } from "@prisma/client";
+import { OptionalJwtAuthGuard } from "../auth/optional-jwt-auth.guard";
+import { CurrentAccount } from "../auth/current-account.decorator";
+import type { JwtPayload } from "../auth/auth.service";
 
 // Query facets match spec Section 3.5's adaptation of the blueprint's faceted
 // filtering: category, subcategory, fulfilment type, and segment — NOT
@@ -69,19 +72,26 @@ export class ProductsService {
 }
 
 @Controller("products")
+@UseGuards(OptionalJwtAuthGuard)
 export class ProductsController {
   constructor(private readonly products: ProductsService) {}
 
+  // Optional auth: if a Bearer token is present, resolve the real account type for
+  // tier-correct pricing; if not, default to RETAIL (public browsing is allowed).
+  // The @CurrentAccount() decorator returns undefined when no token is present
+  // (OptionalJwtAuthGuard doesn't throw 401), and the controller falls back to RETAIL.
+  // This is the pattern guidelines/01-api-design.md describes: thread the real account
+  // type through every pricing-sensitive call.
   @Get()
-  list(@Query() query: ProductQuery) {
-    // TODO(auth module): resolve accountType from the authenticated caller
-    // instead of always pricing as RETAIL once auth is wired in (Phase 1/3).
-    return this.products.list(query);
+  list(@Query() query: ProductQuery, @CurrentAccount() account?: JwtPayload) {
+    const accountType = account?.type ?? AccountType.RETAIL;
+    return this.products.list(query, accountType);
   }
 
   @Get(":sku")
-  findOne(@Param("sku") sku: string) {
-    return this.products.findBySku(sku);
+  findOne(@Param("sku") sku: string, @CurrentAccount() account?: JwtPayload) {
+    const accountType = account?.type ?? AccountType.RETAIL;
+    return this.products.findBySku(sku, accountType);
   }
 }
 

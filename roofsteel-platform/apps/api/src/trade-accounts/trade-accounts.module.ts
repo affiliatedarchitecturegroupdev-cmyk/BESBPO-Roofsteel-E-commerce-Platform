@@ -1,21 +1,25 @@
-import { Module, Controller, Get, Post, Param, Body, Query } from "@nestjs/common";
+import { Module, Controller, Get, Post, Param, Body, UseGuards } from "@nestjs/common";
 import { PrismaService } from "../common/prisma.service";
 import { TradeAccountsService } from "./trade-accounts.service";
 import { ApplyForTradeAccountDto, RejectTradeAccountDto } from "./dto/trade-account.dto";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
+import { CurrentAccount } from "../auth/current-account.decorator";
+import type { JwtPayload } from "../auth/auth.service";
 
 @Controller("trade-accounts")
 export class TradeAccountsController {
   constructor(private readonly tradeAccounts: TradeAccountsService) {}
 
-  // TODO(Phase 2, auth): accountId from the authenticated session, not a query param.
   @Post("apply")
-  apply(@Query("accountId") accountId: string, @Body() dto: ApplyForTradeAccountDto) {
-    return this.tradeAccounts.apply(accountId, dto);
+  @UseGuards(JwtAuthGuard)
+  apply(@CurrentAccount() account: JwtPayload, @Body() dto: ApplyForTradeAccountDto) {
+    return this.tradeAccounts.apply(account.sub, dto);
   }
 
   @Get("me")
-  findMine(@Query("accountId") accountId: string) {
-    return this.tradeAccounts.findByAccount(accountId);
+  @UseGuards(JwtAuthGuard)
+  findMine(@CurrentAccount() account: JwtPayload) {
+    return this.tradeAccounts.findByAccount(account.sub);
   }
 
   // Admin-only in practice — real admin guard is Phase 4 scope (admin panel), matching

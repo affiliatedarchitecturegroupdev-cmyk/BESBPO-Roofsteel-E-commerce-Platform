@@ -29,9 +29,9 @@ Status legend: `[x]` done and merged, `[~]` in progress, `[ ]` not started
 
 | Task | Description | LoC est | LoC act | Status |
 |------|-------------|---------|---------|--------|
-| 2.1 | Session/JWT issuance (auth module expansion) | 250 | — | [ ] |
-| 2.2 | Auth guard + @CurrentAccount decorator | 150 | — | [ ] |
-| 2.3 | Wire account-type into ProductsService/PricingService | 50 | — | [ ] |
+| 2.1 | Session/JWT issuance (auth module expansion) | 250 | 120 | [x] |
+| 2.2 | Auth guard + @CurrentAccount decorator | 150 | 46 | [x] |
+| 2.3 | Wire account-type into ProductsService/PricingService | 50 | 8 | [x] |
 | 2.4 | Real Postgres full-text search (tsvector/pg_trgm) | 200 | — | [ ] |
 | 2.5 | Address module (CRUD endpoints) | 250 | — | [ ] |
 | 2.6 | Quote/RFQ module (Project/Tender tier) | 300 | — | [ ] |
