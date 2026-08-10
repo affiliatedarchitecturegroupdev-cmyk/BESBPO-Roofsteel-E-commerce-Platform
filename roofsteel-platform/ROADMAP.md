@@ -44,7 +44,7 @@ Status legend: `[x]` done and merged, `[~]` in progress, `[ ]` not started
 | 2.13 | Search page (built out, reuses PLP components) | 150 | 68 | [x] |
 | 2.14 | PDP (real fetch, gallery, specs, compliance tab, FBT) | 400 | 85 | [x] |
 | 2.15 | Login/Register pages (built out) | 300 | 210 | [x] |
-| 2.16 | Cut/bend service selector (SANS 282 shape codes) | 200 | — | [ ] |
+| 2.16 | Cut/bend service selector (SANS 282 shape codes) | 200 | 176 | [x] |
 | | **Phase 2 subtotal** | **3,350** | — | |
 
 **Already done in Phase 1/2 overlap:** Categories endpoint, Made-to-Length Configurator, all 21

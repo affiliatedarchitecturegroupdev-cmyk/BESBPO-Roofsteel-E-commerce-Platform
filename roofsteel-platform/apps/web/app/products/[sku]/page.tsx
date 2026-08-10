@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { ProductPurchasePanel } from "../../../components/product/ProductPurchasePanel";
 import { ProductReviews } from "../../../components/product/ProductReviews";
-import { productsApi } from "../../../lib/api-client";
+import { CutBendSelector } from "../../../components/configurator/CutBendSelector";
+import { productsApi, cartApi } from "../../../lib/api-client";
 import type { ProductDetail } from "@roofsteel/shared-types";
 
 // PDP — Product Detail Page. Fetches GET /v1/products/:sku via the API client. The API
@@ -67,6 +68,20 @@ export default function ProductPage({ params }: { params: { sku: string } }) {
 
         <div className="pdp-desktop-right">
           <ProductPurchasePanel product={product} tier="TRADE" />
+
+          {product.fulfilmentType === "FABRICATED_TO_ORDER" && (
+            <CutBendSelector
+              sku={product.sku}
+              unit={product.unit}
+              onAddToCart={(config) => {
+                // Delegates to the same cart-add flow as MadeToLengthConfigurator —
+                // the config is stored in madeToLengthConfig on the cart line.
+                cartApi.addItem(product.sku, config.quantity, undefined, config).then(() => {
+                  window.dispatchEvent(new CustomEvent("cart-updated"));
+                });
+              }}
+            />
+          )}
 
           <div className="section" style={{ marginTop: 24 }}>
             <div className="accordion-row">
