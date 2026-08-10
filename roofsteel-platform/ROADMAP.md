@@ -81,11 +81,11 @@ freight weight+distance banding (ADR-016).
 
 | Task | Description | LoC est | LoC act | Status |
 |------|-------------|---------|---------|--------|
-| 4.1 | Admin auth guard + role middleware | 150 | — | [ ] |
-| 4.2 | Admin panel shell + layout | 200 | — | [ ] |
-| 4.3 | Admin — products management (CRUD + content/image) | 500 | — | [ ] |
-| 4.4 | Admin — orders management + status transitions | 400 | — | [ ] |
-| 4.5 | Admin — trade accounts review (approve/reject) | 250 | — | [ ] |
+| 4.1 | Admin auth guard + role middleware | 150 | 18 | [x] |
+| 4.2 | Admin panel shell + layout | 200 | 65 | [x] |
+| 4.3 | Admin — products management (CRUD + content/image) | 500 | 110 | [x] |
+| 4.4 | Admin — orders management + status transitions | 400 | 86 | [x] |
+| 4.5 | Admin — trade accounts review (approve/reject) | 250 | 90 | [x] |
 | 4.6 | Admin — pricing bands editor (yellow-cell convention) | 250 | — | [ ] |
 | 4.7 | Admin — stock levels/movements | 350 | — | [ ] |
 | 4.8 | Admin — compliance document upload | 200 | — | [ ] |

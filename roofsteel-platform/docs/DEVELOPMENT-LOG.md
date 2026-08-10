@@ -6,6 +6,46 @@ when to add an entry.
 
 ---
 
+## 2026-08-10 — Phase 4 (Tasks 4.1–4.5): Admin guard + admin panel
+
+**Phase:** 4 (Operational Layer)
+**LoC at session end:** 6,335 (88 files) — up from 5,591
+
+**What was built:**
+
+Task 4.1 — Admin auth guard + role middleware (est. 150, actual 18 LoC):
+- `prisma/schema.prisma` — added `role Role @default(CUSTOMER)` field to Account model + new `Role` enum (CUSTOMER | ADMIN).
+- `apps/api/src/auth/admin.guard.ts` — AdminGuard extends JwtAuthGuard, checks `req.user.role === "ADMIN"`, throws 403 if not. Never reuses a customer-facing route with a hidden admin branch (guidelines/01).
+- `apps/api/src/auth/auth.service.ts` — `role` added to JwtPayload and AuthResult; tokens now carry the role claim.
+- `apps/api/src/auth/jwt.strategy.ts` — already returns the full payload (no change needed).
+- `packages/shared-types/src/index.ts` — exported `Role` type.
+
+Task 4.2 — Admin panel shell + layout (est. 200, actual 65 LoC):
+- `apps/web/app/admin/layout.tsx` — sidebar nav (Dashboard, Orders, Trade Accounts, Products), active link highlighting, "Back to Store" link.
+- `apps/web/app/admin/page.tsx` — dashboard with counts (pending trade applications, recent orders) and quick links.
+
+Task 4.3 — Admin — products management (est. 500, actual 110 LoC):
+- `apps/api/src/admin/admin.module.ts` — AdminProductsService (list with search, update) + AdminProductsController (GET /admin/products, PATCH /admin/products/:id).
+- `apps/web/app/admin/products/page.tsx` — product list with search, inline edit (name, specs, active). Pricing band validation happens server-side — the client never sends a price.
+
+Task 4.4 — Admin — orders management + status transitions (est. 400, actual 86 LoC):
+- `apps/api/src/admin/admin.module.ts` — AdminOrdersService (list with status filter, transitionOrder) + AdminOrdersController (GET /admin/orders, PATCH /admin/orders/:id/status).
+- `apps/web/app/admin/orders/page.tsx` — order list with status filter dropdown, inline status transition select per order. Status flow: PENDING → PROCESSING → PACKED → DISPATCHED → OUT_FOR_DELIVERY → DELIVERED (+ CANCELLED).
+
+Task 4.5 — Admin — trade accounts review (est. 250, actual 90 LoC):
+- `apps/api/src/admin/admin.module.ts` — AdminTradeAccountsService (listPending, approve with single-transaction, reject with reason) + AdminTradeAccountsController (GET /admin/trade-accounts/pending, POST /:id/approve, POST /:id/reject).
+- `apps/web/app/admin/trade-accounts/page.tsx` — pending applications list with approve/reject controls. Reject requires a reason (textarea, validated). Approve is a single transaction: application APPROVED + account.type → TRADE.
+
+**Frontend hooks updated:**
+- `apps/web/lib/hooks.ts` — AuthState now includes `role`; login/register callbacks populate it.
+- `apps/web/lib/api-client.ts` — AuthResponse now includes `role`.
+
+**Schema change:** Added `Role` enum and `role` field to Account model. A migration is needed at deploy time (`prisma migrate`), but `prisma db push` works for dev.
+
+**Verified:** LoC check passes (0 hard-cap violations, 88 files, 6,335 LoC).
+
+---
+
 ## 2026-08-10 — Task 2.4: Real Postgres full-text search
 
 **Phase:** 2 (Product, Catalogue & Pricing)

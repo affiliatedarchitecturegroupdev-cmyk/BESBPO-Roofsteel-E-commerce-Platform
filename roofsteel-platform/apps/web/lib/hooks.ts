@@ -22,6 +22,7 @@ export interface AuthState {
   email: string | null;
   name: string | null;
   type: AccountType | null;
+  role: string | null;
   isAuthenticated: boolean;
 }
 
@@ -31,6 +32,7 @@ export function useAuth() {
     email: null,
     name: null,
     type: null,
+    role: null,
     isAuthenticated: false,
   });
   const [loading, setLoading] = useState(true);
@@ -54,6 +56,7 @@ export function useAuth() {
       email: res.email,
       name: res.name,
       type: res.type,
+      role: res.role,
       isAuthenticated: true,
     });
     return res;
@@ -67,6 +70,7 @@ export function useAuth() {
       email: res.email,
       name: res.name,
       type: res.type,
+      role: res.role,
       isAuthenticated: true,
     });
     return res;

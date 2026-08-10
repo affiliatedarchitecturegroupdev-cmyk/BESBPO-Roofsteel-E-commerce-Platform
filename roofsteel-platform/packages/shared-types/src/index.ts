@@ -8,6 +8,8 @@ export type Segment = "INDUSTRIAL" | "COMMERCIAL" | "CIVIL" | "INSTITUTIONAL" | 
 
 export type AccountType = "RETAIL" | "TRADE" | "CONTRACTOR" | "PROJECT";
 
+export type Role = "CUSTOMER" | "ADMIN";
+
 export type Province =
   | "GAUTENG"
   | "KWAZULU_NATAL"

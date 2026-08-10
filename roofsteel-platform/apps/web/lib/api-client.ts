@@ -17,6 +17,7 @@ export interface AuthResponse {
   email: string;
   name: string;
   type: AccountType;
+  role: string;
   accessToken: string;
   refreshToken: string;
 }

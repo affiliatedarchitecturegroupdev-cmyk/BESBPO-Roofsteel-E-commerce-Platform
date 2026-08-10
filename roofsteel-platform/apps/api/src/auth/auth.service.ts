@@ -16,6 +16,7 @@ export interface AuthResult {
   email: string;
   name: string;
   type: AccountType;
+  role: string;
   accessToken: string;
   refreshToken: string;
 }
@@ -24,6 +25,7 @@ export interface JwtPayload {
   sub: string;
   email: string;
   type: AccountType;
+  role: string;
 }
 
 @Injectable()
@@ -97,6 +99,7 @@ export class AuthService {
       sub: account.id,
       email: account.email,
       type: account.type,
+      role: account.role,
     };
 
     const accessToken = this.jwtService.sign(payload, {
@@ -114,6 +117,7 @@ export class AuthService {
       email: account.email,
       name: account.name,
       type: account.type,
+      role: account.role,
       accessToken,
       refreshToken,
     };
