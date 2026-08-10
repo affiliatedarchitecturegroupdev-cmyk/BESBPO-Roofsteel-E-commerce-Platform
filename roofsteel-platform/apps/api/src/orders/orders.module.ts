@@ -1,4 +1,5 @@
 import { Module, Controller, Get, Post, Param, Body, Query, UseGuards } from "@nestjs/common";
+import { SkipThrottle } from "@nestjs/throttler";
 import { PrismaService } from "../common/prisma.service";
 import { PricingService } from "../pricing/pricing.service";
 import { CartService } from "../cart/cart.service";
@@ -57,7 +58,10 @@ export class OrdersController {
   // verification method (guidelines/05-payments.md). Each verifies the payload signature via
   // the gateway's strategy, then transitions the order to PAID. Idempotency: a retried webhook
   // for an already-PAID order is a no-op (the where clause won't match PENDING_PAYMENT).
+  // Webhooks are exempt from rate limiting — they're called by the payment gateway, not users,
+  // and the real protection is signature verification (guidelines/11-security-and-compliance.md).
   @Post("webhooks/payfast")
+  @SkipThrottle()
   async payfastWebhook(@Body() payload: Record<string, string>) {
     const verified = await this.payFast.verify(payload);
     if (!verified) return { received: false, reason: "signature_invalid" };
@@ -71,6 +75,7 @@ export class OrdersController {
   }
 
   @Post("webhooks/lulapay")
+  @SkipThrottle()
   async lulapayWebhook(@Body() payload: unknown) {
     const verified = await this.lulapay.verify(payload);
     if (!verified) return { received: false, reason: "signature_invalid" };
@@ -86,6 +91,7 @@ export class OrdersController {
   }
 
   @Post("webhooks/payjustnow")
+  @SkipThrottle()
   async payJustNowWebhook(@Body() payload: unknown) {
     const verified = await this.payJustNow.verify(payload);
     if (!verified) return { received: false, reason: "signature_invalid" };

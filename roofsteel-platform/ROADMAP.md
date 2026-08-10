@@ -115,7 +115,7 @@ ProductImage, Product.description.
 | 5.5 | Wishlist pages (multi-list, project-based) | 300 | 203 | [x] |
 | 5.6 | Reviews (text/star display + submit) | 250 | — | [ ] |
 | 5.7 | SEO pass (metadata, sitemap, structured data) | 200 | — | [ ] |
-| 5.8 | Rate limiting + helmet (security hardening) | 100 | — | [ ] |
+| 5.8 | Rate limiting + helmet (security hardening) | 100 | 24 | [x] |
 | 5.9 | Account settings page | 150 | — | [ ] |
 | | **Phase 5 subtotal** | **1,900** | — | |
 

@@ -1,5 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
+import { ThrottlerModule, ThrottlerGuard } from "@nestjs/throttler";
+import { APP_GUARD } from "@nestjs/core";
 import { ProductsModule } from "./products/products.module";
 import { CategoriesModule } from "./categories/categories.module";
 import { PricingModule } from "./pricing/pricing.module";
@@ -25,6 +27,13 @@ import { AdminModule } from "./admin/admin.module";
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    // Global rate limiting — 300 requests per minute per IP (default). Payment webhooks are
+    // exempt (they have their own signature verification). See guidelines/11-security-and-
+    // compliance.md. The limits are generous enough for a storefront but block brute-force
+    // attempts on auth and price-resolution endpoints.
+    ThrottlerModule.forRoot([
+      { ttl: 60_000, limit: 300 },
+    ]),
     ProductsModule,
     CategoriesModule,
     PricingModule,
@@ -38,6 +47,9 @@ import { AdminModule } from "./admin/admin.module";
     ComplianceModule,
     ReviewsModule,
     AdminModule,
+  ],
+  providers: [
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
   ],
 })
 export class AppModule {}
