@@ -93,7 +93,7 @@ freight weight+distance banding (ADR-016).
 | 4.10 | Order lifecycle notification jobs | 400 | — | [ ] |
 | 4.11 | Trade application notification jobs | 150 | — | [ ] |
 | 4.12 | Back-in-stock / low-stock alert jobs | 200 | — | [ ] |
-| 4.13 | Stock reservation logic (qtyReserved on order) | 150 | — | [ ] |
+| 4.13 | Stock reservation logic (qtyReserved on order) | 150 | 116 | [x] |
 | 4.14 | Sales/revenue reporting dashboard | 350 | — | [ ] |
 | 4.15 | Location detection UI (geolocation pre-fill) | 150 | — | [ ] |
 | 4.16 | Courier/tracking integration | 300 | — | [ ] |

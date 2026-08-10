@@ -243,6 +243,8 @@ enum StockMovementType {
   DAMAGED
   TRANSFERRED_IN
   TRANSFERRED_OUT
+  RESERVED
+  RELEASED
 }
 
 // KZN/Gauteng two-yard plan from the capacity deck — only one Location is
