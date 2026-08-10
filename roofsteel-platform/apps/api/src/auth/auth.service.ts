@@ -1,4 +1,4 @@
-import { Injectable, ConflictException, UnauthorizedException } from "@nestjs/common";
+import { Injectable, ConflictException, UnauthorizedException, BadRequestException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcryptjs";
 import { PrismaService } from "../common/prisma.service";
@@ -92,6 +92,26 @@ export class AuthService {
 
   async validateAccount(accountId: string): Promise<Account | null> {
     return this.prisma.account.findUnique({ where: { id: accountId } });
+  }
+
+  async updateProfile(accountId: string, dto: { name?: string; companyName?: string }) {
+    const data: Record<string, string> = {};
+    if (dto.name !== undefined) data.name = dto.name;
+    if (dto.companyName !== undefined) data.companyName = dto.companyName;
+    if (Object.keys(data).length === 0) {
+      throw new BadRequestException("No fields to update");
+    }
+    return this.prisma.account.update({ where: { id: accountId }, data });
+  }
+
+  async changePassword(accountId: string, currentPassword: string, newPassword: string) {
+    const account = await this.prisma.account.findUnique({ where: { id: accountId } });
+    if (!account) throw new UnauthorizedException("Account not found");
+    const valid = await bcrypt.compare(currentPassword, account.passwordHash);
+    if (!valid) throw new UnauthorizedException("Current password is incorrect");
+    const passwordHash = await bcrypt.hash(newPassword, SALT_ROUNDS);
+    await this.prisma.account.update({ where: { id: accountId }, data: { passwordHash } });
+    return { success: true };
   }
 
   private toAuthResult(account: Account): AuthResult {

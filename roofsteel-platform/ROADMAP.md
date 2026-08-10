@@ -62,8 +62,8 @@ out — tasks 2.12–2.14).
 | 3.5 | PayFast real HTTP integration + ITN webhook | 300 | — | [ ] |
 | 3.6 | Lulapay real Partner API integration | 250 | — | [ ] |
 | 3.7 | PayJustNow real integration (Retail only) | 200 | — | [ ] |
-| 3.8 | Payment webhook idempotency + order transitions | 200 | — | [ ] |
-| 3.9 | Orders list-by-account endpoint | 100 | — | [ ] |
+| 3.8 | Payment webhook idempotency + order transitions | 200 | 45 | [x] |
+| 3.9 | Orders list-by-account endpoint | 100 | 35 | [x] |
 | 3.10 | Account dashboard page | 200 | — | [ ] |
 | 3.11 | Account/orders (list + detail + tracking) | 400 | — | [ ] |
 | 3.12 | Account/addresses page | 250 | — | [ ] |
@@ -116,7 +116,7 @@ ProductImage, Product.description.
 | 5.6 | Reviews (text/star display + submit) | 250 | — | [ ] |
 | 5.7 | SEO pass (metadata, sitemap, structured data) | 200 | — | [ ] |
 | 5.8 | Rate limiting + helmet (security hardening) | 100 | 24 | [x] |
-| 5.9 | Account settings page | 150 | — | [ ] |
+| 5.9 | Account settings page | 150 | 196 | [x] |
 | | **Phase 5 subtotal** | **1,900** | — | |
 
 ## Cross-cutting — Tests (est. 1,200 LoC → cumulative 15,875)

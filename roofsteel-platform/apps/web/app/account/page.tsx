@@ -131,6 +131,17 @@ export default function AccountDashboardPage() {
             Apply for trade pricing or check your application status.
           </p>
         </Link>
+
+        <Link
+          href="/account/settings"
+          className="account-link-card"
+          style={{ padding: 20, border: "1px solid var(--steel-light)", borderRadius: 8 }}
+        >
+          <h3 style={{ fontSize: 16 }}>Settings</h3>
+          <p style={{ fontSize: 13, color: "var(--steel)", marginTop: 4 }}>
+            Update your profile and change your password.
+          </p>
+        </Link>
       </div>
     </div>
   );

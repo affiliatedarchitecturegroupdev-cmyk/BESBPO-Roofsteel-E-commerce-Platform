@@ -151,6 +151,18 @@ export const authApi = {
     }),
 
   logout: () => clearTokens(),
+
+  updateProfile: (data: { name?: string; companyName?: string }) =>
+    apiFetch<{ id: string; name: string; companyName: string | null }>("/auth/profile", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+
+  changePassword: (currentPassword: string, newPassword: string) =>
+    apiFetch<{ success: boolean }>("/auth/change-password", {
+      method: "POST",
+      body: JSON.stringify({ currentPassword, newPassword }),
+    }),
 };
 
 // --- Products API ---

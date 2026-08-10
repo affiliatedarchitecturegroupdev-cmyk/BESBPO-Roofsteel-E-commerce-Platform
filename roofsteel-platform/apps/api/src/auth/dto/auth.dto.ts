@@ -28,3 +28,22 @@ export class RefreshDto {
   @IsString()
   refreshToken: string;
 }
+
+export class UpdateProfileDto {
+  @IsOptional()
+  @IsString()
+  name?: string;
+
+  @IsOptional()
+  @IsString()
+  companyName?: string;
+}
+
+export class ChangePasswordDto {
+  @IsString()
+  currentPassword: string;
+
+  @IsString()
+  @MinLength(8, { message: "Password must be at least 8 characters" })
+  newPassword: string;
+}
