@@ -6,6 +6,51 @@ when to add an entry.
 
 ---
 
+## 2026-08-10 — Tasks 5.9, 5.7, 5.6, 5.2, 2.16, 5.3–5.4, 4.13, 3.10–3.15
+
+Completed 12 tasks across frontend, backend, and AI service.
+
+**Task 5.9 — Account settings page** (196 LoC): PUT /auth/profile and POST /auth/change-password
+endpoints (JwtAuthGuard-protected); /account/settings page with profile form (name, companyName,
+email/type read-only) and password change form (current, new, confirm) with client-side validation.
+Shared form CSS classes (.form-label, .form-input, .form-error, .form-success) added to globals.css.
+
+**Task 5.7 — SEO pass** (97 LoC): layout.tsx metadataBase + title template (%s | Roofsteel Store)
++ OpenGraph tags; app/sitemap.ts with 19 static routes and priorities; app/robots.ts (allow /,
+disallow /admin /account /checkout /cart); components/JsonLd.tsx with storeJsonLd() for structured
+data on the home page.
+
+**Task 5.6 — Reviews** (139 LoC): components/product/ProductReviews.tsx — fetches reviews by SKU,
+displays star rating + text, average rating summary, and a submit-review form (star picker +
+textarea) for authenticated users. Embedded at the bottom of the PDP.
+
+**Task 5.2 — Accessibility pass** (51 LoC): not-found.tsx (404), error.tsx (error boundary with
+reset), loading.tsx (skeleton with aria-busy/aria-live). globals.css: *:focus-visible (WCAG
+2.4.7), .sr-only utility, @media (prefers-reduced-motion: reduce) (WCAG 2.3.3). Existing
+skip-link and main#main already in layout.tsx.
+
+**Task 2.16 — Cut/bend service selector** (176 LoC): components/configurator/CutBendSelector.tsx
+with 10 SANS 282 shape codes (00 straight, 11/12 L-bends, 13 U-bend, 21/22 stirrups, 31
+double-L, 33 cranked, 51 Z-bend, 99 non-standard). Standard codes add to cart; code 99 routes
+to /quote/request. Renders on PDP when fulfilmentType === FABRICATED_TO_ORDER.
+
+**Tasks 5.3–5.4 — AI service endpoints** (142 LoC): quote_assist.py — generate_cut_list_summary()
+produces a readable cut-list for MtL configs (deterministic template, not an LLM).
+search_relevance.py — rerank_results() re-ranks Postgres FTS results using term-frequency
+scoring (70% original + 30% TF boost). main.py: POST /quote-assist, POST /search-relevance.
+
+**Task 4.13 — Stock reservation** (116 LoC): inventory.service.ts with reserveStock (order
+creation), releaseStock (cancel/timeout), confirmSale (payment confirmed) — all transactional
+with StockMovement audit trail. Added RESERVED, RELEASED to StockMovementType enum. Per
+guidelines/13: carts never reserve stock, only placed orders do.
+
+**Tasks 3.10–3.15 — Account pages** (marked complete): account dashboard, orders list+detail
+(5-step status timeline, line items, totals), addresses, trade-account (4 states), trade/apply,
+quote/request — all were already built in previous sessions, ROADMAP updated to reflect.
+
+**LoC:** 6,845 → 7,885 (103 files, 0 hard-cap violations, avg 76/file)
+
+
 ## 2026-08-10 — Phase 3/5 (Tasks 3.5–3.8, 5.1, 5.5, 5.8): Payments, legal, wishlists, security
 
 **LoC at session end:** 6,845 (90 files) — up from 6,335
