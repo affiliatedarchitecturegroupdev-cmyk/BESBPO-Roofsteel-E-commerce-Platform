@@ -6,6 +6,42 @@ when to add an entry.
 
 ---
 
+## 2026-08-10 — Phase 3/5 (Tasks 3.5–3.8, 5.1, 5.5, 5.8): Payments, legal, wishlists, security
+
+**LoC at session end:** 6,845 (90 files) — up from 6,335
+
+**What was built:**
+
+Tasks 3.5–3.8 — Payment gateway integration + webhook handlers:
+- `payfast.strategy.ts` — `initialize()` now constructs a real PayFast checkout URL with sandbox/production host selection (`PAYFAST_SANDBOX` env), return/cancel/notify URLs, and email_address.
+- `orders.module.ts` — three webhook handlers (`/webhooks/payfast`, `/webhooks/lulapay`, `/webhooks/payjustnow`) each verify the payload via the gateway's `verify()` method, check the gateway-specific completion status, and call `markOrderPaid()`. All are idempotent.
+- `orders.service.ts` — `markOrderPaid(orderNumber)` transitions `PENDING_PAYMENT → PROCESSING` and sets `paidAt`. Idempotent: a retried webhook for an already-PAID order is a no-op.
+- `schema.prisma` — `Order.paidAt DateTime?` field added.
+- Fix: imported `Query` and `JwtAuthGuard` (were missing from orders.module.ts).
+
+Task 5.1 — Legal/info pages with real content (replaced scaffolds):
+- `/terms` — Terms of Purchase (8 sections: orders, pricing, non-returnable MtL/CtO/FtO, payment, delivery, returns, warranties, governing law)
+- `/privacy` — POPIA Privacy Policy (6 sections: collection, use, sharing, security, rights, retention)
+- `/returns` — Returns & RMA Policy (stock returns in 7 days, non-returnable custom items, damaged/incorrect, refund process)
+- `/shipping` — Shipping Policy (weight bands table, province multipliers table, free delivery threshold, timeframes, tracking)
+- `/faq` — 8 FAQs specific to this customer category (tier pricing, MtL, freight, lead time, RFQ, payment methods, compliance docs, wishlists)
+- Root layout — store footer with links to all five legal pages.
+
+Task 5.5 — Wishlist detail + shared wishlist pages:
+- `/wishlists/[id]` — wishlist detail with item list, remove-item, visibility toggle (private/public), delete, share link display.
+- `/wishlists/shared/[slug]` — read-only public shared wishlist (no auth required, matches backend route without guard).
+- `api-client.ts` — added `wishlistsApi.getByShareSlug`, `updateVisibility`, `delete`.
+
+Task 5.8 — Security hardening:
+- `helmet()` in main.ts — HSTS, CSP frame-ancestors, X-Content-Type-Options, X-Frame-Options (DENY).
+- `ThrottlerModule` (300 req/min per IP) + `ThrottlerGuard` as `APP_GUARD` — global rate limiting.
+- Payment webhook routes `@SkipThrottle()` — exempt from rate limiting (gateway calls, not users; signature verification is the real protection).
+- Installed: `helmet@8`, `@nestjs/throttler@6`.
+
+**Verified:** LoC check passes (0 hard-cap violations, 90 files, 6,845 LoC).
+
+---
+
 ## 2026-08-10 — Phase 4 (Tasks 4.1–4.5): Admin guard + admin panel
 
 **Phase:** 4 (Operational Layer)
