@@ -112,7 +112,7 @@ ProductImage, Product.description.
 | 5.2 | Accessibility pass (WCAG 2.1 AA) | 150 | — | [ ] |
 | 5.3 | AI service quote-assist endpoint | 200 | — | [ ] |
 | 5.4 | AI service search-relevance endpoint | 150 | — | [ ] |
-| 5.5 | Wishlist pages (multi-list, project-based) | 300 | — | [ ] |
+| 5.5 | Wishlist pages (multi-list, project-based) | 300 | 203 | [x] |
 | 5.6 | Reviews (text/star display + submit) | 250 | — | [ ] |
 | 5.7 | SEO pass (metadata, sitemap, structured data) | 200 | — | [ ] |
 | 5.8 | Rate limiting + helmet (security hardening) | 100 | — | [ ] |

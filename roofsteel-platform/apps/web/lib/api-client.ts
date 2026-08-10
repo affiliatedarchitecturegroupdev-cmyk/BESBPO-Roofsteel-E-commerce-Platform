@@ -281,6 +281,7 @@ export const wishlistsApi = {
   create: (name: string, isPublic = false) =>
     apiFetch<unknown>("/wishlists", { method: "POST", body: JSON.stringify({ name, isPublic }) }),
   getById: (id: string) => apiFetch<unknown>(`/wishlists/${id}`),
+  getByShareSlug: (slug: string) => apiFetch<unknown>(`/wishlists/shared/${slug}`),
   addItem: (wishlistId: string, productId: string) =>
     apiFetch<unknown>(`/wishlists/${wishlistId}/items`, {
       method: "POST",
@@ -290,4 +291,11 @@ export const wishlistsApi = {
     apiFetch<{ removed: boolean }>(`/wishlists/${wishlistId}/items/${itemId}`, {
       method: "DELETE",
     }),
+  updateVisibility: (wishlistId: string, isPublic: boolean) =>
+    apiFetch<unknown>(`/wishlists/${wishlistId}/visibility`, {
+      method: "PUT",
+      body: JSON.stringify({ isPublic }),
+    }),
+  delete: (wishlistId: string) =>
+    apiFetch<{ deleted: boolean }>(`/wishlists/${wishlistId}`, { method: "DELETE" }),
 };
