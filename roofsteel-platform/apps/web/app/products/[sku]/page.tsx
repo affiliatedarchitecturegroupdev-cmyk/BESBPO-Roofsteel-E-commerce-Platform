@@ -1,57 +1,82 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { ProductPurchasePanel } from "../../../components/product/ProductPurchasePanel";
+import { productsApi } from "../../../lib/api-client";
 import type { ProductDetail } from "@roofsteel/shared-types";
 
-// TODO(Phase 2): replace this fixture with a real GET /v1/products/:sku
-// fetch — this file stays a Server Component (guidelines/03-frontend.md),
-// fetching data server-side and passing it down as serializable props.
-// mtlOptions here matches what a real IBR 686 line actually offers per its
-// catalogue spec string, not the full catalogue-wide gauge/profile/colour
-// range — guidelines/04-made-to-length-configurator.md's explicit
-// requirement.
-const PRODUCT: ProductDetail = {
-  sku: "RS-1000",
-  name: "IBR 686 Roofing Sheet",
-  specs: "0.40 / 0.50 / 0.53 / 0.58 / 0.80mm gauge; full standard colour range; galvanised or colour-coated",
-  unit: "m²",
-  fulfilmentType: "MADE_TO_LENGTH",
-  category: { slug: "steel-roofing-sheets", name: "Steel Roofing Sheets" },
-  subcategory: { name: "IBR Profile" },
-  segments: ["INDUSTRIAL", "COMMERCIAL", "CIVIL", "RESIDENTIAL"],
-  pricing: {
-    landedCost: 145,
-    retailPrice: 210.25,
-    tradePrice: 193.43,
-    volumePrice: 185.02,
-    applicablePrice: 210.25,
-    pricingKey: "Steel Roofing Sheets — Made to Length",
-    costIsReal: true,
-  },
-  mtlOptions: {
-    gaugesMm: [0.4, 0.53, 0.58, 0.8],
-    profiles: ["IBR"],
-    colours: ["Charcoal", "Galvanised", "Chromadec Green", "Rustic Red"],
-    maxLengthMm: 13200,
-  },
-};
-
-// params.sku drives the real fetch once Phase 2 wires this up — the
-// fixture above stands in regardless of which SKU is requested for now.
+// PDP — Product Detail Page. Fetches GET /v1/products/:sku via the API client. The API
+// client attaches auth tokens automatically, so an authenticated trade buyer sees trade
+// pricing in the ProductPurchasePanel, while a guest sees retail pricing.
+//
+// params.sku comes from the Next.js routing layer. The product's mtlOptions (if present)
+// drive the MadeToLengthConfigurator — scoped to what that specific product offers, not
+// the full catalogue-wide range (guidelines/04-made-to-length-configurator.md).
 export default function ProductPage({ params }: { params: { sku: string } }) {
-  const product = PRODUCT;
+  const [product, setProduct] = useState<ProductDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    productsApi
+      .getBySku(params.sku)
+      .then(setProduct)
+      .catch((e) => setError(e instanceof Error ? e.message : "Failed to load product"))
+      .finally(() => setLoading(false));
+  }, [params.sku]);
+
+  if (loading) {
+    return (
+      <div className="container" style={{ padding: 48, textAlign: "center", color: "var(--steel)" }}>
+        Loading product…
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div className="container" style={{ padding: 48, textAlign: "center" }}>
+        <h1>Product not found</h1>
+        <p style={{ color: "var(--steel)", fontSize: 14, marginTop: 8 }}>
+          {error ?? `We couldn't find a product with SKU "${params.sku}".`}
+        </p>
+        <a href="/" className="btn btn-primary" style={{ marginTop: 16 }}>
+          Back to Home
+        </a>
+      </div>
+    );
+  }
 
   return (
-    <div className="pdp-desktop-grid">
-      <div className="pdp-gallery pdp-gallery--desktop" aria-hidden="true" />
+    <div className="container" style={{ padding: "32px 16px" }}>
+      <nav className="breadcrumb" style={{ fontSize: 13, color: "var(--steel)", marginBottom: 16 }}>
+        <a href="/" style={{ color: "var(--steel)" }}>Home</a>
+        <span style={{ margin: "0 8px" }}>/</span>
+        <a href={`/category/${product.category.slug}`} style={{ color: "var(--steel)" }}>
+          {product.category.name}
+        </a>
+        <span style={{ margin: "0 8px" }}>/</span>
+        <span style={{ color: "var(--slate)" }}>{product.name}</span>
+      </nav>
 
-      <div className="pdp-desktop-right">
-        <ProductPurchasePanel product={product} tier="TRADE" />
+      <div className="pdp-desktop-grid">
+        <div className="pdp-gallery pdp-gallery--desktop" aria-hidden="true" />
 
-        <div className="section" style={{ marginTop: 24 }}>
-          <div className="accordion-row">
-            <span>Specifications</span>
-          </div>
-          <div className="accordion-row">
-            <span>Compliance &amp; Certificates</span>
+        <div className="pdp-desktop-right">
+          <ProductPurchasePanel product={product} tier="TRADE" />
+
+          <div className="section" style={{ marginTop: 24 }}>
+            <div className="accordion-row">
+              <span>Specifications</span>
+            </div>
+            <div style={{ padding: "12px 0", fontSize: 14, color: "var(--steel)" }}>
+              {product.specs}
+            </div>
+            <div className="accordion-row">
+              <span>Compliance &amp; Certificates</span>
+            </div>
           </div>
         </div>
       </div>

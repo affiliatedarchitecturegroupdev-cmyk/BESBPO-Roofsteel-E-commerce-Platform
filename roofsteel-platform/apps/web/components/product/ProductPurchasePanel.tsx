@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MadeToLengthConfigurator } from "../configurator/MadeToLengthConfigurator";
 import { PriceDisplay } from "./PriceDisplay";
 import { FulfilmentBadge } from "./FulfilmentBadge";
+import { useCart } from "../../lib/hooks";
 import type { ProductDetail, MadeToLengthConfig, AccountType } from "@roofsteel/shared-types";
 
 export interface ProductPurchasePanelProps {
@@ -21,25 +22,20 @@ export interface ProductPurchasePanelProps {
 // (app/products/[sku]/page.tsx) stays a Server Component that only passes
 // serializable product data down — see guidelines/03-frontend.md's
 // Server-vs-Client rule.
+//
+// The Add to Cart call goes through the CartContext (useCart hook), which
+// handles auth tokens, the guest ID, and refreshing the cart state that the
+// header badge and cart page read from — all from one source of truth.
 export function ProductPurchasePanel({ product, tier = "RETAIL" }: ProductPurchasePanelProps) {
   const [status, setStatus] = useState<"idle" | "adding" | "added" | "error">("idle");
+  const { addToCart } = useCart();
 
   async function handleAddToCart(config: MadeToLengthConfig) {
     setStatus("adding");
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/v1";
-      const res = await fetch(`${apiUrl}/cart/items`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId: product.sku, quantity: 1, mtl: config }),
-      });
-      if (!res.ok) throw new Error(`Add to cart failed: ${res.status}`);
+      await addToCart(product.sku, 1, config);
       setStatus("added");
     } catch {
-      // TODO(Phase 3): real error surface (toast/banner) — see
-      // guidelines/12-storefront-ux-and-ia.md's EmptyState component note
-      // for the pattern this should follow (one honest component, not an
-      // ad hoc error message per call site).
       setStatus("error");
     }
   }

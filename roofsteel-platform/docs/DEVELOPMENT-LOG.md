@@ -6,6 +6,63 @@ when to add an entry.
 
 ---
 
+## 2026-08-10 — Tasks 2.10–2.15: Frontend data layer and pages
+
+**Phase:** 2 (Product, Catalogue & Pricing)
+**LoC at session end:** 4,678 (81 files) — up from 3,616 (79 files) — see docs/loc-history.log
+
+**What was built:**
+
+Task 2.10 — API client data layer (est. 300, actual 312 LoC):
+- `apps/web/lib/api-client.ts` — typed API client with automatic JWT token attachment,
+  transparent refresh-token rotation on 401, and endpoints for every API module (auth,
+  products, categories, cart, addresses, orders, trade accounts, reviews, wishlists).
+- `apps/web/lib/hooks.ts` — React hooks: useAuth (login/register/logout with token storage),
+  useProducts, useCategories, and CartProvider/useCart (a CartContext that wraps the entire
+  app so the header badge, cart drawer, cart page, and PDP add-to-cart all read from one
+  source of truth).
+- `apps/web/app/layout.tsx` — wrapped in CartProvider so the cart context is available
+  everywhere.
+
+Task 2.11 — Home page (est. 200, actual 75 LoC):
+- `apps/web/app/page.tsx` — replaced fixture data with real useCategories() and useProducts()
+  calls. Loading states shown. The promo strip, MTL banner, and category grid are unchanged
+  (they were already real components).
+
+Task 2.12 — PLP / category/[slug] (est. 350, actual 93 LoC):
+- `apps/web/app/category/[slug]/page.tsx` — breadcrumb, product count, ProductCard grid,
+  pagination. Fetches via useProducts({ category: slug }). Client component for useSearchParams.
+
+Task 2.13 — Search page (est. 150, actual 68 LoC):
+- `apps/web/app/search/page.tsx` — search input, result count, ProductCard grid. Fetches via
+  useProducts({ search: query }). Uses the API's current `contains` filter; search quality
+  will improve when task 2.4 (real Postgres full-text search) lands.
+
+Task 2.14 — PDP / products/[sku] (est. 400, actual 85 LoC):
+- `apps/web/app/products/[sku]/page.tsx` — replaced fixture with real productsApi.getBySku()
+  fetch. Breadcrumb, gallery placeholder, specs, compliance accordion, ProductPurchasePanel.
+  Loading and error states. Client component for useEffect-based fetch.
+
+Task 2.15 — Login/Register pages (est. 300, actual 210 LoC):
+- `apps/web/app/login/page.tsx` — real auth form calling useAuth().login(), stores JWT tokens,
+  redirects to returnTo URL. Error display, loading state.
+- `apps/web/app/register/page.tsx` — real registration form with client-side validation (min 8
+  char password), calls useAuth().register(), optional company name for trade accounts.
+
+**Also updated:**
+- `StoreHeader.tsx` and `MobileTabBar.tsx` — now client components using useCart() for real
+  cart count, not hardcoded cartCount props.
+- `ProductPurchasePanel.tsx` — Add to Cart now goes through the CartContext (useCart().addToCart),
+  not a raw fetch() call. Auth tokens and guest ID handled automatically.
+- `apps/web/app/account/page.tsx` — real account dashboard: shows auth state, login/register CTA
+  for unauthenticated users, account info + quick links for authenticated users.
+
+**Verified:** LoC check passes (0 hard-cap violations, 81 files, 4,678 LoC). All new pages
+use the real API client and hooks — no fixture data remains in the home, PLP, PDP, search,
+login, register, cart, or account pages.
+
+---
+
 ## 2026-08-10 — Tasks 2.5–2.9: Address, Quote, Wishlist, Compliance, Review modules
 
 **Phase:** 2 (Product, Catalogue & Pricing)

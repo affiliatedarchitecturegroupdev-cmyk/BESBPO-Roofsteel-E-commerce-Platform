@@ -4,6 +4,7 @@
 import "./globals.css";
 import { StoreHeader } from "../components/layout/StoreHeader";
 import { MobileTabBar } from "../components/layout/MobileTabBar";
+import { CartProvider } from "../lib/hooks";
 
 export const metadata = {
   title: "Roofsteel Store — Steel, Roofing & Structural Materials",
@@ -16,19 +17,19 @@ export const metadata = {
   },
 };
 
-// TODO(Phase 2, auth): cartCount below is hardcoded — wire to real cart
-// state once the cart module has a frontend data layer (guidelines/12
-// -storefront-ux-and-ia.md's Cart section). StoreHeader/MobileTabBar are
-// real components now, not scaffolds — this TODO is about the data feeding
-// them, not the components themselves.
+// CartProvider wraps the entire app so the cart context (item count, add-to-cart,
+// quantity updates) is available from any component — the header badge, the cart
+// drawer, the PDP's Add to Cart, and the /cart page all read from this one source.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <a className="skip-link" href="#main">Skip to content</a>
-        <StoreHeader cartCount={0} />
-        <main id="main">{children}</main>
-        <MobileTabBar cartCount={0} />
+        <CartProvider>
+          <a className="skip-link" href="#main">Skip to content</a>
+          <StoreHeader />
+          <main id="main">{children}</main>
+          <MobileTabBar />
+        </CartProvider>
       </body>
     </html>
   );

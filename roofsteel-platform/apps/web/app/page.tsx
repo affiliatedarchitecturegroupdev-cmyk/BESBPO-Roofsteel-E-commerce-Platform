@@ -1,39 +1,24 @@
+"use client";
+
 import { CategoryGrid } from "../components/category/CategoryGrid";
 import { ProductCard } from "../components/product/ProductCard";
 import { Icon } from "../components/Icon";
+import { useCategories, useProducts } from "../lib/hooks";
 import type { CategorySummary, ProductSummary } from "@roofsteel/shared-types";
-
-// TODO(Phase 2): replace these two fixtures with real data from
-// GET /v1/categories (now real — apps/api/src/categories/categories.module.ts,
-// built in the Gap Analysis I session) and a Trending Now products query —
-// see guidelines/12-storefront-ux-and-ia.md's Home breakdown for the exact
-// sections and guidelines/01-api-design.md for endpoint conventions. The
-// component tree below (CategoryGrid, ProductCard) is real; only the data
-// source here is still a placeholder.
-const CATEGORIES: CategorySummary[] = [
-  { slug: "steel-roofing-sheets", name: "Steel Roofing Sheets", icon: "layers", lineCount: 10 },
-  { slug: "structural-steel", name: "Structural Steel", icon: "beam", lineCount: 63 },
-  { slug: "reinforcing-steel", name: "Reinforcing Steel", icon: "hash", lineCount: 17 },
-  { slug: "roofing-timber-trusses", name: "Roofing Timber & Trusses", icon: "tree", lineCount: 13 },
-  { slug: "roof-tiles", name: "Roof Tiles", icon: "grid", lineCount: 9 },
-  { slug: "roofing-accessories", name: "Roofing Accessories", icon: "tool", lineCount: 25 },
-];
-
-const TRENDING: ProductSummary[] = [
-  {
-    sku: "RS-1000",
-    name: "IBR 686 Roofing Sheet",
-    fulfilmentType: "MADE_TO_LENGTH",
-    unit: "per m²",
-    pricing: { landedCost: 145, retailPrice: 210.25, tradePrice: 193.43, volumePrice: 185.02, applicablePrice: 210.25, pricingKey: "Steel Roofing Sheets — Made to Length", costIsReal: true },
-  },
-];
 
 // Home — category-led, not a marketing hero (guidelines/12-storefront-ux-and-ia.md
 // Section "Home (/)"). Deliberately NOT the corporate site's 8-slide cinematic
 // hero; the promo strip here is compact, sized to get out of the way fast for
 // a returning trade buyer who already knows what they want.
+//
+// Data is fetched client-side via the hooks in lib/hooks.ts, which call the real
+// API through lib/api-client.ts. The API client attaches auth tokens automatically,
+// so an authenticated trade buyer sees trade pricing in the Trending Now products
+// immediately, without a separate "trade home" page.
 export default function HomePage() {
+  const { categories, loading: catsLoading } = useCategories();
+  const { data: trending, loading: productsLoading } = useProducts({ pageSize: 8 });
+
   return (
     <>
       <section className="promo-strip promo-strip--desktop">
@@ -48,9 +33,13 @@ export default function HomePage() {
       <section className="section">
         <div className="section-head">
           <h2>Shop by Category</h2>
-          <a className="see-all" href="/categories">See all 13</a>
+          <a className="see-all" href="/categories">See all</a>
         </div>
-        <CategoryGrid categories={CATEGORIES} variant="desktop" />
+        {catsLoading ? (
+          <div className="loading-placeholder">Loading categories…</div>
+        ) : (
+          <CategoryGrid categories={categories} variant="desktop" />
+        )}
       </section>
 
       <section className="section mtl-banner mtl-banner--desktop">
@@ -70,11 +59,15 @@ export default function HomePage() {
         <div className="section-head">
           <h2>Trending Now</h2>
         </div>
-        <div className="pcard-grid-desktop">
-          {TRENDING.map((p) => (
-            <ProductCard key={p.sku} product={p} />
-          ))}
-        </div>
+        {productsLoading ? (
+          <div className="loading-placeholder">Loading products…</div>
+        ) : (
+          <div className="pcard-grid-desktop">
+            {trending?.items.map((p: ProductSummary) => (
+              <ProductCard key={p.sku} product={p} />
+            ))}
+          </div>
+        )}
       </section>
     </>
   );

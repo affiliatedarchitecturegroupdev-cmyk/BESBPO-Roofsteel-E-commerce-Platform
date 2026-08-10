@@ -3,16 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "../Icon";
-
-export interface MobileTabBarProps {
-  cartCount?: number;
-}
+import { useCart } from "../../lib/hooks";
 
 // Persistent bottom tab bar — mobile only (hidden >=1080px via .tab-bar rule
 // in globals.css). See guidelines/12-storefront-ux-and-ia.md for why this
 // exists as a deliberate deviation from the corporate site's simpler
 // hamburger nav: the store is revisited constantly mid-session, the
-// corporate site is browsed linearly.
+// corporate site is browsed linearly. Cart count is real from CartContext.
 const TABS = [
   { href: "/", label: "Home", icon: "home" },
   { href: "/categories", label: "Categories", icon: "grid" },
@@ -21,8 +18,9 @@ const TABS = [
   { href: "/account", label: "Account", icon: "users" },
 ] as const;
 
-export function MobileTabBar({ cartCount = 0 }: MobileTabBarProps) {
+export function MobileTabBar() {
   const pathname = usePathname();
+  const { itemCount } = useCart();
 
   return (
     <nav className="tab-bar" aria-label="Primary">
@@ -32,7 +30,7 @@ export function MobileTabBar({ cartCount = 0 }: MobileTabBarProps) {
           <Link key={tab.href} href={tab.href} className={`tab-item${active ? " active" : ""}`}>
             <Icon name={tab.icon} size={20} />
             <span>{tab.label}</span>
-            {tab.href === "/cart" && cartCount > 0 && <span className="tab-badge">{cartCount}</span>}
+            {tab.href === "/cart" && itemCount > 0 && <span className="tab-badge">{itemCount}</span>}
           </Link>
         );
       })}

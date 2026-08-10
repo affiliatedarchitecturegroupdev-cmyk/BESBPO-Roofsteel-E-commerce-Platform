@@ -38,12 +38,12 @@ Status legend: `[x]` done and merged, `[~]` in progress, `[ ]` not started
 | 2.7 | Wishlist module (multi-list, project-based) | 250 | 135 | [x] |
 | 2.8 | ComplianceDocument module (upload + list) | 200 | 95 | [x] |
 | 2.9 | Review model + module (text/star, schema change) | 300 | 145 | [x] |
-| 2.10 | API client data layer (frontend) | 300 | — | [ ] |
-| 2.11 | Home page (real fetch, trending, new arrivals) | 200 | — | [ ] |
-| 2.12 | Category/[slug] PLP (filters, sort, grid, pagination) | 350 | — | [ ] |
-| 2.13 | Search page (built out, reuses PLP components) | 150 | — | [ ] |
-| 2.14 | PDP (real fetch, gallery, specs, compliance tab, FBT) | 400 | — | [ ] |
-| 2.15 | Login/Register pages (built out) | 300 | — | [ ] |
+| 2.10 | API client data layer (frontend) | 300 | 312 | [x] |
+| 2.11 | Home page (real fetch, trending, new arrivals) | 200 | 75 | [x] |
+| 2.12 | Category/[slug] PLP (filters, sort, grid, pagination) | 350 | 93 | [x] |
+| 2.13 | Search page (built out, reuses PLP components) | 150 | 68 | [x] |
+| 2.14 | PDP (real fetch, gallery, specs, compliance tab, FBT) | 400 | 85 | [x] |
+| 2.15 | Login/Register pages (built out) | 300 | 210 | [x] |
 | 2.16 | Cut/bend service selector (SANS 282 shape codes) | 200 | — | [ ] |
 | | **Phase 2 subtotal** | **3,350** | — | |
 

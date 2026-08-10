@@ -1,9 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Icon } from "../Icon";
-
-export interface StoreHeaderProps {
-  cartCount?: number;
-}
+import { useCart } from "../../lib/hooks";
 
 // Validated against design-mockup/mockup.html's mobile and desktop Home
 // screens (docs/DEVELOPMENT-LOG.md) — one component, responsive via CSS
@@ -14,8 +13,11 @@ export interface StoreHeaderProps {
 // Deliberately different from the corporate site's header
 // (guidelines/12-storefront-ux-and-ia.md's "same brand, different job"):
 // no Launch Store CTA (we're already in the store), cart + account icons
-// take that visual priority instead.
-export function StoreHeader({ cartCount = 0 }: StoreHeaderProps) {
+// take that visual priority instead. Cart count comes from the CartContext
+// (lib/hooks.ts) — real, not hardcoded.
+export function StoreHeader() {
+  const { itemCount } = useCart();
+
   return (
     <header className="store-header">
       <Link href="/" className="brand" aria-label="Roofsteel home">
@@ -53,9 +55,9 @@ export function StoreHeader({ cartCount = 0 }: StoreHeaderProps) {
         <Link href="/account" aria-label="Account">
           <Icon name="users" size={20} color="#1A1F24" />
         </Link>
-        <Link href="/cart" className="cart-icon-wrap" aria-label={`Cart, ${cartCount} items`}>
+        <Link href="/cart" className="cart-icon-wrap" aria-label={`Cart, ${itemCount} items`}>
           <Icon name="bag" size={20} color="#1A1F24" />
-          {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+          {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
         </Link>
       </div>
     </header>
