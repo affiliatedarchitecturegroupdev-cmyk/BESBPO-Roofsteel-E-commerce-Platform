@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ProductPurchasePanel } from "../../../components/product/ProductPurchasePanel";
+import { ProductReviews } from "../../../components/product/ProductReviews";
 import { productsApi } from "../../../lib/api-client";
 import type { ProductDetail } from "@roofsteel/shared-types";
 
@@ -80,6 +81,8 @@ export default function ProductPage({ params }: { params: { sku: string } }) {
           </div>
         </div>
       </div>
+
+      <ProductReviews sku={product.sku} />
     </div>
   );
 }
