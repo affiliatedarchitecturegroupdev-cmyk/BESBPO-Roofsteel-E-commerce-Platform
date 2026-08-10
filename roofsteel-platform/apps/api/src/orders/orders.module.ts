@@ -1,4 +1,4 @@
-import { Module, Controller, Get, Post, Param, Body, UseGuards } from "@nestjs/common";
+import { Module, Controller, Get, Post, Param, Body, Query, UseGuards } from "@nestjs/common";
 import { PrismaService } from "../common/prisma.service";
 import { PricingService } from "../pricing/pricing.service";
 import { CartService } from "../cart/cart.service";
@@ -8,13 +8,19 @@ import { PayFastStrategy } from "./payments/payfast.strategy";
 import { LulapayStrategy } from "./payments/lulapay.strategy";
 import { PayJustNowStrategy } from "./payments/payjustnow.strategy";
 import { OptionalJwtAuthGuard } from "../auth/optional-jwt-auth.guard";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { CurrentAccount } from "../auth/current-account.decorator";
 import type { JwtPayload } from "../auth/auth.service";
-import { AccountType } from "@prisma/client";
+import { AccountType, OrderStatus } from "@prisma/client";
 
 @Controller("orders")
 export class OrdersController {
-  constructor(private readonly orders: OrdersService) {}
+  constructor(
+    private readonly orders: OrdersService,
+    private readonly payFast: PayFastStrategy,
+    private readonly lulapay: LulapayStrategy,
+    private readonly payJustNow: PayJustNowStrategy,
+  ) {}
 
   // Optional auth: a guest can checkout with guestEmail; an authenticated user's account type
   // determines their pricing tier and available payment gateways. The real accountType is
@@ -48,23 +54,49 @@ export class OrdersController {
   }
 
   // Webhook endpoints — one per gateway, since each has a different payload shape and
-  // verification method (guidelines/05-payments.md). Real signature verification wiring is
-  // Phase 3 scope; routes exist now so the URL contract is stable.
+  // verification method (guidelines/05-payments.md). Each verifies the payload signature via
+  // the gateway's strategy, then transitions the order to PAID. Idempotency: a retried webhook
+  // for an already-PAID order is a no-op (the where clause won't match PENDING_PAYMENT).
   @Post("webhooks/payfast")
-  payfastWebhook(@Body() _payload: unknown) {
-    // TODO(Phase 3): verify via PayFastStrategy.verify(), then transition order status.
+  async payfastWebhook(@Body() payload: Record<string, string>) {
+    const verified = await this.payFast.verify(payload);
+    if (!verified) return { received: false, reason: "signature_invalid" };
+
+    // PayFast ITN payload includes m_payment_id (our orderNumber) and payment_status.
+    if (payload.payment_status !== "COMPLETE") {
+      return { received: true, status: payload.payment_status };
+    }
+    await this.orders.markOrderPaid(payload.m_payment_id);
     return { received: true };
   }
 
   @Post("webhooks/lulapay")
-  lulapayWebhook(@Body() _payload: unknown) {
-    // TODO(Phase 3): verify via LulapayStrategy.verify(), then transition order status.
+  async lulapayWebhook(@Body() payload: unknown) {
+    const verified = await this.lulapay.verify(payload);
+    if (!verified) return { received: false, reason: "signature_invalid" };
+
+    const body = payload as { orderNumber?: string; status?: string };
+    if (body.status !== "SETTLED") {
+      return { received: true, status: body.status };
+    }
+    if (body.orderNumber) {
+      await this.orders.markOrderPaid(body.orderNumber);
+    }
     return { received: true };
   }
 
   @Post("webhooks/payjustnow")
-  payJustNowWebhook(@Body() _payload: unknown) {
-    // TODO(Phase 3): verify via PayJustNowStrategy.verify(), then transition order status.
+  async payJustNowWebhook(@Body() payload: unknown) {
+    const verified = await this.payJustNow.verify(payload);
+    if (!verified) return { received: false, reason: "signature_invalid" };
+
+    const body = payload as { orderNumber?: string; status?: string };
+    if (body.status !== "APPROVED") {
+      return { received: true, status: body.status };
+    }
+    if (body.orderNumber) {
+      await this.orders.markOrderPaid(body.orderNumber);
+    }
     return { received: true };
   }
 }

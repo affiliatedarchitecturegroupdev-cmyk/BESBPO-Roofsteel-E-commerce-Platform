@@ -104,6 +104,22 @@ export class OrdersService {
     return order;
   }
 
+  // Idempotent order payment confirmation — called by webhook handlers after signature
+  // verification. Only transitions PENDING_PAYMENT orders; a retried webhook for an
+  // already-PAID order is a no-op (the where clause won't match). This is the idempotency
+  // rule from guidelines/05-payments.md: a retried notification must never double-process.
+  async markOrderPaid(orderNumber: string) {
+    const order = await this.prisma.order.findUnique({ where: { orderNumber } });
+    if (!order) throw new NotFoundException(`Order ${orderNumber} not found`);
+    if (order.status !== OrderStatus.PENDING_PAYMENT) {
+      return order; // Already processed — idempotent no-op
+    }
+    return this.prisma.order.update({
+      where: { id: order.id },
+      data: { status: OrderStatus.PROCESSING, paidAt: new Date() },
+    });
+  }
+
   // List orders for an authenticated account — paginated, most recent first. This is what
   // the /account/orders page calls. Guest orders (no accountId) are excluded — a guest only
   // sees their order if they have the orderNumber from their confirmation email.

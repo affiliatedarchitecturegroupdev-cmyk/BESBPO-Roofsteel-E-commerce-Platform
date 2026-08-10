@@ -28,12 +28,26 @@ export class PayFastStrategy implements PaymentStrategy {
     };
     const signature = this.buildDeclaredOrderSignature(fields);
 
-    // TODO(Phase 3): real PayFast checkout URL construction (sandbox vs. production host from
-    // env) — this returns the session shape the interface requires; the actual HTTP call to
-    // PayFast's process endpoint is the next concrete step.
+    // Sandbox vs. production host from env — sandbox.payfast.co.za for testing,
+    // www.payfast.co.za for production. The PAYFAST_SANDBOX env var toggles this.
+    const host = process.env.PAYFAST_SANDBOX === "true"
+      ? "https://sandbox.payfast.co.za/eng/process"
+      : "https://www.payfast.co.za/eng/process";
+    const returnUrl = process.env.PAYFAST_RETURN_URL ?? "";
+    const cancelUrl = process.env.PAYFAST_CANCEL_URL ?? "";
+    const notifyUrl = process.env.PAYFAST_NOTIFY_URL ?? "";
+
+    const allFields: Record<string, string> = {
+      ...fields,
+      signature,
+      return_url: returnUrl,
+      cancel_url: cancelUrl,
+      notify_url: notifyUrl,
+      email_address: order.guestEmail ?? "",
+    };
     return {
       gatewayReference: order.orderNumber,
-      redirectUrl: `https://www.payfast.co.za/eng/process?${new URLSearchParams({ ...fields, signature }).toString()}`,
+      redirectUrl: `${host}?${new URLSearchParams(allFields).toString()}`,
       requiresRedirect: true,
     };
   }

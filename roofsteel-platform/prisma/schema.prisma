@@ -408,6 +408,7 @@ model Order {
 
   paymentGateway  PaymentGateway?
   paymentRef      String?
+  paidAt          DateTime?
 
   items           OrderItem[]
   shipment        Shipment?
