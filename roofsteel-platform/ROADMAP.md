@@ -92,9 +92,9 @@ freight weight+distance banding (ADR-016).
 | 4.9 | BullMQ worker skeleton + queue setup | 200 | 95 | [x] |
 | 4.10 | Order lifecycle notification jobs | 400 | 48 | [x] |
 | 4.11 | Trade application notification jobs | 150 | 39 | [x] |
-| 4.12 | Back-in-stock / low-stock alert jobs | 200 | — | [ ] |
+| 4.12 | Back-in-stock / low-stock alert jobs | 200 | 38 | [x] |
 | 4.13 | Stock reservation logic (qtyReserved on order) | 150 | 116 | [x] |
-| 4.14 | Sales/revenue reporting dashboard | 350 | — | [ ] |
+| 4.14 | Sales/revenue reporting dashboard | 350 | 125 | [x] |
 | 4.15 | Location detection UI (geolocation pre-fill) | 150 | — | [ ] |
 | 4.16 | Courier/tracking integration | 300 | — | [ ] |
 | | **Phase 4 subtotal** | **3,800** | — | |

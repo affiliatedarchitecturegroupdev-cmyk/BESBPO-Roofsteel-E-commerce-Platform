@@ -1,10 +1,15 @@
 import {
   Module, Controller, Get, Post, Patch, Delete, Body, Param, Query, UseGuards, Injectable,
 } from "@nestjs/common";
+import { BullModule } from "@nestjs/bull";
+import { InjectQueue } from "@nestjs/bull";
+import type { Queue } from "bull";
 import { PrismaService } from "../common/prisma.service";
 import { AdminGuard } from "../auth/admin.guard";
 import { OrderStatus, Prisma } from "@prisma/client";
 import { NotFoundException } from "@nestjs/common";
+import { QUEUE_NAMES } from "../queue/queue.module";
+import type { StockAlertJob } from "../queue/processors/stock-alert.processor";
 
 // Admin module — all routes under /v1/admin/* require AdminGuard (role: ADMIN). Never reuse
 // a customer-facing route with a hidden admin branch (guidelines/01-api-design.md). Each
@@ -184,7 +189,12 @@ export class AdminPricingBandsService {
 // complete and tamper-evident (guidelines/13-listings-cms-inventory-sales.md Section 3.1).
 @Injectable()
 export class AdminStockService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    @InjectQueue(QUEUE_NAMES.STOCK_ALERTS) private readonly stockAlertQueue: Queue<StockAlertJob>,
+  ) {}
+
+  private static readonly LOW_STOCK_THRESHOLD = 10;
 
   // List stock levels with product and location info, filterable by location.
   async listStock(locationId?: string, page = 1, pageSize = 50) {
@@ -252,8 +262,38 @@ export class AdminStockService {
             `${updated.product.sku} at ${updated.location.name}`
         );
       }
+
       return { movement, stockLevel: updated };
     });
+
+    // Enqueue stock alert jobs after the transaction commits — fire-and-forget, never block
+    // the admin response. Two cases (guidelines/09-notifications-and-jobs.md):
+    // 1. Stock was ≤0 before, now >0 → back_in_stock (notify wishlisted customers).
+    // 2. Stock dropped to/below threshold → low_stock (notify restock managers).
+    const prevQty = result.stockLevel.qtyOnHand - delta;
+    const { sku, name } = result.stockLevel.product;
+
+    if (delta > 0 && prevQty <= 0 && result.stockLevel.qtyOnHand > 0) {
+      await this.stockAlertQueue.add("back_in_stock", {
+        productId: result.stockLevel.productId,
+        productSku: sku,
+        productName: name,
+        alertType: "back_in_stock",
+        currentStock: result.stockLevel.qtyOnHand,
+      });
+    }
+    if (delta < 0 && result.stockLevel.qtyOnHand <= AdminStockService.LOW_STOCK_THRESHOLD) {
+      await this.stockAlertQueue.add("low_stock", {
+        productId: result.stockLevel.productId,
+        productSku: sku,
+        productName: name,
+        alertType: "low_stock",
+        threshold: AdminStockService.LOW_STOCK_THRESHOLD,
+        currentStock: result.stockLevel.qtyOnHand,
+      });
+    }
+
+    return result;
   }
 
   // View movement history for a stock level — the full audit trail.
@@ -287,6 +327,136 @@ export class AdminStockService {
       isLow: s.qtyOnHand - s.qtyReserved <= threshold,
     }));
   }
+}
+
+// Sales/revenue reporting — admin dashboard analytics. Aggregates order data by date range,
+// status, and account type. All amounts are in ZAR (cents stored as Decimal, returned as
+// numbers). See guidelines/13 Section 5 (reporting) and guidelines/06 (pricing tiers).
+@Injectable()
+export class AdminReportingService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  // Revenue summary for a date range — total revenue, order count, AOV, by status.
+  async revenueSummary(dateFrom?: string, dateTo?: string) {
+    const where: Prisma.OrderWhereInput = {};
+    if (dateFrom || dateTo) {
+      where.createdAt = {};
+      if (dateFrom) where.createdAt.gte = new Date(dateFrom);
+      if (dateTo) where.createdAt.lte = new Date(dateTo);
+    }
+
+    const orders = await this.prisma.order.findMany({
+      where,
+      select: { total: true, status: true, priceTierApplied: true, createdAt: true },
+    });
+
+    const paidOrders = orders.filter((o) => o.status === "PAID" || o.status === "PROCESSING");
+    const totalRevenue = paidOrders.reduce((sum, o) => sum + Number(o.total), 0);
+    const orderCount = orders.length;
+    const paidCount = paidOrders.length;
+    const aov = paidCount > 0 ? totalRevenue / paidCount : 0;
+
+    // Revenue by price tier — RETAIL vs TRADE vs CONTRACTOR vs PROJECT.
+    const byTier = paidOrders.reduce(
+      (acc, o) => {
+        const tier = o.priceTierApplied;
+        acc[tier] = (acc[tier] ?? 0) + Number(o.total);
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+
+    // Order count by status.
+    const byStatus = orders.reduce(
+      (acc, o) => {
+        acc[o.status] = (acc[o.status] ?? 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+
+    return {
+      totalRevenue: round2(totalRevenue),
+      orderCount,
+      paidOrderCount: paidCount,
+      aov: round2(aov),
+      revenueByTier: Object.fromEntries(
+        Object.entries(byTier).map(([k, v]) => [k, round2(v)]),
+      ),
+      ordersByStatus: byStatus,
+    };
+  }
+
+  // Top products by revenue — the best-sellers for the date range.
+  async topProducts(dateFrom?: string, dateTo?: string, limit = 10) {
+    const where: Prisma.OrderItemWhereInput = {};
+    if (dateFrom || dateTo) {
+      where.order = {};
+      if (dateFrom) where.order.createdAt = { gte: new Date(dateFrom) };
+      if (dateTo) where.order.createdAt = { ...where.order.createdAt, lte: new Date(dateTo) };
+    }
+
+    const items = await this.prisma.orderItem.findMany({
+      where,
+      select: {
+        productId: true,
+        quantity: true,
+        unitPrice: true,
+        product: { select: { sku: true, name: true } },
+        order: { select: { status: true } },
+      },
+    });
+
+    // Only count items from paid/processing orders. Revenue = quantity × unitPrice.
+    const paidItems = items.filter((i) => i.order.status === "PAID" || i.order.status === "PROCESSING");
+
+    const byProduct = new Map<string, { productName: string; sku: string; qty: number; revenue: number }>();
+    for (const item of paidItems) {
+      const revenue = item.quantity * Number(item.unitPrice);
+      const existing = byProduct.get(item.productId);
+      if (existing) {
+        existing.qty += item.quantity;
+        existing.revenue += revenue;
+      } else {
+        byProduct.set(item.productId, {
+          productName: item.product.name,
+          sku: item.product.sku,
+          qty: item.quantity,
+          revenue,
+        });
+      }
+    }
+
+    return Array.from(byProduct.values())
+      .sort((a, b) => b.revenue - a.revenue)
+      .slice(0, limit)
+      .map((p) => ({ ...p, revenue: round2(p.revenue) }));
+  }
+
+  // Daily revenue — for the dashboard's revenue-over-time chart.
+  async dailyRevenue(dateFrom: string, dateTo: string) {
+    const orders = await this.prisma.order.findMany({
+      where: {
+        createdAt: { gte: new Date(dateFrom), lte: new Date(dateTo) },
+        status: { in: ["PAID", "PROCESSING"] },
+      },
+      select: { total: true, createdAt: true },
+    });
+
+    const byDay = new Map<string, number>();
+    for (const o of orders) {
+      const day = o.createdAt.toISOString().slice(0, 10);
+      byDay.set(day, (byDay.get(day) ?? 0) + Number(o.total));
+    }
+
+    return Array.from(byDay.entries())
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([date, revenue]) => ({ date, revenue: round2(revenue) }));
+  }
+}
+
+function round2(n: number): number {
+  return Math.round(n * 100) / 100;
 }
 
 @Controller("admin/orders")
@@ -509,8 +679,37 @@ export class AdminComplianceService {
   }
 }
 
+@Controller("admin/reports")
+@UseGuards(AdminGuard)
+export class AdminReportingController {
+  constructor(private readonly service: AdminReportingService) {}
+
+  @Get("revenue")
+  revenueSummary(
+    @Query("dateFrom") dateFrom?: string,
+    @Query("dateTo") dateTo?: string
+  ) {
+    return this.service.revenueSummary(dateFrom, dateTo);
+  }
+
+  @Get("top-products")
+  topProducts(
+    @Query("dateFrom") dateFrom?: string,
+    @Query("dateTo") dateTo?: string,
+    @Query("limit") limit?: string
+  ) {
+    return this.service.topProducts(dateFrom, dateTo, limit ? parseInt(limit, 10) : 10);
+  }
+
+  @Get("daily-revenue")
+  dailyRevenue(@Query("dateFrom") dateFrom: string, @Query("dateTo") dateTo: string) {
+    return this.service.dailyRevenue(dateFrom, dateTo);
+  }
+}
+
 @Module({
-  controllers: [AdminOrdersController, AdminTradeAccountsController, AdminProductsController, AdminPricingBandsController, AdminStockController, AdminComplianceController],
-  providers: [AdminOrdersService, AdminTradeAccountsService, AdminProductsService, AdminPricingBandsService, AdminStockService, AdminComplianceService, PrismaService],
+  imports: [BullModule.registerQueue({ name: QUEUE_NAMES.STOCK_ALERTS })],
+  controllers: [AdminOrdersController, AdminTradeAccountsController, AdminProductsController, AdminPricingBandsController, AdminStockController, AdminComplianceController, AdminReportingController],
+  providers: [AdminOrdersService, AdminTradeAccountsService, AdminProductsService, AdminPricingBandsService, AdminStockService, AdminComplianceService, AdminReportingService, PrismaService],
 })
 export class AdminModule {}
