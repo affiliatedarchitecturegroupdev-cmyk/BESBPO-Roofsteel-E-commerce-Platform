@@ -1,7 +1,11 @@
 import { Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { InjectQueue } from "@nestjs/bull";
+import type { Queue } from "bull";
 import { PrismaService } from "../../common/prisma.service";
 import { InventoryService } from "../../inventory/inventory.service";
 import { OrderStatus } from "@prisma/client";
+import { QUEUE_NAMES } from "../../queue/queue.module";
+import type { OrderNotificationJob } from "../../queue/processors/order-notification.processor";
 
 // Centralised payment-event processor — every webhook path routes through this single
 // transition function. This prevents double-fulfilment across all three gateways: the
@@ -20,6 +24,7 @@ export class PaymentProcessor {
   constructor(
     private readonly prisma: PrismaService,
     private readonly inventory: InventoryService,
+    @InjectQueue(QUEUE_NAMES.ORDER_NOTIFICATIONS) private readonly orderQueue: Queue<OrderNotificationJob>,
   ) {}
 
   // Called by every gateway's webhook handler after signature verification succeeds.
@@ -57,6 +62,16 @@ export class PaymentProcessor {
     }
 
     this.logger.log(`Order ${orderNumber} confirmed: PENDING_PAYMENT → PROCESSING`);
+
+    // Enqueue paid notification (guidelines/09). Only when transitioned — a retried webhook
+    // for an already-paid order must not re-send the confirmation email (idempotency).
+    await this.orderQueue.add("paid", {
+      orderNumber,
+      eventType: "paid",
+      accountId: order.accountId ?? undefined,
+      guestEmail: order.guestEmail ?? undefined,
+    });
+
     return { order: updated, transitioned: true };
   }
 

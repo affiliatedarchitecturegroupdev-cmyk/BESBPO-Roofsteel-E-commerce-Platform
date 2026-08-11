@@ -1,6 +1,8 @@
 import { Module, Controller, Get, Post, Param, Body, Query, UseGuards, Req } from "@nestjs/common";
 import type { Request } from "express";
 import { SkipThrottle } from "@nestjs/throttler";
+import { BullModule } from "@nestjs/bull";
+import type { Queue } from "bull";
 import { PrismaService } from "../common/prisma.service";
 import { PricingService } from "../pricing/pricing.service";
 import { CartService } from "../cart/cart.service";
@@ -11,11 +13,15 @@ import { LulapayStrategy } from "./payments/lulapay.strategy";
 import { PayJustNowStrategy } from "./payments/payjustnow.strategy";
 import { PaymentProcessor } from "./payments/payment.processor";
 import { InventoryModule } from "../inventory/inventory.module";
+import { QUEUE_NAMES } from "../queue/queue.module";
+import type { OrderNotificationJob } from "../queue/processors/order-notification.processor";
 import { OptionalJwtAuthGuard } from "../auth/optional-jwt-auth.guard";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { CurrentAccount } from "../auth/current-account.decorator";
 import type { JwtPayload } from "../auth/auth.service";
 import { AccountType, OrderStatus } from "@prisma/client";
+
+import { InjectQueue } from "@nestjs/bull";
 
 @Controller("orders")
 export class OrdersController {
@@ -25,6 +31,7 @@ export class OrdersController {
     private readonly lulapay: LulapayStrategy,
     private readonly payJustNow: PayJustNowStrategy,
     private readonly paymentProcessor: PaymentProcessor,
+    @InjectQueue(QUEUE_NAMES.ORDER_NOTIFICATIONS) private readonly orderQueue: Queue<OrderNotificationJob>,
   ) {}
 
   // Optional auth: a guest can checkout with guestEmail; an authenticated user's account type
@@ -32,12 +39,23 @@ export class OrdersController {
   // threaded through here (guidelines/01-api-design.md, "Auth context in services").
   @Post()
   @UseGuards(OptionalJwtAuthGuard)
-  create(@Body() dto: CreateOrderDto, @CurrentAccount() account?: JwtPayload) {
+  async create(@Body() dto: CreateOrderDto, @CurrentAccount() account?: JwtPayload) {
     const accountType = account?.type ?? AccountType.RETAIL;
     if (account && !dto.accountId) {
       dto.accountId = account.sub;
     }
-    return this.orders.createOrder(dto, accountType);
+    const result = await this.orders.createOrder(dto, accountType);
+
+    // Enqueue order-created notification (guidelines/09 — fire-and-forget, never block
+    // the checkout response on email rendering).
+    await this.orderQueue.add("created", {
+      orderNumber: result.order.orderNumber,
+      eventType: "created",
+      accountId: result.order.accountId ?? undefined,
+      guestEmail: result.order.guestEmail ?? undefined,
+    });
+
+    return result;
   }
 
   // List orders for the authenticated account — paginated. This is a literal segment before
@@ -115,7 +133,7 @@ export class OrdersController {
 }
 
 @Module({
-  imports: [InventoryModule],
+  imports: [InventoryModule, BullModule.registerQueue({ name: QUEUE_NAMES.ORDER_NOTIFICATIONS })],
   controllers: [OrdersController],
   providers: [
     OrdersService,

@@ -1,10 +1,12 @@
 import { Module, Controller, Get, Post, Param, Body, UseGuards } from "@nestjs/common";
+import { BullModule } from "@nestjs/bull";
 import { PrismaService } from "../common/prisma.service";
 import { TradeAccountsService } from "./trade-accounts.service";
 import { ApplyForTradeAccountDto, RejectTradeAccountDto } from "./dto/trade-account.dto";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { CurrentAccount } from "../auth/current-account.decorator";
 import type { JwtPayload } from "../auth/auth.service";
+import { QUEUE_NAMES } from "../queue/queue.module";
 
 @Controller("trade-accounts")
 export class TradeAccountsController {
@@ -42,6 +44,7 @@ export class TradeAccountsController {
 }
 
 @Module({
+  imports: [BullModule.registerQueue({ name: QUEUE_NAMES.TRADE_APPLICATIONS })],
   controllers: [TradeAccountsController],
   providers: [TradeAccountsService, PrismaService],
 })

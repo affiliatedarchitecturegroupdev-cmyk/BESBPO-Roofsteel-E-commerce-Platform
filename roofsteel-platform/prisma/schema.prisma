@@ -184,6 +184,7 @@ model Product {
   cartItems     CartItem[]
   orderItems    OrderItem[]
   reviews       Review[]
+  wishlistItems WishlistItem[]
 
   active        Boolean  @default(true)
   createdAt     DateTime @default(now())

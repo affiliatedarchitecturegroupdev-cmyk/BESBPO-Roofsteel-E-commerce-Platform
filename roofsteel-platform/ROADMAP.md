@@ -89,9 +89,9 @@ freight weight+distance banding (ADR-016).
 | 4.6 | Admin — pricing bands editor (yellow-cell convention) | 250 | 71 | [x] |
 | 4.7 | Admin — stock levels/movements | 350 | 110 | [x] |
 | 4.8 | Admin — compliance document upload | 200 | 72 | [x] |
-| 4.9 | BullMQ worker skeleton + queue setup | 200 | — | [ ] |
-| 4.10 | Order lifecycle notification jobs | 400 | — | [ ] |
-| 4.11 | Trade application notification jobs | 150 | — | [ ] |
+| 4.9 | BullMQ worker skeleton + queue setup | 200 | 95 | [x] |
+| 4.10 | Order lifecycle notification jobs | 400 | 48 | [x] |
+| 4.11 | Trade application notification jobs | 150 | 39 | [x] |
 | 4.12 | Back-in-stock / low-stock alert jobs | 200 | — | [ ] |
 | 4.13 | Stock reservation logic (qtyReserved on order) | 150 | 116 | [x] |
 | 4.14 | Sales/revenue reporting dashboard | 350 | — | [ ] |

@@ -1,14 +1,21 @@
 import { Injectable, ConflictException, NotFoundException } from "@nestjs/common";
+import { InjectQueue } from "@nestjs/bull";
+import type { Queue } from "bull";
 import { PrismaService } from "../common/prisma.service";
 import { ApplyForTradeAccountDto, RejectTradeAccountDto } from "./dto/trade-account.dto";
 import { AccountType, TradeApplicationStatus } from "@prisma/client";
+import { QUEUE_NAMES } from "../queue/queue.module";
+import type { TradeApplicationJob } from "../queue/processors/trade-application.processor";
 
 // This is the pattern named explicitly in CLAUDE.md and AGENTS.md — mirrored here, not
 // reinvented: approve() updates Account.type AND application status in ONE transaction;
 // create() blocks duplicate-pending and already-trade applications. See spec Section 4.3.
 @Injectable()
 export class TradeAccountsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    @InjectQueue(QUEUE_NAMES.TRADE_APPLICATIONS) private readonly tradeQueue: Queue<TradeApplicationJob>,
+  ) {}
 
   async apply(accountId: string, dto: ApplyForTradeAccountDto) {
     const account = await this.prisma.account.findUnique({ where: { id: accountId } });
@@ -61,8 +68,14 @@ export class TradeAccountsService {
       }),
     ]);
 
-    // TODO(Phase 4, guidelines/09-notifications-and-jobs.md): enqueue a
-    // trade-application.approved notification job here.
+    // Enqueue trade-application.approved notification job (guidelines/09).
+    const account = await this.prisma.account.findUnique({ where: { id: updatedApplication.accountId } });
+    await this.tradeQueue.add("approved", {
+      applicationId,
+      eventType: "approved",
+      accountEmail: account?.email ?? "",
+      companyName: updatedApplication.companyName,
+    });
 
     return updatedApplication;
   }
@@ -76,7 +89,15 @@ export class TradeAccountsService {
       data: { status: TradeApplicationStatus.REJECTED, rejectionReason: dto.rejectionReason, reviewedAt: new Date() },
     });
 
-    // TODO(Phase 4): enqueue a trade-application.rejected notification job here.
+    // Enqueue trade-application.rejected notification job (guidelines/09).
+    const account = await this.prisma.account.findUnique({ where: { id: updated.accountId } });
+    await this.tradeQueue.add("rejected", {
+      applicationId,
+      eventType: "rejected",
+      accountEmail: account?.email ?? "",
+      companyName: updated.companyName,
+      rejectionReason: dto.rejectionReason,
+    });
 
     return updated;
   }

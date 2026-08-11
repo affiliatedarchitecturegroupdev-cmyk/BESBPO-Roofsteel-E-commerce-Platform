@@ -16,6 +16,7 @@ import { ComplianceModule } from "./compliance/compliance.module";
 import { ReviewsModule } from "./reviews/reviews.module";
 import { AdminModule } from "./admin/admin.module";
 import { InventoryModule } from "./inventory/inventory.module";
+import { QueueModule } from "./queue/queue.module";
 
 // All modules now have real logic, not empty scaffolds. The auth module provides JWT
 // session issuance (task 2.1), guards (task 2.2), and the @CurrentAccount decorator that
@@ -49,6 +50,7 @@ import { InventoryModule } from "./inventory/inventory.module";
     ReviewsModule,
     AdminModule,
     InventoryModule,
+    QueueModule,
   ],
   providers: [
     { provide: APP_GUARD, useClass: ThrottlerGuard },
