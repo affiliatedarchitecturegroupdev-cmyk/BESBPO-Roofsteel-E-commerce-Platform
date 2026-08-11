@@ -81,8 +81,9 @@ export class OrdersController {
 
   @Post("webhooks/lulapay")
   @SkipThrottle()
-  async lulapayWebhook(@Body() payload: unknown) {
-    const verified = await this.lulapay.verify(payload);
+  async lulapayWebhook(@Body() payload: unknown, @Req() req: Request) {
+    const headers = req.headers as Record<string, string>;
+    const verified = await this.lulapay.verify(payload, headers);
     if (!verified) return { received: false, reason: "signature_invalid" };
 
     const body = payload as { orderNumber?: string; status?: string; reference?: string };
@@ -97,8 +98,9 @@ export class OrdersController {
 
   @Post("webhooks/payjustnow")
   @SkipThrottle()
-  async payJustNowWebhook(@Body() payload: unknown) {
-    const verified = await this.payJustNow.verify(payload);
+  async payJustNowWebhook(@Body() payload: unknown, @Req() req: Request) {
+    const headers = req.headers as Record<string, string>;
+    const verified = await this.payJustNow.verify(payload, headers);
     if (!verified) return { received: false, reason: "signature_invalid" };
 
     const body = payload as { orderNumber?: string; status?: string; reference?: string };

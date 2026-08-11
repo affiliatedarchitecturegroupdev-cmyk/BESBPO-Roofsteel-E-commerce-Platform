@@ -60,8 +60,8 @@ out — tasks 2.12–2.14).
 | 3.3 | Checkout page (one-page, collapsible steps) | 600 | 233 | [x] |
 | 3.4 | Checkout success/cancelled pages | 150 | 64 | [x] |
 | 3.5 | PayFast real HTTP integration + ITN webhook | 300 | 199 | [x] |
-| 3.6 | Lulapay real Partner API integration | 250 | — | [ ] |
-| 3.7 | PayJustNow real integration (Retail only) | 200 | — | [ ] |
+| 3.6 | Lulapay real Partner API integration | 250 | 142 | [x] |
+| 3.7 | PayJustNow real integration (Retail only) | 200 | 128 | [x] |
 | 3.8 | Payment webhook idempotency + order transitions | 200 | 108 | [x] |
 | 3.9 | Orders list-by-account endpoint | 100 | 35 | [x] |
 | 3.10 | Account dashboard page | 200 | 148 | [x] |
