@@ -89,7 +89,7 @@ export class AdminProductsService {
     const where: Prisma.ProductWhereInput = {};
     if (search) {
       where.OR = [
-        { name: { search } },
+        { name: { contains: search, mode: "insensitive" } },
         { sku: { contains: search, mode: "insensitive" } },
       ];
     }
@@ -236,7 +236,7 @@ export class AdminStockService {
     const sign = data.type === "DAMAGED" || data.type === "TRANSFERRED_OUT" ? -1 : 1;
     const delta = data.type === "ADJUSTED" ? data.quantity : sign * Math.abs(data.quantity);
 
-    return this.prisma.$transaction(async (tx) => {
+    const result = await this.prisma.$transaction(async (tx) => {
       const movement = await tx.stockMovement.create({
         data: {
           stockLevelId,
@@ -350,7 +350,7 @@ export class AdminReportingService {
       select: { total: true, status: true, priceTierApplied: true, createdAt: true },
     });
 
-    const paidOrders = orders.filter((o) => o.status === "PAID" || o.status === "PROCESSING");
+    const paidOrders = orders.filter((o) => o.status !== "PENDING_PAYMENT" && o.status !== "CANCELLED");
     const totalRevenue = paidOrders.reduce((sum, o) => sum + Number(o.total), 0);
     const orderCount = orders.length;
     const paidCount = paidOrders.length;
@@ -391,9 +391,10 @@ export class AdminReportingService {
   async topProducts(dateFrom?: string, dateTo?: string, limit = 10) {
     const where: Prisma.OrderItemWhereInput = {};
     if (dateFrom || dateTo) {
-      where.order = {};
-      if (dateFrom) where.order.createdAt = { gte: new Date(dateFrom) };
-      if (dateTo) where.order.createdAt = { ...where.order.createdAt, lte: new Date(dateTo) };
+      const createdAt: Prisma.DateTimeFilter = {};
+      if (dateFrom) createdAt.gte = new Date(dateFrom);
+      if (dateTo) createdAt.lte = new Date(dateTo);
+      where.order = { createdAt };
     }
 
     const items = await this.prisma.orderItem.findMany({
@@ -408,7 +409,7 @@ export class AdminReportingService {
     });
 
     // Only count items from paid/processing orders. Revenue = quantity × unitPrice.
-    const paidItems = items.filter((i) => i.order.status === "PAID" || i.order.status === "PROCESSING");
+    const paidItems = items.filter((i) => i.order.status !== "PENDING_PAYMENT" && i.order.status !== "CANCELLED");
 
     const byProduct = new Map<string, { productName: string; sku: string; qty: number; revenue: number }>();
     for (const item of paidItems) {
@@ -438,7 +439,7 @@ export class AdminReportingService {
     const orders = await this.prisma.order.findMany({
       where: {
         createdAt: { gte: new Date(dateFrom), lte: new Date(dateTo) },
-        status: { in: ["PAID", "PROCESSING"] },
+        status: { in: ["PROCESSING", "PACKED", "DISPATCHED", "OUT_FOR_DELIVERY", "DELIVERED"] },
       },
       select: { total: true, createdAt: true },
     });
@@ -611,35 +612,6 @@ export class AdminStockController {
 // (mill certs, NRCS LoAs, SABS certificates). The admin can upload a compliance doc for a
 // product, list all docs for a product, and remove a doc. The fileUrl is stored — the actual
 // file storage backend is decided per ADR-013 (guidelines/03 compliance section).
-@Controller("admin/compliance")
-@UseGuards(AdminGuard)
-export class AdminComplianceController {
-  constructor(private readonly service: AdminComplianceService) {}
-
-  @Get("product/:productId")
-  listByProduct(@Param("productId") productId: string) {
-    return this.service.listByProduct(productId);
-  }
-
-  @Post("product/:productId")
-  upload(
-    @Param("productId") productId: string,
-    @Body() body: {
-      type: "MILL_TEST_CERTIFICATE" | "NRCS_LETTER_OF_AUTHORITY" | "SABS_MARK_CERTIFICATE";
-      fileUrl: string;
-      batchRef?: string;
-      issuedAt?: string;
-    }
-  ) {
-    return this.service.upload(productId, body);
-  }
-
-  @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.service.remove(id);
-  }
-}
-
 @Injectable()
 export class AdminComplianceService {
   constructor(private readonly prisma: PrismaService) {}
@@ -676,6 +648,35 @@ export class AdminComplianceService {
     if (!doc) throw new NotFoundException(`Compliance document ${docId} not found`);
     await this.prisma.complianceDocument.delete({ where: { id: docId } });
     return { removed: true };
+  }
+}
+
+@Controller("admin/compliance")
+@UseGuards(AdminGuard)
+export class AdminComplianceController {
+  constructor(private readonly service: AdminComplianceService) {}
+
+  @Get("product/:productId")
+  listByProduct(@Param("productId") productId: string) {
+    return this.service.listByProduct(productId);
+  }
+
+  @Post("product/:productId")
+  upload(
+    @Param("productId") productId: string,
+    @Body() body: {
+      type: "MILL_TEST_CERTIFICATE" | "NRCS_LETTER_OF_AUTHORITY" | "SABS_MARK_CERTIFICATE";
+      fileUrl: string;
+      batchRef?: string;
+      issuedAt?: string;
+    }
+  ) {
+    return this.service.upload(productId, body);
+  }
+
+  @Delete(":id")
+  remove(@Param("id") id: string) {
+    return this.service.remove(id);
   }
 }
 
