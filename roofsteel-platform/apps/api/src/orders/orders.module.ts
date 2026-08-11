@@ -1,4 +1,5 @@
-import { Module, Controller, Get, Post, Param, Body, Query, UseGuards } from "@nestjs/common";
+import { Module, Controller, Get, Post, Param, Body, Query, UseGuards, Req } from "@nestjs/common";
+import type { Request } from "express";
 import { SkipThrottle } from "@nestjs/throttler";
 import { PrismaService } from "../common/prisma.service";
 import { PricingService } from "../pricing/pricing.service";
@@ -8,6 +9,8 @@ import { CreateOrderDto } from "./dto/orders.dto";
 import { PayFastStrategy } from "./payments/payfast.strategy";
 import { LulapayStrategy } from "./payments/lulapay.strategy";
 import { PayJustNowStrategy } from "./payments/payjustnow.strategy";
+import { PaymentProcessor } from "./payments/payment.processor";
+import { InventoryModule } from "../inventory/inventory.module";
 import { OptionalJwtAuthGuard } from "../auth/optional-jwt-auth.guard";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { CurrentAccount } from "../auth/current-account.decorator";
@@ -21,6 +24,7 @@ export class OrdersController {
     private readonly payFast: PayFastStrategy,
     private readonly lulapay: LulapayStrategy,
     private readonly payJustNow: PayJustNowStrategy,
+    private readonly paymentProcessor: PaymentProcessor,
   ) {}
 
   // Optional auth: a guest can checkout with guestEmail; an authenticated user's account type
@@ -62,15 +66,16 @@ export class OrdersController {
   // and the real protection is signature verification (guidelines/11-security-and-compliance.md).
   @Post("webhooks/payfast")
   @SkipThrottle()
-  async payfastWebhook(@Body() payload: Record<string, string>) {
-    const verified = await this.payFast.verify(payload);
+  async payfastWebhook(@Body() payload: Record<string, string>, @Req() req: Request) {
+    const headers = req.headers as Record<string, string>;
+    const verified = await this.payFast.verify(payload, headers);
     if (!verified) return { received: false, reason: "signature_invalid" };
 
     // PayFast ITN payload includes m_payment_id (our orderNumber) and payment_status.
     if (payload.payment_status !== "COMPLETE") {
       return { received: true, status: payload.payment_status };
     }
-    await this.orders.markOrderPaid(payload.m_payment_id);
+    await this.paymentProcessor.confirmPayment(payload.m_payment_id, payload.pf_payment_id);
     return { received: true };
   }
 
@@ -80,12 +85,12 @@ export class OrdersController {
     const verified = await this.lulapay.verify(payload);
     if (!verified) return { received: false, reason: "signature_invalid" };
 
-    const body = payload as { orderNumber?: string; status?: string };
+    const body = payload as { orderNumber?: string; status?: string; reference?: string };
     if (body.status !== "SETTLED") {
       return { received: true, status: body.status };
     }
     if (body.orderNumber) {
-      await this.orders.markOrderPaid(body.orderNumber);
+      await this.paymentProcessor.confirmPayment(body.orderNumber, body.reference);
     }
     return { received: true };
   }
@@ -96,18 +101,19 @@ export class OrdersController {
     const verified = await this.payJustNow.verify(payload);
     if (!verified) return { received: false, reason: "signature_invalid" };
 
-    const body = payload as { orderNumber?: string; status?: string };
+    const body = payload as { orderNumber?: string; status?: string; reference?: string };
     if (body.status !== "APPROVED") {
       return { received: true, status: body.status };
     }
     if (body.orderNumber) {
-      await this.orders.markOrderPaid(body.orderNumber);
+      await this.paymentProcessor.confirmPayment(body.orderNumber, body.reference);
     }
     return { received: true };
   }
 }
 
 @Module({
+  imports: [InventoryModule],
   controllers: [OrdersController],
   providers: [
     OrdersService,
@@ -117,6 +123,7 @@ export class OrdersController {
     PayFastStrategy,
     LulapayStrategy,
     PayJustNowStrategy,
+    PaymentProcessor,
   ],
 })
 export class OrdersModule {}

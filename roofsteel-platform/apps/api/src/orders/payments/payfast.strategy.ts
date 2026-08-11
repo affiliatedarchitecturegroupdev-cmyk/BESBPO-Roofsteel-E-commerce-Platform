@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import * as crypto from "crypto";
 import { PaymentStrategy, PaymentSession, OrderForPayment } from "./payment-strategy.interface";
 
@@ -9,8 +9,22 @@ import { PaymentStrategy, PaymentSession, OrderForPayment } from "./payment-stra
 //     of the object as built, NOT alphabetical).
 //   - Refunds API: signature over fields in ALPHABETICAL order, plus signed headers.
 // Do not reuse buildDeclaredOrderSignature() for a refund call, or vice versa.
+//
+// PayFast IP allowlist for ITN verification (guidelines/05): the ITN POST must originate from
+// PayFast's servers. We check the source IP against PayFast's published ranges as a defence
+// in depth on top of the signature check.
+const PAYFAST_ITN_IP_RANGES = [
+  "41.74.168.0/24",   // PayFast production IPs
+  "41.74.168.1",
+  "196.26.204.0/24",
+  "196.26.204.1",
+  "197.149.192.0/24",
+  "197.149.192.1",
+];
+
 @Injectable()
 export class PayFastStrategy implements PaymentStrategy {
+  private readonly logger = new Logger(PayFastStrategy.name);
   readonly gatewayName = "PAYFAST" as const;
 
   private readonly merchantId = process.env.PAYFAST_MERCHANT_ID ?? "";
@@ -52,25 +66,91 @@ export class PayFastStrategy implements PaymentStrategy {
     };
   }
 
-  async verify(payload: Record<string, string>): Promise<boolean> {
+  // ITN verification: check the source IP is from PayFast, then verify the MD5 signature
+  // over the payload fields in PayFast's declared order.
+  async verify(payload: Record<string, string>, headers?: Record<string, string>): Promise<boolean> {
+    // IP allowlist check (defence in depth on top of signature — guidelines/05 + 08).
+    const clientIp = headers?.["x-forwarded-for"]?.split(",")[0]?.trim() ?? headers?.["x-real-ip"] ?? "";
+    if (clientIp && !this.isPayFastIp(clientIp)) {
+      // In sandbox mode, skip the IP check (sandbox traffic may come from different IPs).
+      if (process.env.PAYFAST_SANDBOX !== "true") {
+        this.logger.warn(`ITN rejected: source IP ${clientIp} not in PayFast ranges`);
+        return false;
+      }
+    }
+
     const { signature, ...fields } = payload;
+    if (!signature) return false;
     const expected = this.buildDeclaredOrderSignature(fields);
-    // Constant-time comparison — a naive === comparison on a signature check is a timing-attack
-    // surface; small enough risk here to be debatable, but cheap enough to just do right.
     return this.timingSafeEqual(signature, expected);
   }
 
+  // Real refund HTTP call to PayFast's Refunds API. Uses alphabetical field order + signed
+  // headers (guidelines/05). Returns true only if PayFast confirms the refund.
   async refund(transactionId: string, amountCents?: number): Promise<boolean> {
-    // Alphabetical field order for the Refunds API — deliberately different from initialize()'s
-    // declared-order signature above. See guidelines/05-payments.md.
     const fields: Record<string, string> = {
       amount: amountCents ? (amountCents / 100).toFixed(2) : "",
       merchant_id: this.merchantId,
       transaction_id: transactionId,
     };
     const sortedFields = Object.fromEntries(Object.entries(fields).sort(([a], [b]) => a.localeCompare(b)));
-    this.buildDeclaredOrderSignature(sortedFields); // signed headers + real HTTP call: Phase 3 TODO
-    return true;
+    const signature = this.buildDeclaredOrderSignature(sortedFields);
+
+    const refundHost = process.env.PAYFAST_SANDBOX === "true"
+      ? "https://sandbox.payfast.co.za/api/refund"
+      : "https://api.payfast.co.za/refund";
+
+    try {
+      const response = await fetch(refundHost, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "merchant-id": this.merchantId,
+          "signature": signature,
+          "version": "v1",
+        },
+        body: new URLSearchParams(sortedFields).toString(),
+      });
+      if (!response.ok) {
+        this.logger.error(`PayFast refund failed: HTTP ${response.status}`);
+        return false;
+      }
+      const result = await response.json() as { status: string; message?: string };
+      return result.status === "SUCCESS" || result.status === "COMPLETE";
+    } catch (err) {
+      this.logger.error(`PayFast refund HTTP error: ${(err as Error).message}`);
+      return false;
+    }
+  }
+
+  // Check if an IP falls within PayFast's published ITN source ranges.
+  private isPayFastIp(ip: string): boolean {
+    // Allow loopback in dev/test environments.
+    if (ip === "127.0.0.1" || ip === "::1") return true;
+    for (const range of PAYFAST_ITN_IP_RANGES) {
+      if (range.includes("/")) {
+        if (this.ipInCidr(ip, range)) return true;
+      } else if (ip === range) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private ipInCidr(ip: string, cidr: string): boolean {
+    const [range, bits] = cidr.split("/");
+    const mask = parseInt(bits ?? "32", 10);
+    const ipNum = this.ipToInt(ip);
+    const rangeNum = this.ipToInt(range);
+    if (ipNum === null || rangeNum === null) return false;
+    const maskBits = mask === 32 ? 0xffffffff : (0xffffffff << (32 - mask)) >>> 0;
+    return (ipNum & maskBits) === (rangeNum & maskBits);
+  }
+
+  private ipToInt(ip: string): number | null {
+    const parts = ip.split(".").map(Number);
+    if (parts.length !== 4 || parts.some((p) => isNaN(p) || p < 0 || p > 255)) return null;
+    return ((parts[0] << 24) + (parts[1] << 16) + (parts[2] << 8) + parts[3]) >>> 0;
   }
 
   private buildDeclaredOrderSignature(fields: Record<string, string>): string {

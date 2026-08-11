@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException, NotFoundException, ForbiddenException } from "@nestjs/common";
 import { PrismaService } from "../common/prisma.service";
 import { CartService } from "../cart/cart.service";
+import { InventoryService } from "../inventory/inventory.service";
 import { PayFastStrategy } from "./payments/payfast.strategy";
 import { LulapayStrategy } from "./payments/lulapay.strategy";
 import { PayJustNowStrategy } from "./payments/payjustnow.strategy";
@@ -18,6 +19,7 @@ export class OrdersService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly cart: CartService,
+    private readonly inventory: InventoryService,
     payFast: PayFastStrategy,
     lulapay: LulapayStrategy,
     payJustNow: PayJustNowStrategy
@@ -91,6 +93,25 @@ export class OrdersService {
       where: { id: order.id },
       data: { paymentRef: paymentSession.gatewayReference },
     });
+
+    // Reserve stock for STOCK-fulfilment line items at order creation — not at cart time.
+    // Per guidelines/13: a cart reservation would let an abandoned cart lock up real stock.
+    // MtL/Cut-to-Order/Fabricated-to-Order items have no on-hand stock to reserve.
+    try {
+      await this.inventory.reserveStock(order.id, order.items.map((i) => ({
+        productId: i.productId,
+        quantity: i.quantity,
+      })));
+    } catch (err) {
+      // If stock reservation fails (insufficient stock between cart and order), cancel the
+      // just-created order and surface the error — never leave a PENDING_PAYMENT order with
+      // unreservable stock sitting in the system.
+      await this.prisma.order.update({
+        where: { id: order.id },
+        data: { status: OrderStatus.CANCELLED, cancelReason: "insufficient_stock" },
+      });
+      throw new BadRequestException(`Insufficient stock: ${(err as Error).message}`);
+    }
 
     return { order, paymentSession };
   }
