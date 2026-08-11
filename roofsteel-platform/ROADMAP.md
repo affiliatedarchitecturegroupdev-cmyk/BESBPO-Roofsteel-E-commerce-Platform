@@ -125,11 +125,11 @@ ProductImage, Product.description.
 |------|-------------|---------|---------|--------|
 | T.1 | PricingService unit tests | 150 | 75 | [x] |
 | T.2 | Made-to-Length validation tests | 100 | 95 | [x] |
-| T.3 | Trade-account approval transaction tests | 100 | — | [ ] |
+| T.3 | Trade-account approval transaction tests | 100 | 130 | [x] |
 | T.4 | PayFast webhook idempotency + signature tests | 120 | 82 | [x] |
 | T.5 | Checkout integration test (e2e) | 200 | — | [ ] |
 | T.6 | Freight calculation tests | 100 | 85 | [x] |
-| T.7 | Auth/JWT tests | 100 | — | [ ] |
+| T.7 | Auth/JWT tests | 100 | 115 | [x] |
 | T.8 | Address/Quote/Wishlist endpoint tests | 200 | — | [ ] |
 | T.9 | Admin endpoint tests | 130 | — | [ ] |
 | | **Tests subtotal** | **1,200** | — | |
