@@ -95,7 +95,7 @@ freight weight+distance banding (ADR-016).
 | 4.12 | Back-in-stock / low-stock alert jobs | 200 | 38 | [x] |
 | 4.13 | Stock reservation logic (qtyReserved on order) | 150 | 116 | [x] |
 | 4.14 | Sales/revenue reporting dashboard | 350 | 125 | [x] |
-| 4.15 | Location detection UI (geolocation pre-fill) | 150 | — | [ ] |
+| 4.15 | Location detection UI (geolocation pre-fill) | 150 | 118 | [x] |
 | 4.16 | Courier/tracking integration | 300 | — | [ ] |
 | | **Phase 4 subtotal** | **3,800** | — | |
 
